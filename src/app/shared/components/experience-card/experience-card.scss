@@ -1,0 +1,215 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--rxp-white);
+  border-radius: var(--rxp-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--rxp-shadow-sm);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    box-shadow: var(--rxp-shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  // ── Compact variant ─────────────────────────────────────────────
+  &--compact {
+    .card__photo {
+      height: 160px;
+    }
+    .card__body {
+      padding: var(--rxp-spacing-md);
+    }
+  }
+}
+
+// ── Photo area ────────────────────────────────────────────────────
+.card__photo {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  background: var(--rxp-gray-100);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover & img {
+    transform: scale(1.04);
+  }
+}
+
+.card__category-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(4px);
+  padding: 4px 10px;
+  border-radius: var(--rxp-radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--rxp-gray-900);
+}
+
+.card__duration-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--rxp-green-700);
+  color: white;
+  padding: 4px 10px;
+  border-radius: var(--rxp-radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+// ── Body ──────────────────────────────────────────────────────────
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rxp-spacing-sm);
+  padding: var(--rxp-spacing-lg);
+  flex: 1;
+}
+
+.card__host {
+  display: flex;
+  align-items: center;
+  gap: var(--rxp-spacing-sm);
+}
+
+.card__host-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.card__host-name {
+  font-size: 0.8rem;
+  color: var(--rxp-gray-700);
+}
+
+.card__verified {
+  font-size: 0.7rem;
+  color: var(--rxp-green-700);
+  font-weight: 700;
+  background: var(--rxp-green-100);
+  border-radius: var(--rxp-radius-full);
+  padding: 1px 5px;
+}
+
+.card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--rxp-gray-900);
+  margin: 0;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card__description {
+  font-size: 0.875rem;
+  color: var(--rxp-gray-700);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+}
+
+.card__location {
+  font-size: 0.8rem;
+  color: var(--rxp-gray-400);
+  margin: 0;
+}
+
+// ── Footer ────────────────────────────────────────────────────────
+.card__footer {
+  margin-top: auto;
+  padding-top: var(--rxp-spacing-md);
+  border-top: 1px solid var(--rxp-gray-100);
+  display: flex;
+  flex-direction: column;
+  gap: var(--rxp-spacing-sm);
+}
+
+.card__rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card__stars {
+  display: flex;
+  gap: 1px;
+}
+
+.card__star {
+  font-size: 0.9rem;
+  color: var(--rxp-gray-100);
+
+  &--filled { color: #f5a623; }
+  &--half   { color: #f5a623; opacity: 0.6; }
+}
+
+.card__rating-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--rxp-gray-900);
+}
+
+.card__review-count {
+  font-size: 0.8rem;
+  color: var(--rxp-gray-400);
+}
+
+.card__price-book {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card__price-amount {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--rxp-green-700);
+}
+
+.card__price-label {
+  font-size: 0.75rem;
+  color: var(--rxp-gray-400);
+  display: block;
+}
+
+.card__book-btn {
+  background: var(--rxp-green-700);
+  color: white;
+  border: none;
+  border-radius: var(--rxp-radius-md);
+  padding: 8px 18px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: var(--rxp-green-900);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--rxp-green-700);
+    outline-offset: 2px;
+  }
+}

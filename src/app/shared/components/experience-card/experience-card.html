@@ -1,0 +1,91 @@
+<article
+  class="card"
+  [class.card--compact]="compact()"
+  [routerLink]="['/experiences', experience().id]">
+
+  <!-- Photo -->
+  <div class="card__photo">
+    <img
+      [src]="photoUrl"
+      [alt]="experience().title"
+      loading="lazy">
+
+    <!-- Category badge -->
+    <span class="card__category-badge">
+      {{ experience().category.emoji }}
+      {{ experience().category.name }}
+    </span>
+
+    <!-- Duration badge -->
+    <span class="card__duration-badge">
+      {{ durationLabel() }}
+    </span>
+  </div>
+
+  <!-- Content -->
+  <div class="card__body">
+
+    <!-- Host info -->
+    <div class="card__host">
+      <img
+        class="card__host-avatar"
+        [src]="experience().host.avatarUrl ?? 'assets/images/avatar-placeholder.jpg'"
+        [alt]="hostName()">
+      <span class="card__host-name">{{ hostName() }}</span>
+      @if (experience().host.isVerified) {
+        <span class="card__verified" title="Verified host">✓</span>
+      }
+    </div>
+
+    <!-- Title -->
+    <h3 class="card__title">{{ experience().title }}</h3>
+
+    <!-- Description (hidden in compact mode) -->
+    @if (!compact()) {
+      <p class="card__description">{{ experience().description }}</p>
+    }
+
+    <!-- Location -->
+    <p class="card__location">
+      {{ experience().location }}, {{ experience().country }}
+    </p>
+
+    <!-- Footer: rating + price + CTA -->
+    <div class="card__footer">
+      <div class="card__rating">
+        <span class="card__stars">
+          @for (star of stars(); track $index) {
+            <span
+              class="card__star"
+              [class.card__star--filled]="star.filled"
+              [class.card__star--half]="star.half">
+              ★
+            </span>
+          }
+        </span>
+        <span class="card__rating-value">
+          {{ experience().averageRating | number:'1.1-1' }}
+        </span>
+        <span class="card__review-count">
+          ({{ experience().reviewCount }})
+        </span>
+      </div>
+
+      <div class="card__price-book">
+        <div class="card__price">
+          <span class="card__price-amount">
+            {{ experience().pricePerPerson | currency:'EUR':'symbol':'1.0-0' }}
+          </span>
+          <span class="card__price-label">/ person / day</span>
+        </div>
+
+        <button
+          class="card__book-btn"
+          (click)="onBookNow($event)"
+          [attr.aria-label]="'Book ' + experience().title">
+          Book Now
+        </button>
+      </div>
+    </div>
+  </div>
+</article>

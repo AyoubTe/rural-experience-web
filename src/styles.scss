@@ -1,1 +1,83 @@
-/* You can add global styles to this file, and also import other style files */
+/* Google Fonts — loaded via CDN */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+/* CSS Custom Properties — RuralXperience design tokens */
+:root {
+  /* Brand colours */
+  --rxp-green-900:  #1a3a16;
+  --rxp-green-700:  #2d5a27;   /* Primary brand green */
+  --rxp-green-500:  #4a8c42;
+  --rxp-green-100:  #e8f5e4;
+  --rxp-green-50:   #f4faf2;
+
+  --rxp-earth-700:  #8b5e3c;   /* Warm earth accent */
+  --rxp-earth-100:  #f5ede4;
+
+  --rxp-sky-700:    #1976d2;   /* Links and info */
+
+  /* Neutrals */
+  --rxp-gray-900:   #1a1a1a;
+  --rxp-gray-700:   #444444;
+  --rxp-gray-400:   #999999;
+  --rxp-gray-100:   #f5f5f0;
+  --rxp-white:      #ffffff;
+
+  /* Typography */
+  --rxp-font-body:    'Inter', sans-serif;
+  --rxp-font-display: 'Playfair Display', serif;
+
+  /* Spacing */
+  --rxp-spacing-xs:  4px;
+  --rxp-spacing-sm:  8px;
+  --rxp-spacing-md:  16px;
+  --rxp-spacing-lg:  24px;
+  --rxp-spacing-xl:  48px;
+
+  /* Border radius */
+  --rxp-radius-sm:   4px;
+  --rxp-radius-md:   8px;
+  --rxp-radius-lg:   16px;
+  --rxp-radius-full: 9999px;
+
+  /* Shadows */
+  --rxp-shadow-sm:   0 1px 3px rgba(0,0,0,0.08);
+  --rxp-shadow-md:   0 4px 12px rgba(0,0,0,0.10);
+  --rxp-shadow-lg:   0 8px 24px rgba(0,0,0,0.12);
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--rxp-font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--rxp-gray-900);
+  background-color: var(--rxp-gray-100);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--rxp-sky-700);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1, h2, h3 {
+  font-family: var(--rxp-font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 0;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}

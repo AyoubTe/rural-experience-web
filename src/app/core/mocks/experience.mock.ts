@@ -1,0 +1,77 @@
+import { Experience } from '@rxp/core/models/experience.model';
+
+export const MOCK_EXPERIENCES: Experience[] = [
+  {
+    id: 1,
+    title: 'Three-Day Provençal Harvest Experience',
+    description: 'Join us during the lavender harvest in the heart ' +
+      'of Provence. Learn traditional distillation techniques, ' +
+      'help with the harvest, and enjoy farm-to-table meals.',
+    pricePerPerson: 120,
+    durationDays: 3,
+    maxGuests: 6,
+    averageRating: 4.8,
+    reviewCount: 24,
+    status: 'PUBLISHED',
+    coverPhotoUrl: 'https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?w=600',
+    location: 'Valensole',
+    country: 'France',
+    category: { id: 1, name: 'Farm Life', emoji: '🌾' },
+    host: {
+      id: 10,
+      firstName: 'Pierre',
+      lastName: 'Dubois',
+      avatarUrl: null,
+      isVerified: true,
+      location: 'Provence',
+    },
+  },
+  {
+    id: 2,
+    title: 'Traditional Cheese-Making Weekend',
+    description: 'Learn to make Comté and Beaufort from scratch. ' +
+      'Two full days with a master fromager in the Jura mountains.',
+    pricePerPerson: 95,
+    durationDays: 2,
+    maxGuests: 4,
+    averageRating: 4.6,
+    reviewCount: 18,
+    status: 'PUBLISHED',
+    coverPhotoUrl: 'https://ediblemanhattan.com/wp-content/uploads/2023/03/EHV_VegHead_Cheese_426-900x600.jpg',
+    location: 'Poligny',
+    country: 'France',
+    category: { id: 3, name: 'Artisan Crafts', emoji: '🧀' },
+    host: {
+      id: 11,
+      firstName: 'Marie',
+      lastName: 'Laurent',
+      avatarUrl: null,
+      isVerified: true,
+      location: 'Jura',
+    },
+  },
+  {
+    id: 3,
+    title: 'Atlantic Fly Fishing Masterclass',
+    description: 'Learn fly fishing on private salmon rivers in the ' +
+      'Basque Country. All equipment provided, beginners welcome.',
+    pricePerPerson: 140,
+    durationDays: 2,
+    maxGuests: 4,
+    averageRating: 4.9,
+    reviewCount: 31,
+    status: 'PUBLISHED',
+    coverPhotoUrl: 'https://flyfishingjourneys.com/wp-content/uploads/2022/01/04_keyImage_Iceland_Fishing_Guide-1.png',
+    location: 'Bayonne',
+    country: 'France',
+    category: { id: 2, name: 'Fishing', emoji: '🎣' },
+    host: {
+      id: 12,
+      firstName: 'Jean',
+      lastName: 'Etcheverry',
+      avatarUrl: null,
+      isVerified: false,
+      location: 'Basque Country',
+    },
+  },
+];
