@@ -8,7 +8,7 @@ export const MOCK_EXPERIENCES: Experience[] = [
       'of Provence. Learn traditional distillation techniques, ' +
       'help with the harvest, and enjoy farm-to-table meals.',
     pricePerPerson: 120,
-    durationDays: 3,
+    durationDays: 7,
     maxGuests: 6,
     averageRating: 4.8,
     reviewCount: 24,
@@ -32,7 +32,7 @@ export const MOCK_EXPERIENCES: Experience[] = [
     description: 'Learn to make Comté and Beaufort from scratch. ' +
       'Two full days with a master fromager in the Jura mountains.',
     pricePerPerson: 95,
-    durationDays: 2,
+    durationDays: 12,
     maxGuests: 4,
     averageRating: 4.6,
     reviewCount: 18,
@@ -56,7 +56,7 @@ export const MOCK_EXPERIENCES: Experience[] = [
     description: 'Learn fly fishing on private salmon rivers in the ' +
       'Basque Country. All equipment provided, beginners welcome.',
     pricePerPerson: 140,
-    durationDays: 2,
+    durationDays: 3,
     maxGuests: 4,
     averageRating: 4.9,
     reviewCount: 31,

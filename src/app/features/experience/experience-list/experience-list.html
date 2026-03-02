@@ -2,34 +2,119 @@
 
   <!-- Page header -->
   <header class="experience-list__header">
-    <h1>Rural Experiences</h1>
-    <p class="experience-list__subtitle">
-      Discover authentic farm stays, fishing retreats,
-      and artisan workshops across France.
-    </p>
+    <div class="experience-list__header-text">
+      <h1>Rural Experiences</h1>
+      <p class="experience-list__subtitle">
+        Discover authentic farm stays, fishing retreats, and
+        artisan workshops across France.
+      </p>
+    </div>
+
+    <!-- Results count -->
+    @if (!isLoading()) {
+      <p class="experience-list__count">
+        @if (activeFilterCount() > 0) {
+          {{ filteredExperiences().length }} of
+          {{ allExperiences().length }} experiences
+        } @else {
+          {{ allExperiences().length }} experiences available
+        }
+      </p>
+    }
   </header>
 
-  <!-- Loading state -->
-  @if (isLoading()) {
-    <div class="experience-list__loading">
-      <p>Loading experiences...</p>
-    </div>
+  <!-- Search and filter bar -->
+  <div class="experience-list__filters">
 
-  } @else if (experiences().length === 0) {
-    <!-- Empty state -->
-    <div class="experience-list__empty">
-      <p>No experiences found. Try adjusting your filters.</p>
-    </div>
-
-  } @else {
-  <!-- Experiences grid -->
-    <div class="experience-list__grid">
-      @for (exp of experiences(); track exp.id) {
-        <rxp-experience-card
-          [experience]="exp"
-          (booked)="onExperienceBooked($event)"
-        />
+    <!-- Keyword search -->
+    <div class="search-box">
+      <span class="search-box__icon"> 🔍 </span>
+      <input
+        class="search-box__input"
+        type="text"
+        placeholder="Search by name, location..."
+        [value]="keyword()"
+        (input)="onKeywordChange($any($event.target).value)">
+      @if (keyword()) {
+        <button
+          class="search-box__clear"
+          (click)="onKeywordChange('')"
+          aria-label="Clear search">
+          ✕
+        </button>
       }
     </div>
+
+    <!-- Category chips -->
+    <div class="category-chips" role="group"
+         aria-label="Filter by category">
+
+      <button
+        class="chip"
+        [class.chip--active]="selectedCategoryId() === null"
+        (click)="onCategorySelect(null)">
+        All
+      </button>
+
+      @for (category of categories(); track category.id) {
+        <button
+          class="chip"
+          [class.chip--active]="selectedCategoryId() === category.id"
+          (click)="onCategorySelect(category.id)"
+          [attr.aria-pressed]="selectedCategoryId() === category.id">
+          {{ category.emoji }} {{ category.name }}
+        </button>
+      }
+    </div>
+
+    <!-- Active filter count + clear -->
+    @if (activeFilterCount() > 0) {
+      <button
+        class="clear-filters-btn"
+        (click)="clearAllFilters()">
+        Clear {{ activeFilterCount() }}
+        {{ activeFilterCount() === 1 ? 'filter' : 'filters' }}
+      </button>
+    }
+  </div>
+
+  <!-- States -->
+  @if (isLoading()) {
+    <div class="experience-list__loading">
+      <div class="spinner"></div>
+      <p>Finding experiences for you...</p>
+    </div>
+  } @else {
+
+    <!-- Experiences grid -->
+    @for (exp of filteredExperiences(); track exp.id) {
+      <div class="experience-list__grid-wrapper">
+        <rxp-experience-card
+          [experience]="exp"
+          (booked)="onExperienceBooked($event)" />
+      </div>
+    } @empty {
+      <!-- Empty state -->
+      <div class="experience-list__empty">
+        <p class="experience-list__empty-icon"></p>
+        <h3>No experiences found</h3>
+        @if (activeFilterCount() > 0) {
+          <p>
+            No experiences match your current filters.
+            Try broadening your search.
+          </p>
+          <button
+            class="btn btn--primary"
+            (click)="clearAllFilters()">
+            Clear all filters
+          </button>
+        } @else {
+          <p>
+            Check back soon — new experiences are added regularly.
+          </p>
+        }
+      </div>
+    }
   }
+
 </div>
