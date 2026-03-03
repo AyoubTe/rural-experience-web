@@ -4,6 +4,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "baseUrl": "./",
+    "esModuleInterop": true,
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
