@@ -9,7 +9,7 @@ import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Experience } from '@rxp/core/models/experience.model';
 import {DurationPipe} from '@rxp/shared/pipes/duration/duration-pipe';
-import {TruncatePipePipe} from '@rxp/shared/pipes/truncate/truncate-pipe-pipe';
+import {TruncatePipe} from '@rxp/shared/pipes/truncate/truncate-pipe-pipe';
 
 @Component({
   selector: 'rxp-experience-card',
@@ -17,7 +17,7 @@ import {TruncatePipePipe} from '@rxp/shared/pipes/truncate/truncate-pipe-pipe';
   templateUrl: './experience-card.html',
   styleUrl: './experience-card.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CurrencyPipe, DecimalPipe, RouterLink, DurationPipe, TruncatePipePipe],
+  imports: [CurrencyPipe, DecimalPipe, RouterLink, DurationPipe, TruncatePipe],
 })
 export class ExperienceCardComponent {
 

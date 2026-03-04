@@ -1,0 +1,134 @@
+// ── Toolbar ──────────────────────────────────────────────────────
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--rxp-green-700) !important;
+  box-shadow: var(--rxp-shadow-md);
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: white;
+    margin-right: var(--rxp-spacing-lg);
+  }
+
+  &__logo-icon { font-size: 1.4rem; }
+
+  &__logo-text {
+    font-family: var(--rxp-font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: white;
+  }
+
+  &__nav {
+    display: flex;
+    gap: 4px;
+
+    a { color: rgba(255,255,255,0.85) !important; }
+    a:hover, a.active-link { color: white !important; }
+  }
+
+  &__login-btn {
+    color: white !important;
+    border-color: rgba(255,255,255,0.4) !important;
+    margin-right: 8px;
+  }
+}
+
+.spacer { flex: 1; }
+
+// ── Sidenav ──────────────────────────────────────────────────────
+.app-container {
+  height: calc(100vh - 64px);  // Subtract toolbar height
+}
+
+.app-sidenav {
+  width: 260px;
+  background: var(--rxp-white);
+
+  &__header {
+    padding: var(--rxp-spacing-lg);
+    display: flex;
+    align-items: center;
+  }
+
+  &__brand {
+    font-family: var(--rxp-font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--rxp-green-700);
+  }
+}
+
+.active-nav-item {
+  color: var(--rxp-green-700) !important;
+  background: var(--rxp-green-50) !important;
+  border-right: 3px solid var(--rxp-green-700);
+}
+
+// ── Content area ─────────────────────────────────────────────────
+.app-content {
+  background: var(--rxp-gray-100);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  router-outlet + * {
+    flex: 1;
+  }
+}
+
+// ── Footer ───────────────────────────────────────────────────────
+.app-footer {
+  background: var(--rxp-green-900);
+  color: rgba(255,255,255,0.7);
+  margin-top: auto;
+
+  &__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--rxp-spacing-xl) var(--rxp-spacing-lg);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--rxp-spacing-xl);
+    align-items: start;
+  }
+
+  &__logo {
+    font-family: var(--rxp-font-display);
+    font-size: 1.1rem;
+    color: white;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  &__tagline {
+    font-size: 0.875rem;
+    margin: 0;
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--rxp-spacing-md);
+
+    a {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.875rem;
+      &:hover { color: white; }
+    }
+  }
+
+  &__copy {
+    grid-column: 1 / -1;
+    font-size: 0.8rem;
+    margin: 0;
+    padding-top: var(--rxp-spacing-lg);
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+}

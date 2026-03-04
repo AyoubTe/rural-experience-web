@@ -8,7 +8,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true,
   pure: true
 })
-export class TruncatePipePipe implements PipeTransform {
+export class TruncatePipe implements PipeTransform {
 
   transform(value: string, maxLength = 120, suffix = '....'): string {
     if (value.length === 0) return '';
