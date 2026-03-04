@@ -1,0 +1,30 @@
+<div class="host-shell">
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel"
+       class="host-shell__tabs">
+
+    <a mat-tab-link routerLink="dashboard"
+       routerLinkActive #dashActive="routerLinkActive"
+       [active]="dashActive.isActive">
+      <mat-icon>dashboard</mat-icon> Dashboard
+    </a>
+    <a mat-tab-link routerLink="experiences"
+       routerLinkActive #expActive="routerLinkActive"
+       [active]="expActive.isActive">
+      <mat-icon>landscape</mat-icon> My Experiences
+    </a>
+    <a mat-tab-link routerLink="bookings"
+       routerLinkActive #bookActive="routerLinkActive"
+       [active]="bookActive.isActive">
+      <mat-icon>book_online</mat-icon> Bookings
+    </a>
+    <a mat-tab-link routerLink="profile"
+       routerLinkActive #profActive="routerLinkActive"
+       [active]="profActive.isActive">
+      <mat-icon>person</mat-icon> Profile
+    </a>
+  </nav>
+
+  <mat-tab-nav-panel #tabPanel>
+    <router-outlet />
+  </mat-tab-nav-panel>
+</div>

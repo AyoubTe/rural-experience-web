@@ -3,7 +3,7 @@ import {
   signal, computed, inject, OnDestroy
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import { ExperienceCardComponent }
   from '@rxp/shared/components/experience-card/experience-card';
@@ -36,6 +36,8 @@ export class ExperienceListComponent implements OnInit, OnDestroy {
 
   private experienceService = inject(ExperienceService);
   private categoryService = inject(CategoryService);
+
+  private route  = inject(ActivatedRoute);
   private router = inject(Router);
 
   private destroy$ = new Subject<void>();
@@ -64,6 +66,12 @@ export class ExperienceListComponent implements OnInit, OnDestroy {
 
   // ── Lifecycle ──────────────────────────────────────────────────
   ngOnInit(): void {
+    // Initialize filters from URL query params
+    // (lets users share filtered URLs)
+    const params = this.route.snapshot.queryParamMap;
+    this.keyword.set(params.get('keyword') ?? '');
+    const catId = params.get('categoryId');
+    this.selectedCategoryId.set(catId ? Number(catId) : null);
     this.loadExperiences();
     this.loadCategories();
   }
@@ -118,6 +126,17 @@ export class ExperienceListComponent implements OnInit, OnDestroy {
   // ── Filter handlers ────────────────────────────────────────────
   onKeywordChange(value: string): void {
     this.keyword.set(value);
+
+    // Update URL without navigation (keeps browser history clean)
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        keyword: value || null,  // null removes the param
+        categoryId: this.selectedCategoryId() ?? null,
+      },
+      queryParamsHandling: 'merge',
+    });
+
     this.loadExperiences(0);  // Reset to first page on new search
   }
 
