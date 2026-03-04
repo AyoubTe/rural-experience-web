@@ -132,3 +132,30 @@
     border-top: 1px solid rgba(255,255,255,0.1);
   }
 }
+
+// ── Global overrides in styles.scss ─────────────────────────────
+
+// Make all mat-cards use our brand radius
+.mat-mdc-card {
+  --mdc-elevated-card-container-shape: var(--rxp-radius-lg) !important;
+}
+
+// Override primary button colour with our exact green
+.mat-mdc-raised-button.mat-primary,
+.mat-mdc-flat-button.mat-primary {
+  --mdc-filled-button-container-color: var(--rxp-green-700);
+  --mdc-filled-button-label-text-color: white;
+}
+
+// Form field focus ring colour
+.mat-mdc-form-field.mat-focused {
+  --mdc-outlined-text-field-focus-outline-color: var(--rxp-green-700);
+  --mdc-outlined-text-field-focus-label-text-color: var(--rxp-green-700);
+}
+
+// Active chip colour
+.mat-mdc-chip.mat-mdc-chip-selected {
+  --mdc-chip-elevated-selected-container-color: var(--rxp-green-700);
+  --mdc-chip-with-trailing-icon-selected-trailing-icon-color: white;
+  --mdc-chip-label-text-color: white;
+}

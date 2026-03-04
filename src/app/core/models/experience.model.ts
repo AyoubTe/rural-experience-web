@@ -1,18 +1,21 @@
+// experience.model.ts
 export interface Experience {
   id: number;
   title: string;
-  description: string;
+  shortDescription: string;   // was: description
   pricePerPerson: number;
   durationDays: number;
   maxGuests: number;
+  location: string;
+  status: string;
   averageRating: number;
   reviewCount: number;
-  status: 'DRAFT' | 'PENDING_REVIEW' | 'PUBLISHED' | 'ARCHIVED';
-  category: Category;
-  host: HostSummary;
   coverPhotoUrl: string | null;
-  location: string;
-  country: string;
+  categoryName: string;        // flat, not nested
+  categoryEmoji: string;       // flat, not nested
+  hostFirstName: string;       // flat, not nested
+  hostLastName: string;        // flat, not nested
+  hostVerified: boolean;       // flat, not nested
 }
 
 export interface Category {
@@ -28,4 +31,17 @@ export interface HostSummary {
   avatarUrl: string | null;
   isVerified: boolean;
   location: string;
+}
+
+export interface ExperienceSearchParams {
+  keyword?:    string;
+  categoryId?: number;
+  minPrice?:   number;
+  maxPrice?:   number;
+  minDays?:    number;
+  maxDays?:    number;
+  country?:    string;
+  page?:       number;
+  size?:       number;
+  sort?:       string;
 }

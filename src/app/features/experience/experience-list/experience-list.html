@@ -15,9 +15,9 @@
       <p class="experience-list__count">
         @if (activeFilterCount() > 0) {
           {{ filteredExperiences().length }} of
-          {{ allExperiences().length }} experiences
+          {{ experiences().length }} experiences
         } @else {
-          {{ allExperiences().length }} experiences available
+          {{ experiences().length }} experiences available
         }
       </p>
     }
@@ -45,7 +45,7 @@
       }
     </div>
 
-    <!-- Category chips -->
+    <!-- category chips -->
     <div class="category-chips" role="group"
          aria-label="Filter by category">
 
@@ -80,11 +80,25 @@
 
   <!-- States -->
   @if (isLoading()) {
-    <div class="experience-list__loading">
-      <div class="spinner"></div>
+    <div class="state-container">
+      <mat-progress-spinner mode="indeterminate" diameter="48" />
       <p>Finding experiences for you...</p>
     </div>
-  } @else {
+  } @else if (errorMessage()) {
+    <!-- Error -->
+    <div class="state-container state-container--error">
+      <mat-icon class="error-icon">error_outline</mat-icon>
+      <h3>Something went wrong</h3>
+      <p>{{ errorMessage() }}</p>
+      <button mat-flat-button color="primary"
+              (click)="loadExperiences()">
+        <mat-icon>refresh</mat-icon>
+        Try Again
+      </button>
+    </div>
+  }
+
+  @else {
 
     <!-- Experiences grid -->
     @for (exp of filteredExperiences(); track exp.id) {
@@ -115,6 +129,18 @@
         }
       </div>
     }
+  }
+
+  <!-- Pagination -->
+  @if (totalPages() > 1) {
+    <mat-paginator
+      [length]="totalElements()"
+      [pageSize]="12"
+      [pageIndex]="currentPage()"
+      [pageSizeOptions]="[6, 12, 24]"
+      (page)="onPageChange($event.pageIndex)"
+      aria-label="Select page">
+    </mat-paginator>
   }
 
 </div>

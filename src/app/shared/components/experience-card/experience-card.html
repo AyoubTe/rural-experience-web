@@ -10,10 +10,10 @@
       [alt]="experience().title"
       loading="lazy">
 
-    <!-- Category badge -->
+    <!-- category badge -->
     <span class="card__category-badge">
-      {{ experience().category.emoji }}
-      {{ experience().category.name }}
+      {{ experience().categoryEmoji }}
+          {{ experience().categoryName }}
     </span>
 
     <!-- Duration badge -->
@@ -29,10 +29,12 @@
     <div class="card__host">
       <img
         class="card__host-avatar"
-        [src]="experience().host.avatarUrl ?? 'assets/images/avatar-placeholder.jpg'"
-        [alt]="hostName()">
-      <span class="card__host-name">{{ hostName() }}</span>
-      @if (experience().host.isVerified) {
+        src="assets/images/avatar-placeholder.jpg"
+        [alt]="experience().hostFirstName">
+      <span class="card__host-name">
+        {{ experience().hostFirstName }} {{ experience().hostLastName }}
+      </span>
+      @if (experience().hostVerified) {
         <span class="card__verified" title="Verified host">✓</span>
       }
     </div>
@@ -42,12 +44,12 @@
 
     <!-- Description (hidden in compact mode) -->
     @if (!compact()) {
-      <p class="card__description">{{ experience().description | truncatePipe:100:' [read more]' }}</p>
+      <p class="card__description">{{ experience().shortDescription | truncatePipe:100:' [read more]' }}</p>
     }
 
     <!-- Location -->
     <p class="card__location">
-      {{ experience().location }}, {{ experience().country }}
+      {{ experience().location }}, {{ experience().location }}
     </p>
 
     <!-- Footer: rating + price + CTA -->
