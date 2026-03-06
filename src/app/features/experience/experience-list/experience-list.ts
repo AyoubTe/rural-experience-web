@@ -28,8 +28,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import {CategoryService} from '@rxp/features/category/category-service';
-import {takeUntilDestroyed, toSignal} from '@angular/core/rxjs-interop';
+import {takeUntilDestroyed, toObservable, toSignal} from '@angular/core/rxjs-interop';
 import {AsyncPipe} from '@angular/common';
+import {ExperienceFilterService} from '@rxp/features/experience/experience-filter';
 
 @Component({
   selector: 'rxp-experience-list',
@@ -51,10 +52,27 @@ export class ExperienceListComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private destroy$ = new Subject<void>();
 
+  /** Signal Based State Service */
+  private filters = inject(ExperienceFilterService);
+
+  private results$ = toObservable(this.filters.searchParams)
+    .pipe(
+      debounceTime(300),
+      switchMap(
+        params => this.expSvc.search(params)
+          .pipe(
+            catchError(() => of(null))
+          )
+      ),
+      takeUntilDestroyed(),
+    );
+
+  results = toSignal(this.results$, { initialValue: null });
+
   // ── State ──────────────────────────────────────────────────────
   pageResponse  = signal<PageResponse<Experience> | null>(null);
 
-  keyword            = signal('');
+  keyword       = signal('');
 
   categories = signal<Category[]>([]);
   // ── Derived signals ───────────────────────────────────────────

@@ -1,71 +1,114 @@
-<article
+<mat-card
   class="card"
   [class.card--compact]="compact()"
-  [routerLink]="['/experiences', experience().id]">
+  matRipple
+  [routerLink]="['/experiences', experience().id]"
+  role="article"
+  [attr.aria-label]="experience().title">
 
-  <!-- Photo -->
+  <!-- ── Photo ──────────────────────────────────────────────── -->
   <div class="card__photo">
     <img
-      [src]="photoUrl"
+      [src]="photoUrl()"
       [alt]="experience().title"
-      loading="lazy">
+      loading="lazy"
+      width="400"
+      height="220">
 
-    <!-- category badge -->
-    <span class="card__category-badge">
-      {{ experience().categoryEmoji }}
-          {{ experience().categoryName }}
-    </span>
+    <div class="card__badges">
+      <mat-chip class="card__category-chip" disableRipple>
+        {{ experience().categoryEmoji }}
+        {{ experience().categoryName }}
+      </mat-chip>
+      <mat-chip class="card__duration-chip" disableRipple>
+        {{ experience().durationDays | duration:'short' }}
+      </mat-chip>
+    </div>
 
-    <!-- Duration badge -->
-    <span class="card__duration-badge">
-      {{ this.experience().durationDays | duration:'long' }}
-    </span>
+    <!-- Wishlist button -->
+    <button
+      mat-icon-button
+      class="card__wishlist-btn"
+      (click)="onToggleWishlist($event)"
+      [attr.aria-label]="isWishlisted()
+        ? 'Remove from wishlist'
+        : 'Add to wishlist'"
+      [matTooltip]="isWishlisted()
+        ? 'Remove from wishlist'
+        : 'Add to wishlist'">
+      <mat-icon>
+        {{ isWishlisted() ? 'favorite' : 'favorite_border' }}
+      </mat-icon>
+    </button>
   </div>
 
-  <!-- Content -->
-  <div class="card__body">
+  <!-- ── Body ───────────────────────────────────────────────── -->
+  <mat-card-content class="card__body">
 
-    <!-- Host info -->
+    <!-- Host -->
     <div class="card__host">
-      <img
-        class="card__host-avatar"
-        src="assets/images/avatar-placeholder.jpg"
-        [alt]="experience().hostFirstName">
-      <span class="card__host-name">
-        {{ experience().hostFirstName }} {{ experience().hostLastName }}
-      </span>
-      @if (experience().hostVerified) {
-        <span class="card__verified" title="Verified host">✓</span>
+      @if (experience().coverPhotoUrl) {
+        <img
+          class="card__avatar"
+          [src]="experience().coverPhotoUrl"
+          [alt]="hostName()"
+          loading="lazy">
+      } @else {
+        <div class="card__avatar card__avatar--initials">
+          {{ hostInitials() }}
+        </div>
+      }
+      <span class="card__host-name">{{ hostName() }}</span>
+      @if (isVerifiedHost()) {
+        <mat-icon
+          class="card__verified-icon"
+          matTooltip="Verified host"
+          aria-label="Verified host">
+          verified
+        </mat-icon>
       }
     </div>
 
     <!-- Title -->
-    <h3 class="card__title">{{ experience().title }}</h3>
+    <h3 class="card__title">
+      {{ experience().title | truncatePipe:60 }}
+    </h3>
 
-    <!-- Description (hidden in compact mode) -->
+    <!-- Description (full mode only) -->
     @if (!compact()) {
-      <p class="card__description">{{ experience().shortDescription | truncatePipe:100:' [read more]' }}</p>
+      <p class="card__description">
+        {{ experience().shortDescription | truncatePipe:110 }}
+      </p>
     }
 
     <!-- Location -->
     <p class="card__location">
+      <mat-icon inline aria-hidden="true">place</mat-icon>
       {{ experience().location }}, {{ experience().location }}
     </p>
 
-    <!-- Footer: rating + price + CTA -->
-    <div class="card__footer">
-      <div class="card__rating">
-        <span class="card__stars">
-          @for (star of stars(); track $index) {
-            <span
-              class="card__star"
-              [class.card__star--filled]="star.filled"
-              [class.card__star--half]="star.half">
-              ★
-            </span>
+  </mat-card-content>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  @if (showActions()) {
+    <mat-card-actions class="card__footer">
+
+      <!-- Rating -->
+      <div class="card__rating" [attr.aria-label]="
+        experience().averageRating + ' out of 5 stars, ' +
+        experience().reviewCount + ' reviews'">
+        <div class="card__stars" aria-hidden="true">
+          @for (star of stars(); track star.index) {
+            <mat-icon class="card__star card__star--{{ star.type }}">
+              @switch (star.type) {
+                @case ('full')  { star }
+                @case ('half')  { star_half }
+                @case ('empty') { star_border }
+              }
+            </mat-icon>
           }
-        </span>
-        <span class="card__rating-value">
+        </div>
+        <span class="card__rating-score">
           {{ experience().averageRating | number:'1.1-1' }}
         </span>
         <span class="card__review-count">
@@ -73,21 +116,27 @@
         </span>
       </div>
 
+      <!-- Price + Book -->
       <div class="card__price-book">
         <div class="card__price">
           <span class="card__price-amount">
-            {{ experience().pricePerPerson | currency:'EUR':'symbol':'1.0-0' }}
+            {{ experience().pricePerPerson
+            | currency:'EUR':'symbol':'1.0-0' }}
           </span>
-          <span class="card__price-label">/ person / day</span>
+          <span class="card__price-unit">/person/day</span>
         </div>
 
         <button
+          mat-flat-button
+          color="primary"
           class="card__book-btn"
           (click)="onBookNow($event)"
           [attr.aria-label]="'Book ' + experience().title">
           Book Now
         </button>
       </div>
-    </div>
-  </div>
-</article>
+
+    </mat-card-actions>
+  }
+
+</mat-card>

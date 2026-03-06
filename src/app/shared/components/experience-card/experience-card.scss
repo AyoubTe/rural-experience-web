@@ -142,6 +142,7 @@
   border-top: 1px solid var(--rxp-gray-100);
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: var(--rxp-spacing-sm);
 }
 
@@ -158,9 +159,9 @@
 
 .card__star {
   font-size: 0.9rem;
-  color: var(--rxp-gray-100);
+  color: var(--rxp-gray-200);
 
-  &--filled { color: #f5a623; }
+  &--full { color: #f5a623; }
   &--half   { color: #f5a623; opacity: 0.6; }
 }
 
@@ -179,6 +180,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  margin-top: 8px;
 }
 
 .card__price-amount {
