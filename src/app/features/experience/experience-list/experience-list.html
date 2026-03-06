@@ -56,7 +56,7 @@
         All
       </button>
 
-      @for (category of categories(); track category.id) {
+      @for (category of categories$ | async; track category.id) {
         <button
           class="chip"
           [class.chip--active]="selectedCategoryId() === category.id"

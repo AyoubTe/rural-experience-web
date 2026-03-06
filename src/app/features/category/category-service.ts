@@ -23,7 +23,7 @@ export class CategoryService {
    * the frontend also caches the reference data.
    */
   categories$: Observable<Category[]> =
-    this.http.get<Category[]>(this.baseUrl).pipe(
+    this.http.get<Category[]>(this.baseUrl + API_ENDPOINTS.CATEGORIES.BASE).pipe(
       shareReplay(1),
       catchError(() => {
         console.warn('Failed to load categories');

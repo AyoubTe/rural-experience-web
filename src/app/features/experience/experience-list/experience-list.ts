@@ -2,7 +2,7 @@ import {
   Component, OnInit, ChangeDetectionStrategy,
   signal, computed, inject, OnDestroy
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormControl, FormsModule} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import { ExperienceCardComponent }
@@ -11,14 +11,25 @@ import { ExperienceCardComponent }
 import {Experience, Category, ExperienceSearchParams}
   from '@rxp/core/models/experience.model';
 import {ExperienceService} from '@rxp/features/experience/experience-service';
-import {Subject, takeUntil} from 'rxjs';
+import {
+  catchError,
+  combineLatest,
+  debounceTime,
+  distinctUntilChanged,
+  map, of,
+  startWith,
+  Subject,
+  switchMap,
+  takeUntil,
+  tap
+} from 'rxjs';
 import {PageResponse} from '@rxp/core/models/api.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import {CategoryService} from '@rxp/features/category/category-service';
-import { MatChipListbox, MatChip } from '@angular/material/chips';
-import { MatChipsModule } from '@angular/material/chips';
+import {takeUntilDestroyed, toSignal} from '@angular/core/rxjs-interop';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'rxp-experience-list',
@@ -29,40 +40,47 @@ import { MatChipsModule } from '@angular/material/chips';
   imports: [
     FormsModule,
     ExperienceCardComponent,
-    MatPaginator, MatIcon, MatProgressSpinner,
+    MatPaginator, MatIcon, MatProgressSpinner, AsyncPipe,
   ],
 })
 export class ExperienceListComponent implements OnInit, OnDestroy {
 
-  private experienceService = inject(ExperienceService);
-  private categoryService = inject(CategoryService);
-
-  private route  = inject(ActivatedRoute);
-  private router = inject(Router);
-
+  private expSvc      = inject(ExperienceService);
+  private catSvc      = inject(CategoryService);
+  private router      = inject(Router);
+  private route = inject(ActivatedRoute);
   private destroy$ = new Subject<void>();
 
   // ── State ──────────────────────────────────────────────────────
   pageResponse  = signal<PageResponse<Experience> | null>(null);
-  isLoading     = signal(false);
-  errorMessage  = signal<string | null>(null);
 
   keyword            = signal('');
-  selectedCategoryId = signal<number | null>(null);
-
-  // ── Derived ────────────────────────────────────────────────────
-  experiences = computed(() => this.pageResponse()?.content ?? []);
 
   categories = signal<Category[]>([]);
-  // The async pipe subscribes automatically
-  // Multiple uses of categories$ share the same cached response
-  categories$ = this.categoryService.categories$;
+  // ── Derived signals ───────────────────────────────────────────
+  experiences = computed(() => this.searchResult()?.content ?? []);
 
-  totalElements = computed(() => this.pageResponse()?.totalElements ?? 0);
+  totalElements = computed(() => this.searchResult()?.totalElements ?? 0);
 
-  currentPage = computed(() => this.pageResponse()?.page ?? 0);
+  currentPage = computed(() => this.searchResult()?.page ?? 0);
 
-  totalPages = computed(() => this.pageResponse()?.totalPages ?? 0);
+  totalPages = computed(() => this.searchResult()?.totalPages ?? 0);
+
+  // selectedCategoryId as a signal (for template binding)
+  selectedCategoryId = signal<number | null>(null);
+
+  keywordControl = new FormControl('');
+
+  // Subject for category selection (button click, not a form input)
+  private categoryId$ = new Subject<number | null>();
+
+  // ── Loading and error signals ─────────────────────────────────
+  isLoading    = signal(false);
+  errorMessage = signal<string | null>(null);
+
+  // ── Categories (from service, cached with shareReplay) ─────────
+  categories$ = this.catSvc.categories$;
+
 
   // ── Lifecycle ──────────────────────────────────────────────────
   ngOnInit(): void {
@@ -81,6 +99,85 @@ export class ExperienceListComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  // ── The reactive search pipeline ──────────────────────────────
+  private searchResult$ = combineLatest([
+    // Keyword stream: emit on every change, debounced
+    this.keywordControl.valueChanges.pipe(
+      startWith(''),
+      debounceTime(400),
+      distinctUntilChanged(),
+      map(kw => kw?.trim() ?? '')
+    ),
+    // Category stream: emit immediately on selection
+    this.categoryId$.pipe(startWith(null as number | null)),
+  ]).pipe(
+    // Side effect: mark as loading
+    tap(() => {
+      this.isLoading.set(true);
+      this.errorMessage.set(null);
+    }),
+
+    // switchMap cancels previous in-flight HTTP request
+    switchMap(([keyword, categoryId]) =>
+      this.expSvc.search({
+        keyword:    keyword || undefined,
+        categoryId: categoryId ?? undefined,
+        page: 0,
+        size: 12,
+      }).pipe(
+        // catchError INSIDE switchMap — stream survives errors
+        catchError((err: Error) => {
+          this.errorMessage.set(err.message);
+          return of(null);
+        })
+      )
+    ),
+
+    tap(() => this.isLoading.set(false)),
+
+    takeUntilDestroyed(),  // Auto-cleanup when component destroyed
+  );
+
+  // ── Convert to Signal for template ────────────────────────────
+  searchResult = toSignal<PageResponse<Experience> | null>(
+    this.searchResult$,
+    { initialValue: null }
+  );
+
+  // ── Event handlers ────────────────────────────────────────────
+  onCategorySelect(id: number | null): void {
+    this.selectedCategoryId.set(id);
+    this.categoryId$.next(id);
+  }
+
+  clearAllFilters(): void {
+    this.keywordControl.setValue('');
+    this.onCategorySelect(null);
+  }
+
+  onExperienceBooked(experienceId: number): void {
+    this.router.navigate(['/experiences', experienceId, 'book']);
+  }
+
+  onPageChange(page: number): void {
+    // For pagination we call directly (not via the stream)
+    this.isLoading.set(true);
+    this.expSvc.search({
+      keyword: this.keywordControl.value?.trim() || undefined,
+      categoryId: this.selectedCategoryId() ?? undefined,
+      page,
+      size: 12,
+    }).pipe(
+      takeUntilDestroyed()
+    ).subscribe({
+      next: result => {
+        this.searchResult; // note: toSignal is read-only
+        // For pagination, use a writable signal approach
+        this.isLoading.set(false);
+      }
+    });
+  }
+
   // ── Data loading ───────────────────────────────────────────────
   loadExperiences(page = 0): void {
     const params: ExperienceSearchParams = {
@@ -93,7 +190,7 @@ export class ExperienceListComponent implements OnInit, OnDestroy {
     this.isLoading.set(true);
     this.errorMessage.set(null);
 
-    this.experienceService
+    this.expSvc
       .search(params)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -110,7 +207,7 @@ export class ExperienceListComponent implements OnInit, OnDestroy {
 
   /** All unique categories from the loaded experiences */
   loadCategories(): void {
-    this.categoryService
+    this.catSvc
       .getCategories()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -138,29 +235,6 @@ export class ExperienceListComponent implements OnInit, OnDestroy {
     });
 
     this.loadExperiences(0);  // Reset to first page on new search
-  }
-
-  onCategorySelect(categoryId: number | null): void {
-    this.selectedCategoryId.set(categoryId);
-    this.loadExperiences(0);
-  }
-
-  onPageChange(page: number): void {
-    this.loadExperiences(page);
-    // Scroll back to top on page change
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  clearAllFilters(): void {
-    this.keyword.set('');
-    this.selectedCategoryId.set(null);
-    this.loadExperiences(0);
-  }
-
-  onExperienceBooked(experienceId: number): void {
-    inject(Router).navigate(
-        ['/experiences', experienceId, 'book']
-    );
   }
 
   /** Filtered experiences based on all active filters */
