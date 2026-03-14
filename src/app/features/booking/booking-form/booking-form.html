@@ -1,1 +1,181 @@
-<p>booking-form works!</p>
+<div class="booking-form-page">
+
+  <!-- Experience summary -->
+  <div class="booking-summary">
+    <img [src]="experience().coverPhotoUrl
+                ?? 'assets/images/placeholder-experience.jpg'"
+         [alt]="experience().title"
+         class="booking-summary__photo">
+    <div class="booking-summary__info">
+      <h2 class="booking-summary__title">{{ experience().title }}</h2>
+      <p class="booking-summary__host">
+        Hosted by {{ experience().hostFirstName}}
+        {{ experience().hostLastName}}
+      </p>
+      <p class="booking-summary__price">
+        {{ experience().pricePerPerson
+        | currency:'EUR':'symbol':'1.0-0' }}
+        per person per day
+      </p>
+    </div>
+  </div>
+
+  <!-- Booking form -->
+  <form
+    class="booking-form"
+    [formGroup]="bookingForm"
+    (ngSubmit)="onSubmit()">
+
+    <h3 class="booking-form__section-title">Select dates</h3>
+
+    <div class="booking-form__dates">
+      <!-- Start date -->
+      <mat-form-field appearance="outline">
+        <mat-label>Start date</mat-label>
+        <input matInput
+               [matDatepicker]="startPicker"
+               formControlName="startDate"
+               [min]="minDate"
+               placeholder="DD/MM/YYYY">
+        <mat-datepicker-toggle matIconSuffix
+                               [for]="startPicker">
+        </mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+        <mat-error>
+          @if (hasError('startDate', 'required')) {
+            Please select a start date
+          } @else if (hasError('startDate', 'notInPast')) {
+            Start date cannot be in the past
+          }
+        </mat-error>
+      </mat-form-field>
+
+      <!-- End date -->
+      <mat-form-field appearance="outline">
+        <mat-label>End date</mat-label>
+        <input matInput
+               [matDatepicker]="endPicker"
+               formControlName="endDate"
+               [min]="startDateCtrl.value ?? minDate"
+               placeholder="DD/MM/YYYY">
+        <mat-datepicker-toggle matIconSuffix
+                               [for]="endPicker">
+        </mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+        <mat-error>
+          @if (hasError('endDate', 'required')) {
+            Please select an end date
+          } @else if (hasError('endDate', 'notInPast')) {
+            End date cannot be in the past
+          }
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Cross-field validation error -->
+    @if (dateRangeError && bookingForm.touched) {
+      <mat-error class="date-range-error">
+        <mat-icon inline>error</mat-icon>
+        {{ dateRangeError }}
+      </mat-error>
+    }
+
+    <!-- Guests -->
+    <h3 class="booking-form__section-title">Number of guests</h3>
+
+    <mat-form-field appearance="outline" class="guests-field">
+      <mat-label>Guests</mat-label>
+      <input matInput
+             type="number"
+             formControlName="numberOfGuests"
+             [min]="1"
+             [max]="experience().maxGuests">
+      <mat-hint>
+        Maximum {{ experience().maxGuests }} guests
+      </mat-hint>
+      <mat-error>
+        @if (hasError('numberOfGuests', 'required')) {
+          Please enter the number of guests
+        } @else if (hasError('numberOfGuests', 'min')) {
+          At least 1 guest required
+        } @else if (hasError('numberOfGuests', 'max')) {
+          Maximum {{ experience().maxGuests }} guests allowed
+        }
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Special requests -->
+    <h3 class="booking-form__section-title">
+      Special requests
+      <span class="optional">(optional)</span>
+    </h3>
+
+    <mat-form-field appearance="outline" class="requests-field">
+      <mat-label>Special requests or dietary requirements</mat-label>
+      <textarea matInput
+                formControlName="specialRequests"
+                rows="3"
+                placeholder="Any allergies, mobility requirements...">
+      </textarea>
+      <mat-hint align="end">
+        {{ bookingForm.get('specialRequests')?.value?.length ?? 0 }}
+        / 500
+      </mat-hint>
+    </mat-form-field>
+
+    <!-- Price summary -->
+    @if (durationDays() > 0) {
+      <div class="price-summary">
+        <div class="price-summary__row">
+          <span>
+            {{ experience().pricePerPerson
+            | currency:'EUR':'symbol':'1.0-0' }}
+            × {{ guestsCtrl.value }} guests × {{ durationDays() }}
+            {{ durationDays() === 1 ? 'day' : 'days' }}
+          </span>
+          <span>
+            {{ totalPrice() | currency:'EUR':'symbol':'1.0-0' }}
+          </span>
+        </div>
+        <div class="price-summary__total">
+          <span><strong>Total</strong></span>
+          <span class="price-summary__total-amount">
+            {{ totalPrice() | currency:'EUR':'symbol':'1.0-0' }}
+          </span>
+        </div>
+        <p class="price-summary__note">
+          You will not be charged until the host confirms your booking.
+        </p>
+      </div>
+    }
+
+    <!-- Submit error -->
+    @if (submitError()) {
+      <div class="submit-error" role="alert">
+        <mat-icon>error_outline</mat-icon>
+        {{ submitError() }}
+      </div>
+    }
+
+    <!-- Submit -->
+    <button
+      mat-flat-button color="primary"
+      type="button"
+      (click)="onSubmit()"
+      [disabled]="bookingForm.invalid || isSubmitting()">
+
+      @if (isSubmitting()) {
+        <mat-icon>hourglass_empty</mat-icon>
+      } @else {
+        <mat-icon>check</mat-icon>
+      }
+
+      {{ isSubmitting() ? 'Creating request...' : 'Send Request' }}
+    </button>
+    <p class="booking-form__disclaimer">
+      No payment taken now. Your card will be charged only after
+      the host accepts your request.
+    </p>
+
+  </form>
+</div>

@@ -1,0 +1,100 @@
+// ── Container ─────────────────────────────────────────────────────
+.experience-form-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+
+  h1 {
+    font-family: 'Playfair Display', Georgia, serif; /* Matches your brand */
+    font-size: 2.25rem;
+    color: var(--rxp-gray-900, #1a1a1a);
+    margin-bottom: 2rem;
+  }
+}
+
+// ── Form Layout Utilities ─────────────────────────────────────────
+
+// Fixes the overlapping issue shown in your screenshot
+.full-width {
+  width: 100%;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+// Used for Step 2 (Pricing/Logistics) to align fields side-by-side
+.form-row {
+  display: flex;
+  flex-wrap: wrap; // Allows wrapping on small screens
+  gap: 1rem;
+
+  mat-form-field {
+    flex: 1 1 200px; // Grow to fill space, wrap if smaller than 200px
+    display: block;
+  }
+}
+
+// ── Step 3: Agenda Specifics ──────────────────────────────────────
+.step-intro {
+  color: var(--rxp-gray-700, #4a4a4a);
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.agenda-item {
+  display: flex;
+  align-items: flex-start; // Aligns to top so error messages don't break layout
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+
+  .time-field {
+    flex: 0 0 160px; // Fixed width for the time dropdown
+  }
+
+  .activity-field {
+    flex: 1; // Takes up the remaining space
+  }
+
+  // Position the remove button to align perfectly with the input text
+  button {
+    margin-top: 8px;
+    color: var(--rxp-gray-500, #9e9e9e);
+    transition: color 0.2s;
+
+    &:hover:not([disabled]) {
+      color: #f44336; // Material Red for delete actions
+    }
+  }
+}
+
+// ── Buttons & Actions ─────────────────────────────────────────────
+.step-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rxp-gray-200, #e0e0e0);
+
+  // Push the "Next" button to the right if there is a "Back" button
+  button:last-child {
+    margin-left: auto;
+  }
+}
+
+// ── Error State ───────────────────────────────────────────────────
+.submit-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #ffebee; // Light red background
+  color: #c62828; // Dark red text
+  border-radius: var(--rxp-radius-md, 8px);
+  font-weight: 500;
+
+  mat-icon {
+    color: #d32f2f;
+  }
+}

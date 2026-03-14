@@ -1,0 +1,31 @@
+<form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput
+           name="name"
+           [(ngModel)]="model.name"
+           required
+           #nameField="ngModel">
+    @if (nameField.invalid && nameField.touched){
+      <mat-error> Name is required</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Message</mat-label>
+    <textarea matInput
+              name="message"
+              [(ngModel)]="model.message"
+              required
+              minlength="20">
+        </textarea>
+  </mat-form-field>
+
+  <button mat-flat-button color="primary"
+          type="submit"
+          [disabled]="contactForm.invalid">
+    Send Message
+  </button>
+
+</form>

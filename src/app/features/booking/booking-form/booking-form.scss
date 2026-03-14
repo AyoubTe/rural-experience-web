@@ -1,0 +1,205 @@
+// ── Container ─────────────────────────────────────────────────────
+
+.booking-form-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+// ── Experience Summary Card ────────────────────────────────────────
+
+.booking-summary {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  background: var(--rxp-white, #ffffff);
+  border: 1px solid var(--rxp-gray-200, #e0e0e0);
+  border-radius: var(--rxp-radius-lg, 16px);
+  box-shadow: var(--rxp-shadow-sm, 0 1px 3px rgba(0,0,0,0.08));
+
+  &__photo {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: var(--rxp-radius-md, 8px);
+    flex-shrink: 0;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__title {
+    font-family: var(--rxp-font-display, 'Playfair Display', serif);
+    font-size: 1.25rem;
+    color: var(--rxp-gray-900, #1a1a1a);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  &__host {
+    font-size: 0.9rem;
+    color: var(--rxp-gray-700, #444444);
+    margin: 0;
+  }
+
+  &__price {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--rxp-green-700, #2d5a27);
+    margin: 0;
+  }
+}
+
+// ── Booking Form ───────────────────────────────────────────────────
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: var(--rxp-white, #ffffff);
+  padding: 1.75rem;
+  border-radius: var(--rxp-radius-lg, 16px);
+  box-shadow: var(--rxp-shadow-sm, 0 1px 3px rgba(0,0,0,0.08));
+  border: 1px solid var(--rxp-gray-200, #e0e0e0);
+
+  &__section-title {
+    font-family: var(--rxp-font-display, 'Playfair Display', serif);
+    font-size: 1.1rem;
+    color: var(--rxp-gray-900, #1a1a1a);
+    margin: 0.75rem 0 0.5rem;
+
+    .optional {
+      font-family: var(--rxp-font-body, 'Inter', sans-serif);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--rxp-gray-400, #999999);
+      margin-left: 0.4rem;
+    }
+  }
+
+  &__dates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    mat-form-field {
+      flex: 1 1 200px;
+      display: block;
+    }
+  }
+
+  &__disclaimer {
+    font-size: 0.8rem;
+    color: var(--rxp-gray-400, #999999);
+    text-align: center;
+    margin: 0.25rem 0 0;
+  }
+}
+
+// ── Full-width fields ──────────────────────────────────────────────
+
+.guests-field,
+.requests-field {
+  width: 100%;
+  display: block;
+}
+
+// ── Cross-field date range error ───────────────────────────────────
+
+.date-range-error {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: #c62828;
+  margin-top: -0.25rem;
+
+  mat-icon {
+    font-size: 1rem;
+    height: 1rem;
+    width: 1rem;
+  }
+}
+
+// ── Price Summary ──────────────────────────────────────────────────
+
+.price-summary {
+  margin-top: 0.5rem;
+  padding: 1.25rem;
+  background: var(--rxp-green-50, #f4faf2);
+  border: 1px solid var(--rxp-green-100, #e8f5e4);
+  border-radius: var(--rxp-radius-md, 8px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    color: var(--rxp-gray-700, #444444);
+  }
+
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--rxp-green-100, #e8f5e4);
+    font-size: 1rem;
+    color: var(--rxp-gray-900, #1a1a1a);
+  }
+
+  &__total-amount {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--rxp-green-700, #2d5a27);
+  }
+
+  &__note {
+    font-size: 0.8rem;
+    color: var(--rxp-gray-400, #999999);
+    margin: 0.25rem 0 0;
+  }
+}
+
+// ── Submit Error ───────────────────────────────────────────────────
+
+.submit-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: #ffebee;
+  color: #c62828;
+  border-radius: var(--rxp-radius-md, 8px);
+  font-weight: 500;
+
+  mat-icon {
+    color: #d32f2f;
+  }
+}
+
+// ── Responsive ────────────────────────────────────────────────────
+
+@media (max-width: 600px) {
+  .booking-summary {
+    flex-direction: column;
+    align-items: flex-start;
+
+    &__photo {
+      width: 100%;
+      height: 180px;
+    }
+  }
+
+  .booking-form {
+    padding: 1.25rem;
+  }
+}

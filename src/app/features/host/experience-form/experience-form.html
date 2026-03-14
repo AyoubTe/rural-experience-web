@@ -1,1 +1,207 @@
-<p>experience-form works!</p>
+<div class="experience-form-page">
+  <h1>Create a New Experience</h1>
+
+  <mat-stepper
+    [linear]="true"
+    orientation="vertical"
+    class="experience-stepper">
+
+    <!-- ── Step 1: Basic Info ──────────────────────────────── -->
+    <mat-step
+      [stepControl]="basicInfoForm"
+      label="Basic Information"
+      errorMessage="Please fix the errors above">
+
+      <form [formGroup]="basicInfoForm">
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Experience title</mat-label>
+          <input matInput formControlName="title"
+                 placeholder="e.g. Three-Day Lavender Harvest">
+          <mat-hint align="end">
+            {{ basicInfoForm.get('title')?.value?.length ?? 0 }}/100
+          </mat-hint>
+          <mat-error>
+            @if (basicInfoForm.get('title')?.hasError('required')) {
+              Title is required
+            } @else if (basicInfoForm.get('title')?.hasError('minlength')) {
+              Title must be at least 10 characters
+            }
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"
+                    rows="6"
+                    placeholder="Describe what guests will experience...">
+          </textarea>
+          <mat-hint align="end">
+            {{ basicInfoForm.get('description')?.value?.length ?? 0 }}/2000
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="categoryId">
+            @for (cat of categories$ | async; track cat.id){
+              <mat-option [value]="cat.id"> {{ cat.name }} </mat-option>
+            }
+          </mat-select>
+          <mat-error>Please select a category</mat-error>
+        </mat-form-field>
+
+        <div class="step-actions">
+          <button mat-flat-button color="primary" matStepperNext
+                  [disabled]="basicInfoForm.invalid">
+            Next: Logistics
+            <mat-icon iconSuffix>arrow_forward</mat-icon>
+          </button>
+        </div>
+
+      </form>
+    </mat-step>
+
+    <!-- ── Step 2: Logistics ───────────────────────────────── -->
+    <mat-step
+      [stepControl]="logisticsForm"
+      label="Pricing and Logistics">
+
+      <form [formGroup]="logisticsForm">
+
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Price per person per day (€)</mat-label>
+            <input matInput type="number"
+                   formControlName="pricePerPerson"
+                   min="10">
+            <mat-icon matPrefix>euro</mat-icon>
+            <mat-error>
+              @if (logisticsForm.get('pricePerPerson')?.hasError('required')) {
+                Price is required
+              } @else if (logisticsForm.get('pricePerPerson')?.hasError('min')) {
+                Minimum price is €10
+              }
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Duration (days)</mat-label>
+            <input matInput type="number"
+                   formControlName="durationDays"
+                   min="1" max="30">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Maximum guests</mat-label>
+            <input matInput type="number"
+                   formControlName="maxGuests"
+                   min="1" max="50">
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Location (town/region)</mat-label>
+            <input matInput formControlName="location"
+                   placeholder="e.g. Valensole">
+            <mat-icon matPrefix>place</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Country</mat-label>
+            <mat-select formControlName="country">
+              <mat-option value="France">France</mat-option>
+              <mat-option value="Belgium">Belgium</mat-option>
+              <mat-option value="Switzerland">Switzerland</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="step-actions">
+          <button mat-stroked-button matStepperPrevious>Back</button>
+          <button mat-flat-button color="primary" matStepperNext
+                  [disabled]="logisticsForm.invalid">
+            Next: Daily Agenda
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- ── Step 3: Agenda ──────────────────────────────────── -->
+    <mat-step label="Daily Agenda" [stepControl]="agendaForm">
+      <form [formGroup]="agendaForm">
+
+        <p class="step-intro">
+          Describe what guests will do each day. This helps explorers
+          understand what to expect.
+        </p>
+
+        <div formArrayName="agendaItems">
+          @for (item of agendaItems.controls; track $index;
+            let i = $index, last = $last) {
+            <div [formGroupName]="i" class="agenda-item">
+
+              <mat-form-field appearance="outline" class="time-field">
+                <mat-label>Time of day</mat-label>
+                <mat-select formControlName="time">
+                  <mat-option value="Morning">Morning</mat-option>
+                  <mat-option value="Afternoon">Afternoon</mat-option>
+                  <mat-option value="Evening">Evening</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="activity-field">
+                <mat-label>Activity</mat-label>
+                <input matInput formControlName="activity"
+                       placeholder="e.g. Lavender harvest">
+              </mat-form-field>
+
+              <button mat-icon-button
+                      type="button"
+                      (click)="removeAgendaItem(i)"
+                      [disabled]="agendaItems.length === 1"
+                      aria-label="Remove this agenda item">
+                <mat-icon>remove_circle_outline</mat-icon>
+              </button>
+
+            </div>
+          }
+        </div>
+
+        <button mat-stroked-button type="button"
+                (click)="addAgendaItem()">
+          <mat-icon>add</mat-icon>
+          Add agenda item
+        </button>
+
+        <div class="step-actions">
+          <button mat-stroked-button matStepperPrevious>Back</button>
+          <button
+            mat-flat-button color="primary"
+            type="button"
+            (click)="onSubmit()"
+            [disabled]="!allFormsValid() || isSubmitting()">
+
+            @if (isSubmitting()) {
+              <mat-icon>hourglass_empty</mat-icon>
+            } @else {
+              <mat-icon>check</mat-icon>
+            }
+
+            {{ isSubmitting() ? 'Creating experience...' : 'Create Experience' }}
+          </button>
+        </div>
+
+        @if (submitError()) {
+          <div class="submit-error" role="alert">
+            <mat-icon>error_outline</mat-icon>
+            {{ submitError() }}
+          </div>
+        }
+
+      </form>
+    </mat-step>
+
+  </mat-stepper>
+</div>

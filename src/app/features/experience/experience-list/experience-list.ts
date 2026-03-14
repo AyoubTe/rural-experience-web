@@ -25,7 +25,7 @@ import {
 } from 'rxjs';
 import {PageResponse} from '@rxp/core/models/api.model';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import {CategoryService} from '@rxp/features/category/category-service';
 import {takeUntilDestroyed, toObservable, toSignal} from '@angular/core/rxjs-interop';
@@ -41,7 +41,7 @@ import {ExperienceFilterService} from '@rxp/features/experience/experience-filte
   imports: [
     FormsModule,
     ExperienceCardComponent,
-    MatPaginator, MatIcon, MatProgressSpinner, AsyncPipe,
+    MatPaginator, MatIconModule, MatProgressSpinner, AsyncPipe,
   ],
 })
 export class ExperienceListComponent implements OnInit, OnDestroy {
@@ -178,19 +178,28 @@ export class ExperienceListComponent implements OnInit, OnDestroy {
   }
 
   onPageChange(page: number): void {
-    // For pagination we call directly (not via the stream)
     this.isLoading.set(true);
+    this.errorMessage.set(null);
+
     this.expSvc.search({
       keyword: this.keywordControl.value?.trim() || undefined,
       categoryId: this.selectedCategoryId() ?? undefined,
       page,
       size: 12,
     }).pipe(
-      takeUntilDestroyed()
+      // Use your existing Subject instead of takeUntilDestroyed()
+      takeUntil(this.destroy$)
     ).subscribe({
-      next: result => {
-        this.searchResult; // note: toSignal is read-only
-        // For pagination, use a writable signal approach
+      next: (result) => {
+        // Update the writable signal
+        this.pageResponse.set(result);
+        this.isLoading.set(false);
+
+        // Optional: nice UX touch to scroll up when page changes
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      },
+      error: (err: Error) => {
+        this.errorMessage.set(err.message);
         this.isLoading.set(false);
       }
     });

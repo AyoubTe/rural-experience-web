@@ -1,1 +1,33 @@
-<p>login-form works!</p>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+  <!-- formControlName connects the input to the FormControl -->
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" type="email">
+    <mat-error>
+      @if (loginForm.get('email')?.hasError('required')) {
+        Email is required
+      } @else if (loginForm.get('email')?.hasError('email')) {
+        Please enter a valid email address
+      }
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input matInput formControlName="password" type="password">
+    <mat-error>
+      @if (loginForm.get('password')?.hasError('required')) {
+        Password is required
+      } @else if (loginForm.get('password')?.hasError('minlength')) {
+        Password must be at least 8 characters
+      }
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-flat-button color="primary"
+          type="submit"
+          [disabled]="loginForm.invalid || isLoading()">
+    Log In
+  </button>
+</form>

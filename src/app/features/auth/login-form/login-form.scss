@@ -1,0 +1,97 @@
+// ── Login Page ─────────────────────────────────────────────────────
+:host {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--rxp-gray-100, #f5f5f0);
+  padding: 1rem;
+}
+
+// ── Form Card ──────────────────────────────────────────────────────
+
+form {
+  width: 100%;
+  max-width: 440px;
+  background: var(--rxp-white, #ffffff);
+  border-radius: var(--rxp-radius-lg, 16px);
+  box-shadow: var(--rxp-shadow-lg, 0 8px 24px rgba(0, 0, 0, 0.12));
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  gap: 0.25rem;
+
+  // ── Title (if you add an <h1> or <h2> inside the form) ───────────
+  h1, h2 {
+    font-family: var(--rxp-font-display, 'Playfair Display', serif);
+    font-size: 1.75rem;
+    color: var(--rxp-green-700, #2d5a27);
+    text-align: center;
+    margin: 0 0 1.5rem;
+  }
+
+  // ── Fields ────────────────────────────────────────────────────────
+  mat-form-field {
+    width: 100%;
+    display: block;
+  }
+
+  // ── Submit Button ─────────────────────────────────────────────────
+  button[mat-flat-button] {
+    width: 100%;
+    margin-top: 0.75rem;
+    height: 48px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-radius: var(--rxp-radius-md, 8px);
+  }
+}
+
+// ── Submit Error ───────────────────────────────────────────────────
+
+.submit-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  background-color: #ffebee;
+  color: #c62828;
+  border-radius: var(--rxp-radius-md, 8px);
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  mat-icon {
+    color: #d32f2f;
+    flex-shrink: 0;
+  }
+}
+
+// ── Footer link (Don't have an account? Sign up) ───────────────────
+
+.login-footer {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--rxp-gray-400, #999999);
+  margin-top: 1rem;
+
+  a {
+    color: var(--rxp-green-700, #2d5a27);
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// ── Responsive ────────────────────────────────────────────────────
+
+@media (max-width: 480px) {
+  form {
+    padding: 2rem 1.25rem;
+    box-shadow: none;
+    border: 1px solid var(--rxp-gray-200, #e0e0e0);
+  }
+}
