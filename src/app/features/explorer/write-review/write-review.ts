@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-write-review',
+  selector: 'rxp-write-review',
   imports: [],
   templateUrl: './write-review.html',
   styleUrl: './write-review.scss',

@@ -18,7 +18,7 @@ export interface RegisterRequest {
   password: string;       // min: 8, max: 100
   firstName: string;      // min: 2, max: 50
   lastName: string;       // min: 2, max: 50
-  role: Role;
+  role: 'EXPLORER' | 'HOST';
 }
 
 export interface RefreshTokenRequest {

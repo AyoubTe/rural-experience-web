@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-user-management',
+  selector: 'rxp-user-management',
   imports: [],
   templateUrl: './user-management.html',
   styleUrl: './user-management.scss',

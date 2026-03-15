@@ -2,8 +2,10 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessC
 import {provideRouter, TitleStrategy, withInMemoryScrolling, withViewTransitions} from '@angular/router';
 
 import { routes } from './app.routes';
-import {provideHttpClient, withFetch} from '@angular/common/http';
+import {provideHttpClient, withFetch, withInterceptors} from '@angular/common/http';
 import {RxpTitleStrategy} from '@rxp/core/routing/rxp-title.strategy';
+import {authInterceptor} from '@rxp/core/auth/interceptors/auth-interceptor';
+import {refreshInterceptor} from '@rxp/core/auth/interceptors/refresh-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,7 +19,13 @@ export const appConfig: ApplicationConfig = {
         anchorScrolling: 'enabled',
       })
     ),
-    provideHttpClient(withFetch()),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([
+        authInterceptor,
+        refreshInterceptor
+      ])
+    ),
     {
       provide: TitleStrategy,
       useClass: RxpTitleStrategy,

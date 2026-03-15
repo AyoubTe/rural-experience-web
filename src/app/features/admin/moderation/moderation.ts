@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-moderation',
+  selector: 'rxp-moderation',
   imports: [],
   templateUrl: './moderation.html',
   styleUrl: './moderation.scss',

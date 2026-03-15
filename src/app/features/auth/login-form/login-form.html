@@ -1,33 +1,80 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+<div class="login">
+  <h2 class="login__title">Welcome back</h2>
+  <p class="login__subtitle">
+    Log in to explore rural experiences
+  </p>
 
-  <!-- formControlName connects the input to the FormControl -->
-  <mat-form-field appearance="outline">
-    <mat-label>Email</mat-label>
-    <input matInput formControlName="email" type="email">
-    <mat-error>
-      @if (loginForm.get('email')?.hasError('required')) {
-        Email is required
-      } @else if (loginForm.get('email')?.hasError('email')) {
-        Please enter a valid email address
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login__form">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email address</mat-label>
+      <input matInput
+             formControlName="email"
+             type="email"
+             autocomplete="email"
+             placeholder="you@example.com">
+      <mat-icon matPrefix>mail</mat-icon>
+      <mat-error>
+        @if (form.get('email')?.hasError('required')) {
+          Email is required
+        } @else if (form.get('email')?.hasError('email')) {
+          Enter a valid email address
+        }
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Password</mat-label>
+      <input matInput
+             formControlName="password"
+             [type]="showPassword() ? 'text' : 'password'"
+             autocomplete="current-password">
+      <mat-icon matPrefix>lock</mat-icon>
+      <button matSuffix mat-icon-button
+              type="button"
+              (click)="togglePassword()"
+              [attr.aria-label]="showPassword()
+                ? 'Hide password' : 'Show password'">
+        <mat-icon>
+          {{ showPassword() ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
+      </button>
+      <mat-error>
+        @if (form.get('password')?.hasError('required')) {
+          Password is required
+        }
+      </mat-error>
+    </mat-form-field>
+
+    <a class="login__forgot" routerLink="/auth/forgot-password">
+      Forgot your password?
+    </a>
+
+    @if (errorMessage()) {
+      <div class="login__error" role="alert">
+        <mat-icon>error_outline</mat-icon>
+        {{ errorMessage() }}
+      </div>
+    }
+
+    <button mat-flat-button
+            color="primary"
+            type="submit"
+            class="login__submit"
+            [disabled]="isLoading()">
+      @if (isLoading()) {
+        <ng-container>
+          <mat-icon>hourglass_empty</mat-icon>
+          Logging in...
+        </ng-container>
+      } @else {
+        Log In
       }
-    </mat-error>
-  </mat-form-field>
+    </button>
+  </form>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Password</mat-label>
-    <input matInput formControlName="password" type="password">
-    <mat-error>
-      @if (loginForm.get('password')?.hasError('required')) {
-        Password is required
-      } @else if (loginForm.get('password')?.hasError('minlength')) {
-        Password must be at least 8 characters
-      }
-    </mat-error>
-  </mat-form-field>
-
-  <button mat-flat-button color="primary"
-          type="submit"
-          [disabled]="loginForm.invalid || isLoading()">
-    Log In
-  </button>
-</form>
+  <p class="login__register">
+    Don't have an account?
+    <a routerLink="/auth/register">Sign up free</a>
+  </p>
+</div>

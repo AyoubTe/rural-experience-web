@@ -5,7 +5,7 @@ import { MatInputModule }      from '@angular/material/input';
 import { MatButtonModule }     from '@angular/material/button';
 
 @Component({
-  selector: 'app-contact-form',
+  selector: 'rxp-contact-form',
   imports: [
     FormsModule, MatFormFieldModule,
     MatInputModule, MatButtonModule

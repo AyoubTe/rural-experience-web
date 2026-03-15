@@ -16,7 +16,6 @@ import { MatIconModule }      from '@angular/material/icon';
 import { MatChipsModule }     from '@angular/material/chips';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { HasUnsavedChanges } from '@rxp/core/auth/unsaved-changes-guard/unsaved-changes-guard';
-import { HostExperienceService } from '../host-experience-service';
 import {
   positiveIntegerValidator,
   monetaryAmountValidator,
@@ -25,6 +24,7 @@ import {CategoryService} from '@rxp/features/category/category-service';
 import {AsyncPipe} from '@angular/common';
 import {combineLatest, map} from 'rxjs';
 import {toSignal} from '@angular/core/rxjs-interop';
+import {ExperienceService} from '@rxp/features/experience/experience-service';
 
 @Component({
   selector: 'rxp-experience-form',
@@ -46,7 +46,7 @@ import {toSignal} from '@angular/core/rxjs-interop';
 export class ExperienceForm implements HasUnsavedChanges {
 
   private fb  = inject(FormBuilder);
-  private svc = inject(HostExperienceService);
+  private svc = inject(ExperienceService);
   private router = inject(Router);
   private catSvc = inject(CategoryService);
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-host-profile',
+  selector: 'rxp-host-profile',
   imports: [],
   templateUrl: './host-profile.html',
   styleUrl: './host-profile.scss',

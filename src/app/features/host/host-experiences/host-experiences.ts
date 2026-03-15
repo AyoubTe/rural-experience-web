@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-host-experiences',
+  selector: 'rxp-host-experiences',
   imports: [],
   templateUrl: './host-experiences.html',
   styleUrl: './host-experiences.scss',

@@ -40,6 +40,15 @@ export interface AuthResponse {
   role: Role;
 }
 
+export interface AuthUser {
+  id:        number;
+  email:     string;
+  firstName: string;
+  lastName:  string;
+  role:      'EXPLORER' | 'HOST' | 'ADMIN';
+  avatarUrl: string | null;
+}
+
 // ==========================================
 // CATEGORY
 // ==========================================

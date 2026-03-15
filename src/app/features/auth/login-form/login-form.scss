@@ -1,11 +1,12 @@
 // ── Login Page ─────────────────────────────────────────────────────
 :host {
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--rxp-gray-100, #f5f5f0);
   padding: 1rem;
+  text-align: center;
 }
 
 // ── Form Card ──────────────────────────────────────────────────────

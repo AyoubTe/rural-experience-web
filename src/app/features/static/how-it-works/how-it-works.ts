@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-how-it-works',
+  selector: 'rxp-how-it-works',
   imports: [],
   templateUrl: './how-it-works.html',
   styleUrl: './how-it-works.scss',

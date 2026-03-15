@@ -1,1 +1,101 @@
-<p>register-form works!</p>
+<div class="register">
+  <h2>Create your account</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <!-- Name row -->
+    <div class="name-row">
+      <mat-form-field appearance="outline">
+        <mat-label>First name</mat-label>
+        <input matInput formControlName="firstName"
+               autocomplete="given-name">
+        <mat-error>
+          @if (form.get('firstName')?.hasError('required')) {
+            First name is required
+          }
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Last name</mat-label>
+        <input matInput formControlName="lastName"
+               autocomplete="family-name">
+      </mat-form-field>
+    </div>
+
+    <!-- Email -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email address</mat-label>
+      <input matInput formControlName="email"
+             type="email" autocomplete="email">
+      <mat-icon matPrefix>mail</mat-icon>
+      <mat-error>
+        @if (form.get('email')?.hasError('email')) {
+          Enter a valid email address
+        }
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Account type -->
+    <div class="role-select">
+      <p class="role-select__label">I want to:</p>
+      <mat-radio-group formControlName="role" class="role-group">
+        <mat-radio-button value="EXPLORER">
+          Explore rural experiences
+        </mat-radio-button>
+        <mat-radio-button value="HOST">
+          Host experiences on my farm
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <!-- Password -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password"
+             [type]="showPassword() ? 'text' : 'password'"
+             autocomplete="new-password">
+      <button matSuffix mat-icon-button type="button"
+              (click)="updateShowPassword()">
+        <mat-icon>
+          {{ showPassword() ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
+      </button>
+      @if (passwordError) {
+        <mat-error>{{ passwordError }}</mat-error>
+      }
+    </mat-form-field>
+
+    <!-- Confirm password -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Confirm password</mat-label>
+      <input matInput formControlName="confirmPassword"
+             [type]="showPassword() ? 'text' : 'password'"
+             autocomplete="new-password">
+      @if (confirmError) {
+        <mat-error>{{ confirmError }}</mat-error>
+      }
+    </mat-form-field>
+
+    @if (errorMessage()) {
+      <div class="register__error" role="alert">
+        <mat-icon>error_outline</mat-icon>
+        {{ errorMessage() }}
+      </div>
+    }
+
+    <button mat-flat-button color="primary"
+            type="submit"
+            class="register__submit"
+            [disabled]="form.invalid || isLoading()">
+      @if (isLoading()) { Creating account... }
+      @else { Create Account }
+    </button>
+
+  </form>
+
+  <p class="register__login">
+    Already have an account?
+    <a routerLink="/auth/login">Log in</a>
+  </p>
+</div>

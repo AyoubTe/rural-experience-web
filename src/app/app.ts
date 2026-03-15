@@ -13,6 +13,7 @@ import { MatDividerModule }  from '@angular/material/divider';
 import { MatBadgeModule }    from '@angular/material/badge';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {map} from 'rxjs';
+import {AuthService} from '@rxp/core/auth/auth-service';
 
 @Component({
   selector: 'app-root',
@@ -30,6 +31,7 @@ export class App {
   readonly currentYear = new Date().getFullYear();
 
   private breakpointObserver = inject(BreakpointObserver);
+  authService = inject(AuthService);
 
 
   /** True on mobile — sidenav becomes an overlay drawer */

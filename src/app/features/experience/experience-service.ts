@@ -5,6 +5,8 @@ import {Category, Experience, ExperienceSearchParams} from '@rxp/core/models/exp
 import {catchError, Observable, retry, throwError} from 'rxjs';
 import {ApiError, PageResponse} from '@rxp/core/models/api.model';
 import {API_ENDPOINTS} from '@rxp/core/constants/endpoints';
+import {CreateExperienceRequest} from '@rxp/core/models/requests.model';
+import {ExperienceResponse} from '@rxp/core/models/responses.model';
 
 @Injectable({
   providedIn: 'root',
@@ -109,5 +111,9 @@ export class ExperienceService {
 
     console.error('ExperienceService error:', error);
     return throwError(() => new Error(message));
+  }
+
+  createExperience(exp: CreateExperienceRequest) {
+    return this.http.post<ExperienceResponse>(`${this.baseUrl}` + API_ENDPOINTS.EXPERIENCES.BASE, exp)
   }
 }

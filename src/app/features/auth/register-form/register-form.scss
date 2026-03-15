@@ -1,0 +1,127 @@
+// ── Container ──────────────────────────────────────────────────────
+
+.register {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  h2 {
+    font-family: var(--rxp-font-display, 'Playfair Display', serif);
+    font-size: 1.6rem;
+    color: var(--rxp-gray-900, #1a1a1a);
+    margin: 0 0 0.25rem;
+  }
+
+  // ── Form ───────────────────────────────────────────────────────
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-top: 1rem;
+  }
+}
+
+// ── Name row ───────────────────────────────────────────────────────
+
+.name-row {
+  display: flex;
+  gap: 1rem;
+
+  mat-form-field {
+    flex: 1 1 0;
+    min-width: 0; // prevents overflow on small screens
+  }
+}
+
+// ── Full-width fields ──────────────────────────────────────────────
+
+.full-width {
+  width: 100%;
+  display: block;
+}
+
+// ── Role selector ──────────────────────────────────────────────────
+
+.role-select {
+  padding: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: var(--rxp-radius-md, 8px);
+  margin-bottom: 0.25rem;
+
+  &__label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--rxp-gray-700, #444444);
+    margin: 0 0 0.75rem;
+  }
+}
+
+.role-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  mat-radio-button {
+    font-size: 0.95rem;
+    color: var(--rxp-gray-900, #1a1a1a);
+  }
+}
+
+// ── Submit button ──────────────────────────────────────────────────
+
+.register__submit {
+  width: 100%;
+  height: 48px;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: var(--rxp-radius-md, 8px);
+}
+
+// ── Error alert ────────────────────────────────────────────────────
+
+.register__error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  background-color: #ffebee;
+  color: #c62828;
+  border-radius: var(--rxp-radius-md, 8px);
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  mat-icon {
+    color: #d32f2f;
+    flex-shrink: 0;
+  }
+}
+
+// ── Footer link ────────────────────────────────────────────────────
+
+.register__login {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--rxp-gray-400, #999999);
+  margin-top: 1rem;
+
+  a {
+    color: var(--rxp-green-700, #2d5a27);
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// ── Responsive ────────────────────────────────────────────────────
+
+@media (max-width: 400px) {
+  .name-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
