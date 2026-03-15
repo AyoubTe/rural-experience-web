@@ -1,4 +1,4 @@
-import { Booking } from '@rxp/core/models/booking.model';
+import {Booking, BookingStatus} from '@rxp/core/models/booking.model';
 import {BookingResponse} from '@rxp/core/models/responses.model';
 
 export interface BookingState {
@@ -20,6 +20,8 @@ export interface BookingState {
   loading:        boolean;
   cancelling:     boolean;
   error:          string | null;
+
+  previousBookingStatus: BookingStatus | null;
 }
 
 export const initialBookingState: BookingState = {
@@ -32,4 +34,5 @@ export const initialBookingState: BookingState = {
   loading:           false,
   cancelling:        false,
   error:             null,
+  previousBookingStatus: null
 };

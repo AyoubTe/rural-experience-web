@@ -1,6 +1,36 @@
 <div class="my-bookings">
   <h1>My Bookings</h1>
 
+  @if (summary$ | async; as summary) {
+    <div class="dashboard-stats">
+      <div class="stat-card">
+        <mat-icon class="stat-card__icon">travel_explore</mat-icon>
+        <div class="stat-card__value">{{ summary.totalBookings }}</div>
+        <div class="stat-card__label">Total bookings</div>
+      </div>
+
+      <div class="stat-card stat-card--highlight">
+        <mat-icon class="stat-card__icon">event_available</mat-icon>
+        <div class="stat-card__value">{{ summary.upcoming }}</div>
+        <div class="stat-card__label">Upcoming</div>
+      </div>
+
+      @if (summary.awaitingResponse > 0) {
+        <div class="stat-card stat-card--warning">
+          <mat-icon class="stat-card__icon">hourglass_empty</mat-icon>
+          <div class="stat-card__value">{{ summary.awaitingResponse }}</div>
+          <div class="stat-card__label">Awaiting host</div>
+        </div>
+      }
+
+      <div class="stat-card">
+        <mat-icon class="stat-card__icon">star</mat-icon>
+        <div class="stat-card__value">{{ summary.experiencesHad }}</div>
+        <div class="stat-card__label">Experiences completed</div>
+      </div>
+    </div>
+  }
+
   <!-- Loading bar -->
   @if (loading$ | async) {
     <mat-progress-bar mode="indeterminate" color="primary" />

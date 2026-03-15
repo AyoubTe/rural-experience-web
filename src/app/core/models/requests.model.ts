@@ -68,7 +68,7 @@ export interface CreateBookingRequest {
 // ==========================================
 
 export interface CreateReviewRequest {
-  bookingId: number;
+  bookingId: number;              // 1–5
   rating: number;                 // min: 1, max: 5
   comment?: string;               // min: 10, max: 2000
 }

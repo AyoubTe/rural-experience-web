@@ -1,0 +1,9 @@
+
+<mat-paginator
+  [length]="total()"
+  [pageSize]="10"
+  [pageIndex]="page()"
+  [pageSizeOptions]="[10, 25, 50]"
+  (page)="onPage($event)"
+  aria-label="Bookings pages">
+</mat-paginator>

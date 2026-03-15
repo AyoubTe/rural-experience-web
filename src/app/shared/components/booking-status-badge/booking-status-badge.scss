@@ -1,0 +1,9 @@
+.status-badge {
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+.status-badge--pending   { background:#fff8e1; color:#f57f17; }
+.status-badge--confirmed { background:#e8f5e9; color:#2e7d32; }
+.status-badge--declined  { background:#fce4ec; color:#c62828; }
+.status-badge--cancelled { background:#f5f5f5; color:#757575; }
+.status-badge--completed { background:#e3f2fd; color:#1565c0; }

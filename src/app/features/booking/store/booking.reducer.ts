@@ -99,4 +99,27 @@ export const bookingReducer = createReducer(
     ...state,
     selectedBookingId: bookingId,
   })),
+
+  // In cancelBooking reducer:
+  on(BookingActions.cancelBooking, (state, { bookingId }) => ({
+    ...state,
+    cancelling: true,
+    previousBookingStatus: state.bookings.find(b => b.id === bookingId)?.status ?? null,
+    bookings: state.bookings.map(b =>
+      b.id === bookingId ? { ...b, status: 'CANCELLED' as const } : b
+    ),
+  })),
+
+  // In cancelBookingFailure reducer:
+  on(BookingActions.cancelBookingFailure, (state, { bookingId, error }) => ({
+    ...state,
+    cancelling: false,
+    error,
+    previousBookingStatus: null,
+    bookings: state.bookings.map(b =>
+      b.id === bookingId
+        ? { ...b, status: state.previousBookingStatus ?? 'PENDING' }
+        : b
+    ),
+  })),
 );

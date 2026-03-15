@@ -120,3 +120,13 @@ a { color: var(--rxp-green-700); text-decoration: none; }
 a:hover { text-decoration: underline; }
 h1, h2, h3 { font-family: var(--rxp-font-display); line-height: 1.2; }
 img { max-width: 100%; display: block; }
+
+.snack--success .mat-mdc-snackbar-surface {
+  background: var(--rxp-green-700);
+  color: white;
+}
+
+.snack--error .mat-mdc-snackbar-surface {
+  background: #c62828;
+  color: white;
+}

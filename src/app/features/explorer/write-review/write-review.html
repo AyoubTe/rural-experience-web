@@ -1,1 +1,86 @@
-<p>write-review works!</p>
+<div class="write-review">
+  <h2>How was your experience?</h2>
+  <p class="subtitle">
+    Your honest review helps other explorers choose the right experience.
+  </p>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <!-- Star rating -->
+    <div class="star-rating" role="group" aria-label="Rating out of 5">
+      @for (star of [1,2,3,4,5]; track star) {
+        <button
+          type="button"
+          class="star-btn"
+          [class.star-btn--filled]="
+            star <= (form.get('rating')?.value ?? 0)"
+          [class.star-btn--hovered]="
+            star <= hoveredStar() &&
+            star > (form.get('rating')?.value ?? 0)"
+          (click)="setRating(star)"
+          (mouseenter)="hoveredStar.set(star)"
+          (mouseleave)="hoveredStar.set(0)"
+          [attr.aria-label]="star + ' stars'">
+          <mat-icon>
+            {{ star <= (form.get('rating')?.value ?? 0)
+            ? 'star' : 'star_border' }}
+          </mat-icon>
+        </button>
+      }
+    </div>
+
+    @if (form.get('rating')?.touched &&
+    form.get('rating')?.hasError('min')) {
+      <p class="rating-error">Please select a rating</p>
+    }
+
+    <!-- Review title -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Review title</mat-label>
+      <input matInput formControlName="title"
+             placeholder="e.g. An unforgettable experience">
+      <mat-hint align="end">
+        {{ form.get('title')?.value?.length ?? 0 }}/100
+      </mat-hint>
+      <mat-error>
+        @if (form.get('title')?.hasError('required')) {
+          A title is required
+        }
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Comment -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Your review</mat-label>
+      <textarea matInput
+                formControlName="comment"
+                rows="5"
+                placeholder="Tell others what you enjoyed...">
+      </textarea>
+      <mat-hint align="end">
+        {{ form.get('comment')?.value?.length ?? 0 }}/1000
+      </mat-hint>
+      <mat-error>
+        @if (form.get('comment')?.hasError('required')) {
+          Please write your review
+        } @else if (form.get('comment')?.hasError('minlength')) {
+          At least 20 characters please
+        }
+      </mat-error>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-stroked-button type="button"
+              (click)="router.navigate(['/my-bookings'])">
+        Cancel
+      </button>
+      <button mat-flat-button color="primary"
+              type="submit"
+              [disabled]="form.invalid || isSubmitting()">
+        @if (isSubmitting()) { Submitting... }
+        @else { Submit Review }
+      </button>
+    </div>
+
+  </form>
+</div>

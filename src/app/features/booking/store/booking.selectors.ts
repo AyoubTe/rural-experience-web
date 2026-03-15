@@ -73,3 +73,20 @@ export const selectPendingHostBookingCount = createSelector(
   selectPendingHostBookings,
   (pending) => pending.length
 );
+
+export const selectBookingCancelling = createSelector(
+  selectBookingState,
+  (state) => state.cancelling
+);
+
+
+export const selectBookingSummary = createSelector(
+  selectBookingsByStatus,
+  (groups) => ({
+    totalBookings:    Object.values(groups)
+      .reduce((sum, list) => sum + list.length, 0),
+    upcoming:         groups.confirmed.length,
+    awaitingResponse: groups.pending.length,
+    experiencesHad:   groups.completed.length,
+  })
+);

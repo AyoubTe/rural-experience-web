@@ -1,4 +1,9 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  isDevMode,
+  provideBrowserGlobalErrorListeners,
+  provideZonelessChangeDetection
+} from '@angular/core';
 import {provideRouter, TitleStrategy, withInMemoryScrolling, withViewTransitions} from '@angular/router';
 
 import { routes } from './app.routes';
@@ -8,6 +13,7 @@ import {authInterceptor} from '@rxp/core/auth/interceptors/auth-interceptor';
 import {refreshInterceptor} from '@rxp/core/auth/interceptors/refresh-interceptor';
 import { provideStore } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
+import {provideStoreDevtools} from '@ngrx/store-devtools';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,6 +31,11 @@ export const appConfig: ApplicationConfig = {
         provide: TitleStrategy,
         useClass: RxpTitleStrategy,
     },
-    provideStore(reducers, { metaReducers })
+    provideStore(reducers, { metaReducers }),
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: !isDevMode(),
+      autoPause: true,
+    }),
 ]
 };

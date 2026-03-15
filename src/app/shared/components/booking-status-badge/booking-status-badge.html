@@ -1,0 +1,6 @@
+<mat-chip class="status-badge"
+          [class]="'status-badge--' + status().toLowerCase()"
+          disableRipple>
+  <mat-icon matChipAvatar>{{ icon() }}</mat-icon>
+  {{ label() }}
+</mat-chip>

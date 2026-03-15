@@ -1,1 +1,183 @@
-<p>booking-detail works!</p>
+<div class="booking-detail">
+
+  @if (justBooked()) {
+    <div class="booking-detail__success-banner" role="status">
+      <mat-icon>check_circle</mat-icon>
+      <div>
+        <strong>Booking request sent!</strong>
+        <p>The host will review your request and respond soon.</p>
+      </div>
+      <button mat-icon-button (click)="justBooked.set(false)"
+              aria-label="Dismiss">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  }
+
+  @if (booking(); as booking) {
+
+    <!-- Header -->
+    <div class="booking-detail__header">
+      <button mat-icon-button routerLink="/my-bookings"
+              aria-label="Back to bookings">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1>Booking #{{ booking.id }}</h1>
+    </div>
+
+    <div class="booking-detail__layout">
+
+      <!-- Main info -->
+      <mat-card class="booking-detail__main">
+        <mat-card-content>
+
+          <!-- Experience -->
+          <div class="booking-detail__experience">
+            <img
+              [src]="booking.experienceCoverPhoto
+                     ?? 'assets/images/placeholder-experience.jpg'"
+              [alt]="booking.experienceTitle"
+              class="booking-detail__exp-photo">
+            <div>
+              <h2>{{ booking.experienceTitle }}</h2>
+              <p class="muted">
+                <mat-icon inline>place</mat-icon>
+                {{ booking.experienceLocation }}
+              </p>
+              <a mat-button
+                 [routerLink]="['/experiences',
+                                booking.experienceId]">
+                View Experience
+                <mat-icon iconSuffix>arrow_forward</mat-icon>
+              </a>
+            </div>
+          </div>
+
+          <mat-divider />
+
+          <!-- Stay details -->
+          <h3>Your Stay</h3>
+          <div class="booking-detail__details">
+            <div class="detail-item">
+              <mat-icon>calendar_today</mat-icon>
+              <div>
+                <label>Dates</label>
+                <span>
+                  {{ booking.startDate | date:'d MMMM yyyy' }}
+                  to
+                  {{ booking.endDate | date:'d MMMM yyyy' }}
+                </span>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <mat-icon>group</mat-icon>
+              <div>
+                <label>Guests</label>
+                <span>{{ booking.numberOfGuests }} guests</span>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <mat-icon>euro</mat-icon>
+              <div>
+                <label>Total price</label>
+                <span>
+                  {{ booking.totalPrice
+                  | currency:'EUR':'symbol':'1.0-0' }}
+                </span>
+              </div>
+            </div>
+
+            @if (booking.specialRequests) {
+              <div class="detail-item">
+                <mat-icon>notes</mat-icon>
+                <div>
+                  <label>Special requests</label>
+                  <span>{{ booking.specialRequests }}</span>
+                </div>
+              </div>
+            }
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Sidebar -->
+      <aside class="booking-detail__sidebar">
+
+        <!-- Status card -->
+        <mat-card class="booking-detail__status-card">
+          <mat-card-content>
+            <h3>Status</h3>
+            <rxp-booking-status-badge [status]="booking.status" />
+            @switch (booking.status) {
+              @case ('PENDING') {
+                <p class="status-note">
+                  Your request has been sent. The host typically
+                  responds within 24 hours.
+                </p>
+              }
+              @case ('CONFIRMED') {
+                <p class="status-note">
+                  Your booking is confirmed! Get ready for an
+                  amazing experience.
+                </p>
+              }
+              @case ('COMPLETED') {
+                <p class="status-note">
+                  How was it? Share your experience with other
+                  explorers.
+                </p>
+              }
+            }
+          </mat-card-content>
+          <mat-card-actions>
+            @if (booking.status === 'COMPLETED') {
+              <button mat-flat-button color="primary"
+                      (click)="onWriteReview()">
+                <mat-icon>rate_review</mat-icon>
+                Write a Review
+              </button>
+            }
+            @if (booking.status === 'PENDING' ||
+            booking.status === 'CONFIRMED') {
+              <button mat-stroked-button color="warn"
+                      (click)="onCancel()"
+                      [disabled]="cancelling()">
+                Cancel Booking
+              </button>
+            }
+          </mat-card-actions>
+        </mat-card>
+
+        <!-- Host card -->
+        <mat-card class="booking-detail__host-card">
+          <mat-card-content>
+            <h3>Your Host</h3>
+            <div class="host-info">
+              <!--
+              @if (booking.host.avatarUrl) {
+                <img [src]="booking.host.avatarUrl"
+                     [alt]="booking.explorerFirstName"
+                     class="host-avatar">
+              } -->
+              <span>
+                {{ booking.explorerFirstName }}
+                {{ booking.explorerLastName}}
+              </span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+      </aside>
+    </div>
+
+  } @else {
+    <!-- Loading / not found -->
+    <div class="booking-detail__loading">
+      <p>Loading booking details...</p>
+    </div>
+  }
+
+</div>
