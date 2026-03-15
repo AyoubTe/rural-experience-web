@@ -1,0 +1,188 @@
+.booking-card {
+  display: flex;
+  gap: 1rem;
+  background: var(--rxp-white, #ffffff);
+  border: 1px solid var(--rxp-gray-200, #e0e0e0);
+  border-radius: var(--rxp-radius-lg, 16px);
+  box-shadow: var(--rxp-shadow-sm);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: var(--rxp-shadow-md);
+  }
+
+  // ── Photo ───────────────────────────────────────────────────────
+
+  &__photo {
+    width: 140px;
+    min-height: 140px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  // ── Body ────────────────────────────────────────────────────────
+
+  &__body {
+    flex: 1;
+    padding: 1rem 1rem 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  // ── Header ──────────────────────────────────────────────────────
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  &__title {
+    font-family: var(--rxp-font-display, 'Playfair Display', serif);
+    font-size: 1.05rem;
+    color: var(--rxp-gray-900, #1a1a1a);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  // ── Status badge ────────────────────────────────────────────────
+
+  &__status {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--rxp-radius-full, 9999px);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  // ── Meta ────────────────────────────────────────────────────────
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--rxp-gray-700, #444444);
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    mat-icon {
+      font-size: 1rem;
+      height: 1rem;
+      width: 1rem;
+      color: var(--rxp-green-500, #4a8c42);
+    }
+  }
+
+  // ── Host ────────────────────────────────────────────────────────
+
+  &__host {
+    font-size: 0.85rem;
+    color: var(--rxp-gray-400, #999999);
+    margin: 0;
+  }
+
+  // ── Footer ──────────────────────────────────────────────────────
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--rxp-gray-100, #f5f5f0);
+  }
+
+  &__price {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--rxp-green-700, #2d5a27);
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__explorer {
+    font-size: 0.85rem;
+    color: var(--rxp-gray-400, #999999);
+    margin: 0;
+  }
+
+  &__requests,
+  &__host-message,
+  &__cancellation {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.25rem;
+    font-size: 0.85rem;
+    margin: 0;
+    color: var(--rxp-gray-700, #444444);
+
+    mat-icon {
+      font-size: 1rem;
+      height: 1rem;
+      width: 1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+  }
+
+  &__cancellation {
+    color: #c62828;
+  }
+
+  &__host-message {
+    color: var(--rxp-green-700, #2d5a27);
+  }
+}
+
+// ── Status colours ───────────────────────────────────────────────
+
+.status--pending {
+  background: #fff8e1;
+  color: #f57f17;
+}
+
+.status--confirmed {
+  background: var(--rxp-green-100, #e8f5e4);
+  color: var(--rxp-green-700, #2d5a27);
+}
+
+.status--declined,
+.status--cancelled {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.status--completed {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+// ── Responsive ──────────────────────────────────────────────────
+
+@media (max-width: 480px) {
+  .booking-card {
+    flex-direction: column;
+
+    &__photo {
+      width: 100%;
+      height: 160px;
+      min-height: unset;
+    }
+
+    &__body {
+      padding: 0.75rem;
+    }
+  }
+}

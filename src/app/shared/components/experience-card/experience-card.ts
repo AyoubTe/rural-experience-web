@@ -33,7 +33,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     TruncatePipe, DurationPipe,
   ],
 })
-export class ExperienceCardComponent {
+export class ExperienceCard {
 
   // ── Inputs (signal-based) ───────────────────────────────────────
   experience  = input.required<Experience>();

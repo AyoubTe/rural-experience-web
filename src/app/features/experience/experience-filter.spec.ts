@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ExperienceFilter } from './experience-filter';
+import { ExperienceFilterService } from './experience-filter';
 
 describe('ExperienceFilter', () => {
-  let service: ExperienceFilter;
+  let service: ExperienceFilterService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ExperienceFilter);
+    service = TestBed.inject(ExperienceFilterService);
   });
 
   it('should be created', () => {

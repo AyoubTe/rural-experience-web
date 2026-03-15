@@ -29,7 +29,7 @@ export class BookingService {
     return this.http.post<BookingResponse>(`${this.apiUrl}${API_ENDPOINTS.BOOKINGS.CONFIRM(id)}`, {});
   }
 
-  declineBooking(id: number): Observable<BookingResponse> {
+  declineBooking(id: number, raison?: string): Observable<BookingResponse> {
     return this.http.post<BookingResponse>(`${this.apiUrl}${API_ENDPOINTS.BOOKINGS.DECLINE(id)}`, {});
   }
 

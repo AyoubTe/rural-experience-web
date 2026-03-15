@@ -4,7 +4,7 @@ export const explorerRoutes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./bookings/my-bookings')
+      import('@rxp/features/explorer/my-bookings/my-bookings')
         .then(m => m.MyBookings),
     title: 'My Bookings — RuralXperience',
   },

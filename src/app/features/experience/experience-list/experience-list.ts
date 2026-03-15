@@ -5,7 +5,7 @@ import {
 import {FormControl, FormsModule} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 
-import { ExperienceCardComponent }
+import { ExperienceCard }
   from '@rxp/shared/components/experience-card/experience-card';
 
 import {Experience, Category, ExperienceSearchParams}
@@ -40,7 +40,7 @@ import {ExperienceFilterService} from '@rxp/features/experience/experience-filte
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     FormsModule,
-    ExperienceCardComponent,
+    ExperienceCard,
     MatPaginator, MatIconModule, MatProgressSpinner, AsyncPipe,
   ],
 })

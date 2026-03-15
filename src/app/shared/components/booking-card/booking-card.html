@@ -1,0 +1,98 @@
+<div class="booking-card">
+
+  <img class="booking-card__photo"
+       [src]="booking().experienceCoverPhoto ?? 'assets/images/placeholder-experience.jpg'"
+       [alt]="booking().experienceTitle">
+
+  <div class="booking-card__body">
+
+    <div class="booking-card__header">
+      <h3 class="booking-card__title">{{ booking().experienceTitle }}</h3>
+      <span class="booking-card__status" [class]="statusClass(booking().status)">
+        {{ statusLabel(booking().status) }}
+      </span>
+    </div>
+
+    <div class="booking-card__meta">
+      <span>
+        <mat-icon inline>place</mat-icon>
+        {{ booking().experienceLocation }}
+      </span>
+      <span>
+        <mat-icon inline>calendar_today</mat-icon>
+        {{ booking().startDate | date:'mediumDate' }}
+        –
+        {{ booking().endDate | date:'mediumDate' }}
+      </span>
+      <span>
+        <mat-icon inline>group</mat-icon>
+        {{ booking().numberOfGuests }}
+        {{ booking().numberOfGuests === 1 ? 'guest' : 'guests' }}
+      </span>
+      <span>
+        <mat-icon inline>schedule</mat-icon>
+        Booked {{ booking().createdAt | date:'mediumDate' }}
+      </span>
+    </div>
+
+    <p class="booking-card__explorer">
+      By <strong>{{ booking().explorerFirstName }} {{ booking().explorerLastName }}</strong>
+      · {{ booking().explorerEmail }}
+    </p>
+
+    @if (booking().specialRequests) {
+      <p class="booking-card__requests">
+        <mat-icon inline>notes</mat-icon>
+        {{ booking().specialRequests }}
+      </p>
+    }
+
+    @if (booking().hostMessage) {
+      <p class="booking-card__host-message">
+        <mat-icon inline>message</mat-icon>
+        {{ booking().hostMessage }}
+      </p>
+    }
+
+    @if (booking().cancellationReason) {
+      <p class="booking-card__cancellation">
+        <mat-icon inline>info</mat-icon>
+        {{ booking().cancellationReason }}
+      </p>
+    }
+
+    <div class="booking-card__footer">
+      <span class="booking-card__price">
+        {{ booking().totalPrice | currency:'EUR':'symbol':'1.0-0' }} total
+      </span>
+
+      <div class="booking-card__actions">
+        <a mat-stroked-button
+           [routerLink]="['/my-bookings', booking().id]">
+          <mat-icon>visibility</mat-icon>
+          View
+        </a>
+
+        @if (booking().canCancel) {
+          <button mat-stroked-button
+                  color="warn"
+                  type="button"
+                  (click)="onCancel()">
+            <mat-icon>cancel</mat-icon>
+            Cancel
+          </button>
+        }
+
+        @if (booking().canReview) {
+          <a mat-flat-button
+             color="primary"
+             [routerLink]="['/experiences', booking().experienceId, 'review']">
+            <mat-icon>star</mat-icon>
+            Review
+          </a>
+        }
+      </div>
+    </div>
+
+  </div>
+</div>

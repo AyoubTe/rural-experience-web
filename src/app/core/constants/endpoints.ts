@@ -17,9 +17,9 @@ export const API_ENDPOINTS = {
   },
 
   BOOKINGS: {
-    BASE: '/bookings', // POST new booking
-    MY_BOOKINGS: '/bookings/my',
-    HOST_BOOKINGS: '/bookings/host',
+    BASE: '/my-bookings', // POST new booking
+    MY_BOOKINGS: '/my-bookings/my',
+    HOST_BOOKINGS: '/my-bookings/host',
     GET_BY_ID: (id: number | string) => `/bookings/${id}`,
     CONFIRM: (id: number | string) => `/bookings/${id}/confirm`,
     DECLINE: (id: number | string) => `/bookings/${id}/decline`,

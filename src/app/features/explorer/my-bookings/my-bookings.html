@@ -1,0 +1,94 @@
+<div class="my-bookings">
+  <h1>My Bookings</h1>
+
+  <!-- Loading bar -->
+  @if (loading$ | async) {
+    <mat-progress-bar mode="indeterminate" color="primary" />
+  }
+
+  <!-- Error -->
+  @if (error$ | async; as error) {
+    <div class="error-banner" role="alert">
+      <mat-icon>error_outline</mat-icon>
+      {{ error }}
+    </div>
+  }
+
+  @if (bookingGroups$ | async; as groups) {
+    <mat-tab-group animationDuration="200ms">
+
+      <!-- Upcoming -->
+      <mat-tab>
+        <ng-template mat-tab-label>
+          Upcoming
+          @if (groups.confirmed.length > 0) {
+            <span class="tab-count">
+              {{ groups.confirmed.length }}
+            </span>
+          }
+        </ng-template>
+
+        <div class="booking-list">
+          @for (booking of groups.confirmed; track booking.id) {
+            <rxp-booking-card
+              [booking]="booking"
+              (cancel)="onCancelBooking($event)" />
+          } @empty {
+            <div class="empty-state">
+              <p>No upcoming bookings.</p>
+              <a mat-flat-button color="primary"
+                 routerLink="/experiences">
+                Browse Experiences
+              </a>
+            </div>
+          }
+        </div>
+      </mat-tab>
+
+      <!-- Pending -->
+      <mat-tab>
+        <ng-template mat-tab-label>
+          Pending
+          @if (groups.pending.length > 0) {
+            <span class="tab-count tab-count--warning">
+              {{ groups.pending.length }}
+            </span>
+          }
+        </ng-template>
+
+        <div class="booking-list">
+          @for (booking of groups.pending; track booking.id) {
+            <rxp-booking-card
+              [booking]="booking"
+              (cancel)="onCancelBooking($event)" />
+          } @empty {
+            <p class="empty-state__msg">No pending requests.</p>
+          }
+        </div>
+      </mat-tab>
+
+      <!-- Completed -->
+      <mat-tab label="Completed">
+        <div class="booking-list">
+          @for (booking of groups.completed; track booking.id) {
+            <rxp-booking-card [booking]="booking" />
+          } @empty {
+            <p class="empty-state__msg">No completed bookings yet.</p>
+          }
+        </div>
+      </mat-tab>
+
+      <!-- Cancelled -->
+      <mat-tab label="Cancelled">
+        <div class="booking-list">
+          @for (booking of groups.cancelled; track booking.id) {
+            <rxp-booking-card [booking]="booking" />
+          } @empty {
+            <p class="empty-state__msg">No cancelled bookings.</p>
+          }
+        </div>
+      </mat-tab>
+
+    </mat-tab-group>
+  }
+</div>
