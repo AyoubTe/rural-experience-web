@@ -14,6 +14,8 @@ import { MatBadgeModule }    from '@angular/material/badge';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {map} from 'rxjs';
 import {AuthService} from '@rxp/core/auth/auth-service';
+import {Store} from '@ngrx/store';
+import * as BookingSelectors from '@rxp/features/booking/store/booking.selectors';
 
 @Component({
   selector: 'app-root',
@@ -32,6 +34,7 @@ export class App {
 
   private breakpointObserver = inject(BreakpointObserver);
   authService = inject(AuthService);
+  store = inject(Store);
 
 
   /** True on mobile — sidenav becomes an overlay drawer */
@@ -52,4 +55,12 @@ export class App {
   closeSidenav(): void {
     this.sidenavOpen.set(false);
   }
+
+  // Only relevant for hosts — selector returns 0 otherwise
+  pendingBookingCount = toSignal(
+    this.store.select(
+      BookingSelectors.selectPendingHostBookingCount
+    ),
+    { initialValue: 0 }
+  );
 }

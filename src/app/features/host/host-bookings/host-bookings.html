@@ -1,1 +1,138 @@
-<p>host-bookings works!</p>
+<div class="host-bookings">
+  <h2>Incoming Booking Requests</h2>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+
+  <mat-tab-group>
+
+    <!-- Pending — needs action -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        Pending
+        @if (pending().length > 0) {
+          <span class="tab-badge">{{ pending().length }}</span>
+        }
+      </ng-template>
+
+      <div class="booking-queue">
+        @for (booking of pending(); track booking.id) {
+          <mat-card class="host-booking-card">
+
+            <mat-card-content class="host-booking-card__content">
+
+              <!-- Explorer photo + name -->
+              <div class="host-booking-card__explorer">
+                @if (booking.explorerFirstName) {
+                  <img [src]="booking.explorerFirstName"
+                       [alt]="booking.explorerFirstName"
+                       class="explorer-avatar">
+                } @else {
+                  <div class="explorer-avatar explorer-avatar--initials">
+                    {{ booking.explorerFirstName[0] }}
+                  </div>
+                }
+                <div>
+                  <strong>
+                    {{ booking.explorerFirstName }}
+                    {{ booking.explorerLastName }}
+                  </strong>
+                  <p class="muted">
+                    Requested
+                    {{ booking.createdAt | date:'d MMM yyyy' }}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Stay details -->
+              <div class="host-booking-card__details">
+                <div class="detail-row">
+                  <mat-icon>landscape</mat-icon>
+                  <span>{{ booking.experienceTitle }}</span>
+                </div>
+                <div class="detail-row">
+                  <mat-icon>calendar_today</mat-icon>
+                  <span>
+                    {{ booking.startDate | date:'d MMM' }}
+                    →
+                    {{ booking.endDate | date:'d MMM yyyy' }}
+                  </span>
+                </div>
+                <div class="detail-row">
+                  <mat-icon>group</mat-icon>
+                  <span>
+                    {{ booking.numberOfGuests }}
+                    {{ booking.numberOfGuests === 1
+                    ? 'guest' : 'guests' }}
+                  </span>
+                </div>
+                <div class="detail-row">
+                  <mat-icon>euro</mat-icon>
+                  <span>
+                    {{ booking.totalPrice
+                    | currency:'EUR':'symbol':'1.0-0' }}
+                    total
+                  </span>
+                </div>
+
+                @if (booking.specialRequests) {
+                  <div class="detail-row detail-row--requests">
+                    <mat-icon>notes</mat-icon>
+                    <em>{{ booking.specialRequests }}</em>
+                  </div>
+                }
+              </div>
+
+            </mat-card-content>
+
+            <!-- Accept / Decline actions -->
+            <mat-card-actions align="end">
+              <button mat-stroked-button color="warn"
+                      (click)="onDecline(booking.id)">
+                <mat-icon>close</mat-icon>
+                Decline
+              </button>
+              <button mat-flat-button color="primary"
+                      (click)="onConfirm(booking.id)">
+                <mat-icon>check</mat-icon>
+                Accept
+              </button>
+            </mat-card-actions>
+
+          </mat-card>
+        } @empty {
+          <div class="empty-queue">
+            <mat-icon class="empty-queue__icon">inbox</mat-icon>
+            <h3>All caught up!</h3>
+            <p>No pending booking requests at the moment.</p>
+          </div>
+        }
+      </div>
+    </mat-tab>
+
+    <!-- All bookings tab -->
+    <mat-tab label="All Bookings">
+      <div class="booking-list">
+        @for (booking of allHostBks(); track booking.id) {
+          <div class="all-booking-row">
+            <rxp-booking-status-badge [status]="booking.status" />
+            <span>{{ booking.experienceTitle }}</span>
+            <span>
+              {{ booking.explorerFirstName }}
+              {{ booking.explorerLastName }}
+            </span>
+            <span>{{ booking.startDate | date:'d MMM yyyy' }}</span>
+            <span>
+              {{ booking.totalPrice
+              | currency:'EUR':'symbol':'1.0-0' }}
+            </span>
+          </div>
+        } @empty {
+          <p class="empty-state">No bookings yet.</p>
+        }
+      </div>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>

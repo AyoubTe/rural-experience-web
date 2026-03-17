@@ -7,8 +7,16 @@ export const API_ENDPOINTS = {
 
   EXPERIENCES: {
     BASE: '/experiences', // GET all, POST new
+    GET_HOST_EXPERIENCES: '/experiences/host-experiences',
     GET_BY_ID: (id: number | string) => `/experiences/${id}`,
+    DELETE: (id: number | string) => `/experiences/${id}`,
+    GET_PHOTOS: (id: number | string) => `/experiences/${id}/photos`,
     UPDATE: (id: number | string) => `/experiences/${id}`,
+    UPDATE_STATUS: (id: number | string) => `/experiences/${id}/status`,
+    DELETE_PHOTO: (expId: number, photoId: number) => `/experiences/${expId}/photos/${photoId}`,
+    UPLOAD_PHOTO:   (id: number) => `/experiences/${id}/photos`,
+    REORDER_PHOTOS: (id: number) => `/experiences/${id}/photos/reorder`,
+    SUBMIT: (id: number | string) => `/experiences/${id}/submit`,
   },
 
   CATEGORIES: {
@@ -17,9 +25,9 @@ export const API_ENDPOINTS = {
   },
 
   BOOKINGS: {
-    BASE: '/my-bookings', // POST new booking
-    MY_BOOKINGS: '/my-bookings/my',
-    HOST_BOOKINGS: '/my-bookings/host',
+    BASE: '/bookings', // POST new booking
+    MY_BOOKINGS: '/bookings/my',
+    HOST_BOOKINGS: '/bookings/host',
     GET_BY_ID: (id: number | string) => `/bookings/${id}`,
     CONFIRM: (id: number | string) => `/bookings/${id}/confirm`,
     DECLINE: (id: number | string) => `/bookings/${id}/decline`,

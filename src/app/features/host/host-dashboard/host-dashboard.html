@@ -1,1 +1,69 @@
-<p>host-dashboard works!</p>
+<div class="host-dashboard">
+  <h2>Dashboard</h2>
+
+  @if (stats$ | async; as stats) {
+    <div class="stats-grid">
+
+      <mat-card class="stat-card"
+                [class.stat-card--urgent]="stats.pendingCount > 0">
+        <mat-card-content>
+          <mat-icon class="stat-icon">hourglass_empty</mat-icon>
+          <div class="stat-value">{{ stats.pendingCount }}</div>
+          <div class="stat-label">Awaiting Response</div>
+          @if (stats.pendingCount > 0) {
+            <a mat-stroked-button routerLink="../bookings"
+               class="stat-action">
+              Review Requests
+            </a>
+          }
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <mat-icon class="stat-icon">event_available</mat-icon>
+          <div class="stat-value">{{ stats.confirmedCount }}</div>
+          <div class="stat-label">Confirmed Upcoming</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <mat-icon class="stat-icon">book_online</mat-icon>
+          <div class="stat-value">{{ stats.totalBookings }}</div>
+          <div class="stat-label">Total Bookings</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="stat-card stat-card--revenue">
+        <mat-card-content>
+          <mat-icon class="stat-icon">euro</mat-icon>
+          <div class="stat-value">
+            {{ stats.totalRevenue
+            | currency:'EUR':'symbol':'1.0-0' }}
+          </div>
+          <div class="stat-label">Total Revenue</div>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+
+    <!-- Quick actions -->
+    <div class="quick-actions">
+      <h3>Quick Actions</h3>
+      <a mat-flat-button color="primary"
+         routerLink="../experiences/new">
+        <mat-icon>add</mat-icon>
+        Create Experience
+      </a>
+      <a mat-stroked-button routerLink="../experiences">
+        <mat-icon>landscape</mat-icon>
+        Manage Listings
+      </a>
+      <a mat-stroked-button routerLink="../bookings">
+        <mat-icon>book_online</mat-icon>
+        View All Bookings
+      </a>
+    </div>
+  }
+</div>

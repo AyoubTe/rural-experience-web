@@ -1,0 +1,101 @@
+<div class="photo-manager">
+
+  <div class="photo-manager__header">
+    <h3>Experience Photos</h3>
+    <p class="photo-manager__hint">
+      Drag to reorder. The first photo is your cover image.
+    </p>
+  </div>
+
+  <!-- Drop zone / photo grid -->
+  <div
+    class="photo-manager__grid"
+    cdkDropList
+    cdkDropListOrientation="horizontal"
+    [cdkDropListData]="photos()"
+    (cdkDropListDropped)="onDrop($event)">
+
+    @for (photo of photos(); track photo.id; let i = $index) {
+      <div
+        class="photo-tile"
+        [class.photo-tile--cover]="i === 0"
+        cdkDrag
+        [cdkDragData]="photo">
+
+        <!-- Drag preview (shown while dragging) -->
+        <div class="photo-tile__drag-preview" *cdkDragPreview>
+          <img [src]="photo.url" [alt]="photo.altText">
+        </div>
+
+        <!-- Drag placeholder (shown in original position) -->
+        <div class="photo-tile__drag-placeholder" *cdkDragPlaceholder>
+          <mat-icon>add_photo_alternate</mat-icon>
+        </div>
+
+        <!-- Photo content -->
+        <img class="photo-tile__img"
+             [src]="photo.url"
+             [alt]="photo.altText"
+             loading="lazy">
+
+        <!-- Cover badge -->
+        @if (i === 0) {
+          <span class="photo-tile__cover-badge">Cover</span>
+        }
+
+        <!-- Upload progress overlay -->
+        @if (!photo.uploadedAt) {
+          <div class="photo-tile__progress-overlay">
+            <mat-progress-bar
+              mode="determinate"
+              [value]="photo.uploadedAt">
+            </mat-progress-bar>
+            <span>{{ photo.uploadedAt }}%</span>
+          </div>
+        }
+
+        <!-- Actions overlay (shown on hover) -->
+        @if (photo.uploadedAt) {
+          <div class="photo-tile__actions">
+            <!-- Drag handle -->
+            <button mat-icon-button
+                    cdkDragHandle
+                    class="photo-tile__drag-handle"
+                    aria-label="Drag to reorder">
+              <mat-icon>drag_indicator</mat-icon>
+            </button>
+
+            <!-- Delete -->
+            <button mat-icon-button
+                    class="photo-tile__delete"
+                    (click)="onDeletePhoto(photo)"
+                    aria-label="Delete photo">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        }
+
+      </div>
+    }
+
+    <!-- Upload button tile -->
+    <label class="photo-tile photo-tile--upload"
+           [class.photo-tile--loading]="isUploading()"
+           role="button"
+           tabindex="0">
+      <input type="file"
+             accept="image/*"
+             multiple
+             hidden
+             (change)="onFileSelected($event)">
+      <mat-icon>add_photo_alternate</mat-icon>
+      <span>Add Photos</span>
+    </label>
+
+  </div>
+
+  <p class="photo-manager__limits">
+    JPEG, PNG or WebP · Max 10 MB per photo · Up to 10 photos
+  </p>
+
+</div>

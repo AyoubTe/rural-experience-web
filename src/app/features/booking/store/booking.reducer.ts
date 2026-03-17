@@ -45,36 +45,11 @@ export const bookingReducer = createReducer(
     ...state, loading: false, error,
   })),
 
-  // ── Cancel booking (optimistic update) ───────────────────────
-  // Immediately mark as CANCELLED in UI before API confirms
-  on(BookingActions.cancelBooking, (state, { bookingId }) => ({
-    ...state,
-    cancelling: true,
-    bookings: state.bookings.map(b =>
-      b.id === bookingId
-        ? { ...b, status: 'CANCELLED' as const }
-        : b
-    ),
-  })),
 
   on(BookingActions.cancelBookingSuccess, (state) => ({
     ...state,
     cancelling: false,
   })),
-
-  // On failure: roll back the optimistic update
-  on(BookingActions.cancelBookingFailure,
-    (state, { bookingId, error }) => ({
-      ...state,
-      cancelling: false,
-      error,
-      // Restore the booking to PENDING (it was not actually cancelled)
-      bookings: state.bookings.map(b =>
-        b.id === bookingId
-          ? { ...b, status: 'PENDING' as const }
-          : b
-      ),
-    })),
 
   // ── Confirm booking (host) ───────────────────────────────────
   on(BookingActions.confirmBookingSuccess, (state, { booking }) => ({

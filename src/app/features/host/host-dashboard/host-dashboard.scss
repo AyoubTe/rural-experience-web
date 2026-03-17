@@ -1,0 +1,170 @@
+// ── Dashboard Container ────────────────────────────────────────────
+.host-dashboard {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--rxp-spacing-xl, 48px) var(--rxp-spacing-lg, 24px);
+
+  h2 {
+    font-family: var(--rxp-font-display, 'Playfair Display', Georgia, serif);
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: var(--rxp-gray-900, #111827);
+    margin: 0 0 var(--rxp-spacing-xl, 40px);
+    letter-spacing: -0.02em;
+  }
+}
+
+// ── Stats Grid ─────────────────────────────────────────────────────
+.stats-grid {
+  display: grid;
+  // Creates a fluid grid that wraps beautifully on tablets and mobile
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--rxp-spacing-lg, 24px);
+  margin-bottom: var(--rxp-spacing-2xl, 56px);
+}
+
+// ── Stat Card Base ─────────────────────────────────────────────────
+.stat-card {
+  border-radius: var(--rxp-radius-lg, 16px) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+  border: 1px solid var(--rxp-gray-200, #e5e7eb) !important;
+  background-color: #ffffff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+    padding: var(--rxp-spacing-xl, 32px) !important;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  .stat-icon {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+    margin-bottom: var(--rxp-spacing-md, 20px);
+    color: var(--rxp-gray-500, #6b7280);
+  }
+
+  .stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--rxp-gray-900, #111827);
+    line-height: 1.1;
+    margin-bottom: var(--rxp-spacing-xs, 8px);
+    font-feature-settings: "tnum"; // Aligns numbers beautifully
+  }
+
+  .stat-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--rxp-gray-500, #6b7280);
+    flex-grow: 1; // Pushes the action button to the bottom if present
+  }
+
+  .stat-action {
+    margin-top: var(--rxp-spacing-lg, 24px);
+    width: 100%;
+    border-radius: var(--rxp-radius-md, 8px);
+  }
+
+  // ── Stat Card Modifiers ──────────────────────────────────────────
+
+  &--urgent {
+    background-color: #fffbeb; // Very light amber tint
+    border-color: #fde68a !important;
+
+    .stat-icon {
+      color: #d97706; // Amber
+    }
+
+    .stat-action {
+      color: #b45309;
+      border-color: #fcd34d;
+      background-color: #ffffff;
+
+      &:hover {
+        background-color: #fef3c7;
+      }
+    }
+  }
+
+  &--revenue {
+    background-color: #f0fdf4; // Very light emerald tint
+    border-color: #bbf7d0 !important;
+
+    .stat-icon {
+      color: #10b981; // Emerald
+    }
+
+    .stat-value {
+      color: #065f46;
+    }
+  }
+}
+
+// ── Quick Actions Section ──────────────────────────────────────────
+.quick-actions {
+  background: var(--rxp-gray-50, #f9fafb);
+  border-radius: var(--rxp-radius-xl, 24px);
+  padding: var(--rxp-spacing-xl, 40px);
+  border: 1px dashed var(--rxp-gray-300, #d1d5db);
+
+  h3 {
+    font-family: var(--rxp-font-display, 'Playfair Display', Georgia, serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 var(--rxp-spacing-lg, 24px);
+    color: var(--rxp-gray-800, #1f2937);
+  }
+
+  // Flex row that gracefully wraps on smaller screens
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rxp-spacing-md, 16px);
+  align-items: center;
+
+  a[mat-flat-button], a[mat-stroked-button] {
+    padding: 0 24px;
+    border-radius: var(--rxp-radius-full, 99px);
+
+    mat-icon {
+      margin-right: 8px;
+    }
+  }
+
+  a[mat-stroked-button] {
+    background-color: #ffffff;
+    border-color: var(--rxp-gray-300, #d1d5db);
+  }
+}
+
+// ── Responsive Adjustments ─────────────────────────────────────────
+@media (max-width: 768px) {
+  .host-dashboard {
+    padding: var(--rxp-spacing-lg, 24px) var(--rxp-spacing-md, 16px);
+  }
+
+  .stat-card mat-card-content {
+    padding: var(--rxp-spacing-lg, 24px) !important;
+  }
+
+  .quick-actions {
+    padding: var(--rxp-spacing-lg, 24px);
+    flex-direction: column;
+    align-items: stretch; // Makes buttons full-width on mobile
+
+    a {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

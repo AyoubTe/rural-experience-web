@@ -1,1 +1,131 @@
-<p>host-experiences works!</p>
+<div class="host-experiences">
+
+  <div class="host-experiences__toolbar">
+    <h2>My Experiences</h2>
+    <a mat-flat-button color="primary"
+       routerLink="/host/experiences/new">
+      <mat-icon>add</mat-icon>
+      New Experience
+    </a>
+  </div>
+
+  @if (isLoading()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+
+  <div class="experiences-list">
+    @for (exp of experiences(); track exp.id) {
+      <mat-card class="exp-row">
+
+        <img mat-card-image
+             class="exp-row__photo"
+             [src]="exp.coverPhotoUrl
+                    ?? 'assets/images/placeholder-experience.jpg'"
+             [alt]="exp.title">
+
+        <mat-card-content class="exp-row__content">
+
+          <div class="exp-row__header">
+            <h3 class="exp-row__title">{{ exp.title }}</h3>
+
+            <!-- Status chip -->
+            <mat-chip
+              [class]="'exp-status--' + exp.status.toLowerCase()"
+              disableRipple>
+              {{ exp.status }}
+            </mat-chip>
+          </div>
+
+          <div class="exp-row__meta">
+            <span>
+              {{ exp.pricePerPerson
+              | currency:'EUR':'symbol':'1.0-0' }} /person/day
+            </span>
+            <span>{{ exp.durationDays | duration }}</span>
+            <span>
+              Max {{ exp.maxGuests }} guests
+            </span>
+            <span>
+              <mat-icon inline>place</mat-icon>
+              {{ exp.location }}
+            </span>
+          </div>
+
+          <!-- Rating -->
+          @if (exp.reviewCount > 0) {
+            <div class="exp-row__rating">
+              <mat-icon class="star-icon">star</mat-icon>
+              <span>
+                {{ exp.averageRating | number:'1.1-1' }}
+              </span>
+              <span class="muted">
+                ({{ exp.reviewCount }}
+                {{ exp.reviewCount === 1 ? 'review' : 'reviews' }})
+              </span>
+            </div>
+          }
+
+        </mat-card-content>
+
+        <!-- Actions -->
+        <mat-card-actions class="exp-row__actions" align="end">
+
+          <!-- Publish toggle -->
+          <mat-slide-toggle
+            [checked]="exp.status === 'PUBLISHED'"
+            [disabled]="togglingId() === exp.id ||
+                        exp.status === 'PENDING_REVIEW' ||
+                        exp.status === 'ARCHIVED'"
+            (change)="onTogglePublish(exp, $event)"
+            color="primary"
+            [matTooltip]="exp.status === 'PENDING_REVIEW'
+              ? 'Awaiting moderation approval'
+              : (exp.status === 'PUBLISHED' ? 'Unpublish' : 'Publish')">
+            {{ exp.status === 'PUBLISHED' ? 'Live' : 'Draft' }}
+          </mat-slide-toggle>
+
+          <!-- More menu -->
+          <button mat-icon-button [matMenuTriggerFor]="expMenu"
+                  [attr.aria-label]="'Options for ' + exp.title">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #expMenu="matMenu">
+            <a mat-menu-item
+               [routerLink]="['/experiences', exp.id]">
+              <mat-icon>visibility</mat-icon>
+              Preview listing
+            </a>
+            <a mat-menu-item
+               [routerLink]="['/host/experiences', exp.id, 'edit']">
+              <mat-icon>edit</mat-icon>
+              Edit
+            </a>
+            <a mat-menu-item
+               [routerLink]="['/host/experiences', exp.id, 'photos']">
+              <mat-icon>photo_library</mat-icon>
+              Manage photos
+            </a>
+            <mat-divider />
+            <button mat-menu-item
+                    (click)="onDelete(exp)"
+                    class="delete-item">
+              <mat-icon color="warn">delete</mat-icon>
+              Delete
+            </button>
+          </mat-menu>
+
+        </mat-card-actions>
+      </mat-card>
+    } @empty {
+      <div class="empty-experiences">
+        <mat-icon>landscape</mat-icon>
+        <h3>No experiences yet</h3>
+        <p>Create your first experience to start receiving bookings.</p>
+        <a mat-flat-button color="primary"
+           routerLink="/host/experiences/new">
+          Create Experience
+        </a>
+      </div>
+    }
+  </div>
+</div>

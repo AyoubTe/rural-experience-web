@@ -14,6 +14,7 @@ import {MatCard, MatCardActions, MatCardContent} from '@angular/material/card';
 import {MatDivider} from '@angular/material/list';
 import {CurrencyPipe, DatePipe} from '@angular/common';
 import {BookingStatusBadge} from '@rxp/shared/components/booking-status-badge/booking-status-badge';
+import {MatButton, MatIconButton} from '@angular/material/button';
 
 @Component({
   selector: 'rxp-booking-detail',
@@ -26,7 +27,9 @@ import {BookingStatusBadge} from '@rxp/shared/components/booking-status-badge/bo
     DatePipe,
     CurrencyPipe,
     MatCardActions,
-    BookingStatusBadge
+    BookingStatusBadge,
+    MatIconButton,
+    MatButton
   ],
   templateUrl: './booking-detail.html',
   styleUrl: './booking-detail.scss',

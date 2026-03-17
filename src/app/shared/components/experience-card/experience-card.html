@@ -126,17 +126,17 @@
           <span class="card__price-unit">/person/day</span>
         </div>
 
-        <button
-          mat-flat-button
-          color="primary"
-          class="card__book-btn"
-          (click)="onBookNow($event)"
-          [attr.aria-label]="'Book ' + experience().title">
-          Book Now
-        </button>
+        @if (auth.hasRole("EXPLORER")){
+          <button
+            mat-flat-button
+            color="primary"
+            class="card__book-btn"
+            (click)="onBookNow($event)"
+            [attr.aria-label]="'Book ' + experience().title">
+            Book Now
+          </button>
+        }
       </div>
-
     </mat-card-actions>
   }
-
 </mat-card>

@@ -60,9 +60,11 @@
       <small>{{ authService.currentUser()?.email }}</small>
     </div>
     <mat-divider />
-    <a mat-menu-item routerLink="/my-bookings">
-      <mat-icon>book_online</mat-icon> My Bookings
-    </a>
+    @if (!authService.hasRole("HOST") && !authService.hasRole("ADMIN")){
+      <a mat-menu-item routerLink="/my-bookings">
+        <mat-icon>book_online</mat-icon> My Bookings
+      </a>
+    }
     @if (authService.hasRole('HOST')) {
       <a mat-menu-item routerLink="/host/dashboard">
         <mat-icon>cottage</mat-icon> Host Dashboard
@@ -110,38 +112,56 @@
 
     <!-- Navigation links -->
     <mat-nav-list>
-      <a mat-list-item routerLink="/"
-         routerLinkActive="active-nav-item"
-         [routerLinkActiveOptions]="{ exact: true }"
-         (click)="closeSidenav()">
-        <mat-icon matListItemIcon>home</mat-icon>
-        <span matListItemTitle>Home</span>
-      </a>
+      @if (!authService.isAuthenticated()){
+        <a mat-list-item routerLink="/"
+           routerLinkActive="active-nav-item"
+           [routerLinkActiveOptions]="{ exact: true }"
+           (click)="closeSidenav()">
+          <mat-icon matListItemIcon>home</mat-icon>
+          <span matListItemTitle>Home</span>
+        </a>
+      }
 
-      <a mat-list-item routerLink="/experiences"
-         routerLinkActive="active-nav-item"
-         (click)="closeSidenav()">
-        <mat-icon matListItemIcon>explore</mat-icon>
-        <span matListItemTitle>Experiences</span>
-      </a>
+      @if (authService.hasRole("HOST")){
+        <a mat-list-item routerLink="/host/experiences"
+           routerLinkActive="active-nav-item"
+           (click)="closeSidenav()">
+          <mat-icon matListItemIcon>explore</mat-icon>
+          <span matListItemTitle>MY Experiences</span>
+        </a>
 
-      <a mat-list-item routerLink="/my-bookings"
-         routerLinkActive="active-nav-item"
-         (click)="closeSidenav()">
-        <mat-icon matListItemIcon>book_online</mat-icon>
-        <span matListItemTitle>My Bookings</span>
-      </a>
+        <a mat-list-item routerLink="/host/bookings"
+           routerLinkActive="active-nav-item"
+           (click)="closeSidenav()">
+          <mat-icon matListItemIcon>book_online</mat-icon>
+          <span matListItemTitle>Received Bookings</span>
+        </a>
+      } @else if (authService.hasRole("EXPLORER")){
+        <a mat-list-item routerLink="/my-bookings"
+           routerLinkActive="active-nav-item"
+           (click)="closeSidenav()">
+          <mat-icon matListItemIcon>book_online</mat-icon>
+          <span matListItemTitle>My Bookings</span>
+        </a>
+      }
 
       <mat-divider />
 
+      @if (authService.hasRole('HOST')) {
       <a mat-list-item routerLink="/host/dashboard"
          routerLinkActive="active-nav-item"
          (click)="closeSidenav()">
-        <mat-icon matListItemIcon>cottage</mat-icon>
+        <mat-icon matListItemIcon
+                  [matBadge]="pendingBookingCount() || null"
+                  matBadgeColor="warn"
+                  matBadgeSize="small"
+                  [matBadgeHidden]="pendingBookingCount() === 0">
+          cottage
+        </mat-icon>
         <span matListItemTitle>Host Dashboard</span>
       </a>
+      }
     </mat-nav-list>
-
   </mat-sidenav>
 
   <!-- ── Main content ──────────────────────────────────────── -->

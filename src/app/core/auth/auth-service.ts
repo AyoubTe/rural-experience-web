@@ -105,7 +105,7 @@ export class AuthService {
   logout(): void {
     this._currentUser.set(null);
     this._accessToken.set(null);
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/']);
   }
 
   // ── Token access (used by interceptor) ────────────────────────

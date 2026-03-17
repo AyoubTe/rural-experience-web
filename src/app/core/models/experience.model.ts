@@ -45,3 +45,11 @@ export interface ExperienceSearchParams {
   size?:       number;
   sort?:       string;
 }
+
+export interface ExperiencePhoto {
+  id:       number | null;  // null = not yet uploaded
+  url:      string;         // preview URL (blob) or server URL
+  filename: string;
+  uploaded: boolean;
+  uploadProgress: number;
+}

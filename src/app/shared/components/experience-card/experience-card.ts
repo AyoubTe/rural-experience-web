@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy,
   input,
   output,
-  computed, signal,
+  computed, signal, inject,
 } from '@angular/core';
 import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -19,6 +19,7 @@ import { MatIconModule }    from '@angular/material/icon';
 import { MatRippleModule }  from '@angular/material/core';
 import { MatChipsModule }   from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {AuthService} from '@rxp/core/auth/auth-service';
 
 @Component({
   selector: 'rxp-experience-card',
@@ -34,6 +35,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   ],
 })
 export class ExperienceCard {
+
+  auth = inject(AuthService);
 
   // ── Inputs (signal-based) ───────────────────────────────────────
   experience  = input.required<Experience>();

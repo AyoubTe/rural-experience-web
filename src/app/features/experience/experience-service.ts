@@ -6,7 +6,8 @@ import {catchError, Observable, retry, throwError} from 'rxjs';
 import {ApiError, PageResponse} from '@rxp/core/models/api.model';
 import {API_ENDPOINTS} from '@rxp/core/constants/endpoints';
 import {CreateExperienceRequest} from '@rxp/core/models/requests.model';
-import {ExperienceResponse} from '@rxp/core/models/responses.model';
+import {ExperienceResponse, ExperienceSummaryResponse} from '@rxp/core/models/responses.model';
+import {handleApiError} from '@rxp/core/http/api-error.util';
 
 @Injectable({
   providedIn: 'root',
@@ -115,5 +116,35 @@ export class ExperienceService {
 
   createExperience(exp: CreateExperienceRequest) {
     return this.http.post<ExperienceResponse>(`${this.baseUrl}` + API_ENDPOINTS.EXPERIENCES.BASE, exp)
+      .pipe(catchError(handleApiError));
+  }
+
+  getHostExperiences() : Observable<PageResponse<ExperienceSummaryResponse>> {
+    return this.http.get<PageResponse<ExperienceSummaryResponse>>(`${this.baseUrl}` + API_ENDPOINTS.EXPERIENCES.GET_HOST_EXPERIENCES)
+      .pipe(catchError(handleApiError));
+  }
+
+  updateStatus(id: number, status: string): Observable<ExperienceSummaryResponse> {
+    return this.http.patch<ExperienceSummaryResponse>(
+      `${this.baseUrl}${API_ENDPOINTS.EXPERIENCES.UPDATE_STATUS(id)}`,
+      { status }
+    ).pipe(catchError(handleApiError));
+  }
+
+  deleteExperience(id: number) : Observable<void>{
+    return this.http.delete<void>(`${this.baseUrl}` + API_ENDPOINTS.EXPERIENCES.DELETE(id))
+      .pipe(catchError(handleApiError));
+  }
+
+  getMyExperiences(): Observable<Experience[]> {
+    return this.http.get<Experience[]>(this.baseUrl + API_ENDPOINTS.EXPERIENCES.BASE)
+      .pipe(catchError(handleApiError));
+  }
+
+  updateExperience(id: number, payload: CreateExperienceRequest): Observable<ExperienceResponse> {
+    return this.http.put<ExperienceResponse>(
+      `${this.baseUrl}${API_ENDPOINTS.EXPERIENCES.UPDATE(id)}`,
+      payload
+    ).pipe(catchError(handleApiError));
   }
 }

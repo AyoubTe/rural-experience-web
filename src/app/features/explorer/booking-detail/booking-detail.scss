@@ -1,0 +1,296 @@
+// ── Container ──────────────────────────────────────────────────────
+.booking-detail {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--rxp-spacing-xl, 48px) var(--rxp-spacing-lg, 24px);
+
+  // ── Success Banner ───────────────────────────────────────────────
+  &__success-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--rxp-spacing-md, 16px);
+    background-color: var(--rxp-green-50, #ecfdf5);
+    border: 1px solid var(--rxp-green-200, #a7f3d0);
+    border-radius: var(--rxp-radius-md, 12px);
+    padding: var(--rxp-spacing-md, 16px) var(--rxp-spacing-lg, 24px);
+    margin-bottom: var(--rxp-spacing-xl, 32px);
+    position: relative;
+
+    mat-icon {
+      color: var(--rxp-green-600, #059669);
+      margin-top: 2px;
+    }
+
+    div {
+      flex-grow: 1;
+    }
+
+    strong {
+      display: block;
+      color: var(--rxp-green-900, #064e3b);
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    p {
+      margin: 0;
+      color: var(--rxp-green-700, #047857);
+      font-size: 0.95rem;
+    }
+
+    button {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      color: var(--rxp-green-700, #047857);
+    }
+  }
+
+  // ── Header ───────────────────────────────────────────────────────
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: var(--rxp-spacing-md, 16px);
+    margin-bottom: var(--rxp-spacing-xl, 32px);
+
+    button {
+      color: var(--rxp-gray-500, #6b7280);
+      background-color: var(--rxp-gray-50, #f9fafb);
+      border: 1px solid var(--rxp-gray-200, #e5e7eb);
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: var(--rxp-gray-100, #f3f4f6);
+        color: var(--rxp-gray-900, #111827);
+      }
+    }
+
+    h1 {
+      font-family: var(--rxp-font-display, 'Playfair Display', Georgia, serif);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--rxp-gray-900, #111827);
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+  }
+
+  // ── Layout Grid ──────────────────────────────────────────────────
+  &__layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: var(--rxp-spacing-xl, 32px);
+    align-items: start; // Prevents the sidebar from stretching to match main content height
+  }
+
+  // ── Main Content Area ────────────────────────────────────────────
+  &__main {
+    border-radius: var(--rxp-radius-lg, 16px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+    border: 1px solid var(--rxp-gray-200, #e5e7eb) !important;
+    padding: var(--rxp-spacing-xl, 32px) !important;
+
+    h3 {
+      font-family: var(--rxp-font-display, 'Playfair Display', Georgia, serif);
+      font-size: 1.5rem;
+      color: var(--rxp-gray-900, #111827);
+      margin: var(--rxp-spacing-xl, 32px) 0 var(--rxp-spacing-md, 20px);
+    }
+
+    mat-divider {
+      margin: var(--rxp-spacing-xl, 32px) 0;
+      border-color: var(--rxp-gray-200, #e5e7eb);
+    }
+  }
+
+  // ── Experience Snapshot ──────────────────────────────────────────
+  &__experience {
+    display: flex;
+    gap: var(--rxp-spacing-lg, 24px);
+    align-items: flex-start;
+
+    .booking-detail__exp-photo {
+      width: 140px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: var(--rxp-radius-md, 12px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      font-family: var(--rxp-font-display, 'Playfair Display', Georgia, serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 8px;
+      color: var(--rxp-gray-900, #111827);
+    }
+
+    .muted {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--rxp-gray-500, #6b7280);
+      font-size: 0.9rem;
+      margin: 0 0 16px;
+
+      mat-icon {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    a[mat-button] {
+      margin-left: -8px; // Visually aligns text with the edge
+      color: var(--rxp-green-700, #047857);
+    }
+  }
+
+  // ── Details List ─────────────────────────────────────────────────
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--rxp-spacing-lg, 24px);
+
+    .detail-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--rxp-spacing-md, 16px);
+
+      mat-icon {
+        color: var(--rxp-gray-400, #9ca3af);
+        margin-top: 2px;
+      }
+
+      label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--rxp-gray-500, #6b7280);
+        margin-bottom: 4px;
+      }
+
+      span {
+        display: block;
+        font-size: 1.05rem;
+        color: var(--rxp-gray-900, #111827);
+        line-height: 1.4;
+      }
+    }
+  }
+
+  // ── Sidebar Cards ────────────────────────────────────────────────
+  &__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--rxp-spacing-lg, 24px);
+
+    mat-card {
+      border-radius: var(--rxp-radius-lg, 16px) !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid var(--rxp-gray-200, #e5e7eb) !important;
+      background-color: var(--rxp-gray-50, #f9fafb);
+
+      mat-card-content {
+        padding: var(--rxp-spacing-lg, 24px) !important;
+      }
+
+      h3 {
+        font-family: var(--rxp-font-display, 'Playfair Display', Georgia, serif);
+        font-size: 1.25rem;
+        color: var(--rxp-gray-900, #111827);
+        margin: 0 0 var(--rxp-spacing-md, 16px);
+      }
+    }
+  }
+
+  // ── Status Card Specifics ────────────────────────────────────────
+  &__status-card {
+    rxp-booking-status-badge {
+      display: block;
+      margin-bottom: var(--rxp-spacing-md, 16px);
+    }
+
+    .status-note {
+      font-size: 0.95rem;
+      color: var(--rxp-gray-600, #4b5563);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    mat-card-actions {
+      padding: var(--rxp-spacing-md, 16px) var(--rxp-spacing-lg, 24px) !important;
+      border-top: 1px solid var(--rxp-gray-200, #e5e7eb) !important;
+      margin: 0 !important;
+      display: flex;
+      flex-direction: column; // Stack buttons vertically
+      gap: 12px;
+
+      button {
+        width: 100%; // Full width buttons in the sidebar
+        margin: 0 !important;
+      }
+    }
+  }
+
+  // ── Host Card Specifics ──────────────────────────────────────────
+  &__host-card {
+    .host-info {
+      display: flex;
+      align-items: center;
+      gap: var(--rxp-spacing-md, 16px);
+
+      .host-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      span {
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: var(--rxp-gray-900, #111827);
+      }
+    }
+  }
+
+  // ── Loading State ────────────────────────────────────────────────
+  &__loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    color: var(--rxp-gray-500, #6b7280);
+    font-size: 1.1rem;
+    background-color: var(--rxp-gray-50, #f9fafb);
+    border-radius: var(--rxp-radius-lg, 16px);
+    border: 1px dashed var(--rxp-gray-300, #d1d5db);
+  }
+}
+
+// ── Responsive Breakdown ───────────────────────────────────────────
+@media (max-width: 900px) {
+  .booking-detail {
+    padding: var(--rxp-spacing-lg, 24px) var(--rxp-spacing-md, 16px);
+
+    &__layout {
+      grid-template-columns: 1fr; // Stack main content and sidebar
+    }
+
+    &__main {
+      padding: var(--rxp-spacing-lg, 24px) !important;
+    }
+
+    &__experience {
+      flex-direction: column;
+
+      .booking-detail__exp-photo {
+        width: 100%;
+        height: 200px;
+      }
+    }
+  }
+}

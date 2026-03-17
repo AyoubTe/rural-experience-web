@@ -1,0 +1,195 @@
+.host-experiences {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+
+  &__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+  }
+
+  .experiences-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+/* --- Card Row Layout --- */
+.exp-row {
+  display: flex;
+  flex-direction: row;
+  background-color: #f7f7f7; /* Light gray from screenshot */
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  box-shadow: none !important; /* Remove default material shadow */
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.2s ease;
+
+  &:hover {
+    border-color: #ccc;
+  }
+
+  /* Override Material's default image behavior for a row layout */
+  &__photo {
+    width: 240px;
+    min-width: 240px;
+    margin: 0 !important;
+    object-fit: cover;
+    border-radius: 12px 0 0 12px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px 24px !important;
+  }
+
+  /* --- Typography & Header --- */
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: 'Playfair Display', 'Merriweather', Georgia, serif; /* Serif to match screenshot */
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #222;
+  }
+
+  /* --- Metadata --- */
+  &__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+    font-size: 0.9rem;
+    color: #222;
+    margin-bottom: 8px;
+
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      margin-right: -2px;
+    }
+  }
+
+  &__rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #222;
+
+    .star-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      color: #222; /* Solid dark star from screenshot */
+    }
+
+    .muted {
+      font-weight: 400;
+      color: #666;
+    }
+  }
+
+  /* --- Actions (Bottom Right) --- */
+  &__actions {
+    margin: 0;
+    padding: 16px 24px !important;
+    margin-left: auto;
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    /* Make slide toggle text smaller */
+    mat-slide-toggle {
+      font-size: 0.85rem;
+    }
+  }
+}
+
+/* --- Status Chips (Matching screenshot) --- */
+::ng-deep .exp-status--published {
+  --mdc-chip-container-shape: 6px;
+  --mdc-chip-elevated-container-color: transparent;
+  border: 1px solid #888;
+
+  .mdc-evolution-chip__text-label {
+    color: #333 !important;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+}
+
+/* --- Responsive (Mobile) --- */
+@media (max-width: 768px) {
+  .exp-row {
+    flex-direction: column;
+
+    &__photo {
+      width: 100%;
+      height: 200px;
+      border-radius: 12px 12px 0 0;
+    }
+
+    &__actions {
+      width: 100%;
+      justify-content: space-between;
+      border-top: 1px solid #eee;
+    }
+  }
+}
+
+/* --- Empty State --- */
+.empty-experiences {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  background-color: #f9f9f9;
+  border: 1px dashed #ccc;
+  border-radius: 12px;
+  text-align: center;
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: #999;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    margin: 0 0 8px;
+    font-size: 1.25rem;
+    color: #333;
+  }
+
+  p {
+    color: #666;
+    margin-bottom: 24px;
+  }
+}

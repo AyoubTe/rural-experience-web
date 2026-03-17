@@ -1,1 +1,107 @@
-<p>experience-detail works!</p>
+<div class="experience-detail">
+
+  <!-- Cover photo -->
+  <div class="experience-detail__hero">
+    <img class="experience-detail__cover"
+         [src]="photoUrl()"
+         [alt]="experience().title">
+    <div class="experience-detail__hero-overlay">
+      <span class="experience-detail__category">
+        {{ experience().categoryEmoji }} {{ experience().categoryName }}
+      </span>
+    </div>
+  </div>
+
+  <div class="experience-detail__body">
+
+    <!-- Left column -->
+    <div class="experience-detail__main">
+
+      <!-- Title & rating -->
+      <div class="experience-detail__header">
+        <h1 class="experience-detail__title">{{ experience().title }}</h1>
+        <div class="experience-detail__rating">
+          <mat-icon>star</mat-icon>
+          <span>{{ experience().averageRating | number:'1.1-1' }}</span>
+          <span class="experience-detail__review-count">
+            ({{ experience().reviewCount }} reviews)
+          </span>
+        </div>
+      </div>
+
+      <!-- Meta row -->
+      <div class="experience-detail__meta">
+        <span>
+          <mat-icon>place</mat-icon>
+          {{ experience().location }}
+        </span>
+        <span>
+          <mat-icon>schedule</mat-icon>
+          {{ experience().durationDays }}
+          {{ experience().durationDays === 1 ? 'day' : 'days' }}
+        </span>
+        <span>
+          <mat-icon>group</mat-icon>
+          Up to {{ experience().maxGuests }} guests
+        </span>
+      </div>
+
+      <!-- Description -->
+      <section class="experience-detail__section">
+        <h2 class="experience-detail__section-title">About this experience</h2>
+        <p class="experience-detail__description">
+          {{ experience().shortDescription }}
+        </p>
+      </section>
+
+    </div>
+
+    <!-- Right column — booking card -->
+    <aside class="experience-detail__sidebar">
+      <div class="experience-detail__booking-card">
+
+        <!-- Price -->
+        <div class="experience-detail__price">
+          <span class="experience-detail__price-amount">
+            {{ experience().pricePerPerson | currency:'EUR':'symbol':'1.0-0' }}
+          </span>
+          <span class="experience-detail__price-label">per person / day</span>
+        </div>
+
+        <!-- Host -->
+        <div class="experience-detail__host">
+          <div class="experience-detail__host-avatar">
+            {{ experience().hostFirstName[0] }}{{ experience().hostLastName[0] }}
+          </div>
+          <div class="experience-detail__host-info">
+            <span class="experience-detail__host-name">
+              {{ experience().hostFirstName }} {{ experience().hostLastName }}
+            </span>
+            @if (experience().hostVerified) {
+              <span class="experience-detail__host-verified">
+                <mat-icon>verified</mat-icon>
+                Verified host
+              </span>
+            }
+          </div>
+        </div>
+
+        <!-- CTA -->
+        @if (auth.hasRole("EXPLORER")){
+          <a mat-flat-button color="primary"
+             class="experience-detail__cta"
+             [routerLink]="['/experiences', experience().id, 'book']">
+            Book this experience
+          </a>
+        }
+
+        <p class="experience-detail__no-charge">
+          You won't be charged until the host confirms.
+        </p>
+
+      </div>
+    </aside>
+
+  </div>
+
+</div>
