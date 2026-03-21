@@ -143,6 +143,19 @@
           <mat-icon matListItemIcon>book_online</mat-icon>
           <span matListItemTitle>My Bookings</span>
         </a>
+      } @else if (authService.hasRole('ADMIN')) {
+        <a mat-list-item routerLink="/admin/dashboard"
+           routerLinkActive="active-nav-item"
+           (click)="closeSidenav()">
+          <mat-icon matListItemIcon
+                    [matBadge]="pendingBookingCount() || null"
+                    matBadgeColor="warn"
+                    matBadgeSize="small"
+                    [matBadgeHidden]="pendingBookingCount() === 0">
+            cottage
+          </mat-icon>
+          <span matListItemTitle>Host Dashboard</span>
+        </a>
       }
 
       <mat-divider />

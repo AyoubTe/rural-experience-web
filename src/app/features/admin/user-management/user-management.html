@@ -1,1 +1,129 @@
-<p>user-management works!</p>
+<div class="user-management">
+  <h2>User Management</h2>
+
+  <!-- Filters -->
+  <div class="filters">
+    <mat-form-field appearance="outline">
+      <mat-label>Search users</mat-label>
+      <input matInput [formControl]="searchCtrl"
+             placeholder="Name or email">
+      <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Role</mat-label>
+      <mat-select [(ngModel)]="roleFilter"
+                  (ngModelChange)="onFilterChange()">
+        <mat-option value="">All roles</mat-option>
+        <mat-option value="EXPLORER">Explorer</mat-option>
+        <mat-option value="HOST">Host</mat-option>
+        <mat-option value="ADMIN">Admin</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="statusFilter"
+                  (ngModelChange)="onFilterChange()">
+        <mat-option value="">All statuses</mat-option>
+        <mat-option value="ACTIVE">Active</mat-option>
+        <mat-option value="SUSPENDED">Suspended</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  @if (isLoading()) { <mat-progress-bar mode="indeterminate" /> }
+
+  <table mat-table [dataSource]="users()"
+         matSort (matSortChange)="onSortChange($event)">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let u">
+        {{ u.firstName }} {{ u.lastName }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <td mat-cell *matCellDef="let u">{{ u.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+      <td mat-cell *matCellDef="let u">
+        <mat-chip
+          [class]="'role-chip--' + u.role.toLowerCase()"
+          disableRipple>
+          {{ u.role }}
+        </mat-chip>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let u">
+        <mat-chip
+          [class]="u.status === 'ACTIVE'
+            ? 'status-chip--active' : 'status-chip--suspended'"
+          disableRipple>
+          {{ u.status }}
+        </mat-chip>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="bookingCount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Bookings
+      </th>
+      <td mat-cell *matCellDef="let u">{{ u.bookingCount }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Joined</th>
+      <td mat-cell *matCellDef="let u">
+        {{ u.createdAt | date:'d MMM yyyy' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions" stickyEnd>
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let u">
+        <button mat-icon-button [matMenuTriggerFor]="userMenu"
+                [attr.aria-label]="'Options for ' + u.email">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #userMenu="matMenu">
+          @if (u.role === 'EXPLORER') {
+            <button mat-menu-item (click)="onPromoteToHost(u)">
+              <mat-icon>upgrade</mat-icon>
+              Promote to Host
+            </button>
+          }
+          <button mat-menu-item (click)="onSuspend(u)">
+            <mat-icon [color]="u.status === 'SUSPENDED'
+              ? 'primary' : 'warn'">
+              {{ u.status === 'SUSPENDED'
+              ? 'lock_open' : 'block' }}
+            </mat-icon>
+            {{ u.status === 'SUSPENDED'
+            ? 'Unsuspend' : 'Suspend' }}
+          </button>
+        </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+  </table>
+
+  <mat-paginator
+    [length]="total()"
+    [pageSize]="pageSize()"
+    [pageIndex]="pageIndex()"
+    [pageSizeOptions]="[25, 50, 100]"
+    (page)="onPageChange($event)">
+  </mat-paginator>
+</div>

@@ -1,1 +1,70 @@
-<p>audit-log works!</p>
+<div class="audit-log">
+
+  <div class="audit-log__header">
+    <h2>Audit Log</h2>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Filter by action</mat-label>
+      <mat-select [(ngModel)]="actionFilter"
+                  (ngModelChange)="onActionFilterChange()">
+        <mat-option value="">All actions</mat-option>
+        <mat-option value="EXPERIENCE_APPROVED">Approved</mat-option>
+        <mat-option value="EXPERIENCE_REJECTED">Rejected</mat-option>
+        <mat-option value="USER_SUSPENDED">User Suspended</mat-option>
+        <mat-option value="USER_ROLE_CHANGED">Role Changed</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!--
+    itemSize = fixed row height in px
+    The viewport renders only visible rows — crucial for large logs
+  -->
+  <cdk-virtual-scroll-viewport
+    [itemSize]="ROW_HEIGHT"
+    class="audit-viewport"
+    (scrolledIndexChange)="onScrolledIndexChange($event)">
+
+    <div *cdkVirtualFor="let entry of entries();
+         trackBy: trackEntry"
+         class="audit-row">
+
+      <div class="audit-row__icon">
+        <mat-icon [color]="actionColor(entry.action)">
+          {{ actionIcon(entry.action) }}
+        </mat-icon>
+      </div>
+
+      <div class="audit-row__body">
+        <div class="audit-row__action">
+          {{ entry.action | titlecase }}
+          <span class="audit-row__entity">
+            {{ entry.entityType }} #{{ entry.entityId }}
+          </span>
+        </div>
+        <div class="audit-row__details">{{ entry.details }}</div>
+      </div>
+
+      <div class="audit-row__meta">
+        <span class="audit-row__admin">{{ entry.performedBy }}</span>
+        <span class="audit-row__date">
+          {{ entry.createdAt | date:'d MMM, HH:mm' }}
+        </span>
+      </div>
+
+    </div>
+
+    <!-- Loading indicator at bottom -->
+    @if (isLoading()) {
+      <div class="audit-loading">Loading more...</div>
+    }
+
+    @if (!hasMore() && entries().length > 0) {
+      <div class="audit-end">
+        End of log — {{ entries().length }} entries total
+      </div>
+    }
+
+  </cdk-virtual-scroll-viewport>
+
+</div>

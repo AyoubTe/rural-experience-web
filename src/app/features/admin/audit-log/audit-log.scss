@@ -1,0 +1,61 @@
+.audit-log {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+// The viewport MUST have a fixed height for virtual scroll to work
+.audit-viewport {
+  height: calc(100vh - 220px);
+  border: 1px solid var(--rxp-gray-200);
+  border-radius: var(--rxp-radius-md);
+}
+
+.audit-row {
+  height: 60px;    // Must match ROW_HEIGHT constant
+  display: flex;
+  align-items: center;
+  gap: var(--rxp-spacing-md);
+  padding: 0 var(--rxp-spacing-md);
+  border-bottom: 1px solid var(--rxp-gray-100);
+
+  &__icon { flex-shrink: 0; }
+  &__body { flex: 1; min-width: 0; }
+
+  &__action {
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  &__entity {
+    font-weight: 400;
+    color: var(--rxp-gray-500);
+    margin-left: 6px;
+  }
+
+  &__details {
+    font-size: 0.8rem;
+    color: var(--rxp-gray-500);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 0.75rem;
+    color: var(--rxp-gray-400);
+    flex-shrink: 0;
+  }
+}
+
+.audit-loading, .audit-end {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rxp-gray-400);
+  font-size: 0.85rem;
+}

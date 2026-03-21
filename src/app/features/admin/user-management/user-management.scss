@@ -1,0 +1,161 @@
+// ── Container ──────────────────────────────────────────────────────
+.user-management {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--rxp-spacing-xl, 48px) var(--rxp-spacing-lg, 24px);
+
+  h2 {
+    font-family: var(--rxp-font-display, 'Playfair Display', Georgia, serif);
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: var(--rxp-gray-900, #111827);
+    margin: 0 0 var(--rxp-spacing-xl, 32px);
+    letter-spacing: -0.02em;
+  }
+
+  > mat-progress-bar {
+    margin-bottom: var(--rxp-spacing-md, 16px);
+    border-radius: var(--rxp-radius-full, 9999px);
+  }
+}
+
+// ── Filters Toolbar ────────────────────────────────────────────────
+.filters {
+  display: grid;
+  // The search bar gets 2 fractions of space, the selects get 1 each
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--rxp-spacing-md, 16px);
+  margin-bottom: var(--rxp-spacing-lg, 24px);
+  align-items: start;
+
+  mat-form-field {
+    width: 100%;
+
+    // Slight tweak to make outline form fields look a bit softer
+    ::ng-deep .mdc-notched-outline__leading,
+    ::ng-deep .mdc-notched-outline__notch,
+    ::ng-deep .mdc-notched-outline__trailing {
+      border-color: var(--rxp-gray-300, #d1d5db) !important;
+    }
+  }
+}
+
+// ── Data Table ─────────────────────────────────────────────────────
+table {
+  width: 100%;
+  border-radius: var(--rxp-radius-lg, 12px) var(--rxp-radius-lg, 12px) 0 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+  border: 1px solid var(--rxp-gray-200, #e5e7eb);
+  border-bottom: none; // Prevent double border with paginator
+  background-color: #ffffff;
+
+  // Header Cells
+  th.mat-header-cell {
+    background-color: var(--rxp-gray-50, #f9fafb);
+    color: var(--rxp-gray-500, #6b7280);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 16px;
+    border-bottom: 1px solid var(--rxp-gray-200, #e5e7eb);
+  }
+
+  // Body Cells
+  td.mat-cell {
+    padding: 16px;
+    color: var(--rxp-gray-800, #1f2937);
+    font-size: 0.95rem;
+    border-bottom: 1px solid var(--rxp-gray-100, #f3f4f6);
+    vertical-align: middle;
+  }
+
+  // Row Hover States
+  tr.mat-row {
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--rxp-gray-50, #f9fafb);
+    }
+  }
+
+  // Sticky Actions Column Alignment
+  .mat-column-actions {
+    text-align: right;
+    padding-right: 16px;
+    white-space: nowrap;
+  }
+}
+
+// ── Status & Role Chips ────────────────────────────────────────────
+// Modern Angular Material MDC chip variable overrides
+::ng-deep {
+  // Statuses
+  .status-chip--active {
+    --mdc-chip-elevated-container-color: #ecfdf5; // light emerald
+    --mdc-chip-label-text-color: #064e3b;
+    border: 1px solid #a7f3d0;
+  }
+
+  .status-chip--suspended {
+    --mdc-chip-elevated-container-color: #fef2f2; // light red
+    --mdc-chip-label-text-color: #991b1b;
+    border: 1px solid #fecaca;
+  }
+
+  // Roles
+  .role-chip--explorer {
+    --mdc-chip-elevated-container-color: #f3f4f6; // light gray
+    --mdc-chip-label-text-color: #374151;
+    border: 1px solid #e5e7eb;
+  }
+
+  .role-chip--host {
+    --mdc-chip-elevated-container-color: #eff6ff; // light blue
+    --mdc-chip-label-text-color: #1e40af;
+    border: 1px solid #bfdbfe;
+  }
+
+  .role-chip--admin {
+    --mdc-chip-elevated-container-color: #f5f3ff; // light purple
+    --mdc-chip-label-text-color: #5b21b6;
+    border: 1px solid #ddd6fe;
+  }
+
+  // General Chip Formatting
+  mat-chip {
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em;
+    min-height: 24px !important;
+  }
+}
+
+// ── Paginator (Seamless Attachment) ────────────────────────────────
+mat-paginator {
+  border: 1px solid var(--rxp-gray-200, #e5e7eb);
+  border-top: none; // Connects perfectly to the table above it
+  border-radius: 0 0 var(--rxp-radius-lg, 12px) var(--rxp-radius-lg, 12px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+  background-color: #ffffff;
+}
+
+// ── Responsive Breakdown ───────────────────────────────────────────
+@media (max-width: 1024px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap; // Keeps data on single lines to allow scrolling
+  }
+}
+
+@media (max-width: 768px) {
+  .user-management {
+    padding: var(--rxp-spacing-lg, 24px) var(--rxp-spacing-md, 16px);
+  }
+
+  .filters {
+    grid-template-columns: 1fr; // Stack all filters vertically on mobile
+    gap: 0; // Material form fields have internal bottom margins
+  }
+}

@@ -1,3 +1,5 @@
+import {ModerationAction} from '@rxp/core/models/admin.model';
+
 export const API_ENDPOINTS = {
   AUTH: {
     LOGIN: '/auth/login',
@@ -56,9 +58,13 @@ export const API_ENDPOINTS = {
   ADMIN: {
     STATS: '/admin/stats',
     USERS: '/admin/users',
+    AUDIT_LOG: '/admin/audit',
     PENDING_EXPERIENCES: '/admin/experiences/pending',
+    MODERATE: '/admin/experiences/moderate',
     ENABLE_USER: (id: number | string) => `/admin/users/${id}/enable`,
     DISABLE_USER: (id: number | string) => `/admin/users/${id}/disable`,
+    UPDATE_USER_ROLE:   (id: number | string) => `/admin/users/${id}/role`,
+    UPDATE_USER_STATUS: (id: number | string) => `/admin/users/${id}/status`,
     APPROVE_EXPERIENCE: (id: number | string) => `/admin/experiences/${id}/approve`,
     REJECT_EXPERIENCE: (id: number | string) => `/admin/experiences/${id}/reject`,
   }

@@ -1,0 +1,112 @@
+// ── Container ──────────────────────────────────────────────────────
+
+.admin-shell {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--rxp-gray-100, #f5f5f0);
+}
+
+// ── Header banner ──────────────────────────────────────────────────
+
+.admin-shell__header {
+  display: flex;
+  align-items: center;
+  gap: var(--rxp-spacing-md, 16px);
+  background: var(--rxp-green-900, #1a3a16);
+  color: white;
+  padding: var(--rxp-spacing-lg, 24px) var(--rxp-spacing-xl, 48px);
+}
+
+.admin-shell__header-icon {
+  font-size: 2.5rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.admin-shell__title {
+  font-family: var(--rxp-font-display, 'Playfair Display', serif);
+  font-size: 1.5rem;
+  color: white;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.admin-shell__subtitle {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0.2rem 0 0;
+}
+
+// ── Tab nav ────────────────────────────────────────────────────────
+
+.admin-shell__tabs {
+  background: var(--rxp-white, #ffffff);
+  border-bottom: 1px solid var(--rxp-gray-200, #e0e0e0);
+  padding: 0 var(--rxp-spacing-xl, 48px);
+  box-shadow: var(--rxp-shadow-sm);
+
+  // Override Material tab link styles
+  .mat-mdc-tab-link {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 500;
+    min-width: 120px;
+    opacity: 0.65;
+    transition: opacity 0.2s;
+
+    &.mdc-tab--active,
+    &:hover {
+      opacity: 1;
+    }
+
+    mat-icon {
+      font-size: 1.1rem;
+      height: 1.1rem;
+      width: 1.1rem;
+    }
+  }
+}
+
+// ── Content area ───────────────────────────────────────────────────
+
+.admin-shell__content {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--rxp-spacing-xl, 48px) var(--rxp-spacing-lg, 24px);
+}
+
+// ── Responsive ────────────────────────────────────────────────────
+
+@media (max-width: 768px) {
+  .admin-shell__header {
+    padding: var(--rxp-spacing-md, 16px);
+  }
+
+  .admin-shell__header-icon {
+    font-size: 1.75rem;
+    height: 1.75rem;
+    width: 1.75rem;
+  }
+
+  .admin-shell__title {
+    font-size: 1.2rem;
+  }
+
+  .admin-shell__tabs {
+    padding: 0 var(--rxp-spacing-md, 16px);
+
+    .mat-mdc-tab-link {
+      min-width: unset;
+      font-size: 0.85rem;
+    }
+  }
+
+  .admin-shell__content {
+    padding: var(--rxp-spacing-lg, 24px) var(--rxp-spacing-md, 16px);
+  }
+}

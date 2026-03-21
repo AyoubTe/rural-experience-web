@@ -1,0 +1,187 @@
+// ── Dashboard Container ────────────────────────────────────────────
+.admin-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--rxp-spacing-xl, 48px) var(--rxp-spacing-lg, 24px);
+
+  h2 {
+    font-family: var(--rxp-font-display, 'Playfair Display', Georgia, serif);
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: var(--rxp-gray-900, #111827);
+    margin: 0 0 var(--rxp-spacing-xl, 40px);
+    letter-spacing: -0.02em;
+  }
+
+  > mat-progress-bar {
+    margin-bottom: var(--rxp-spacing-lg, 24px);
+    border-radius: var(--rxp-radius-full, 9999px);
+  }
+}
+
+// ── KPI Grid ───────────────────────────────────────────────────────
+.stats-grid {
+  display: grid;
+  // Responsive grid that comfortably fits 3-4 cards across on desktop
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--rxp-spacing-lg, 24px);
+  margin-bottom: var(--rxp-spacing-xl, 40px);
+}
+
+// ── KPI Card Base ──────────────────────────────────────────────────
+.kpi {
+  border-radius: var(--rxp-radius-lg, 16px) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+  border: 1px solid var(--rxp-gray-200, #e5e7eb) !important;
+  background-color: #ffffff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--rxp-spacing-xl, 32px) var(--rxp-spacing-lg, 24px) !important;
+    flex-grow: 1; // Pushes actions to the bottom if present
+  }
+
+  mat-icon {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+    margin-bottom: var(--rxp-spacing-md, 20px);
+    color: var(--rxp-green-600, #059669); // Primary brand color
+  }
+
+  &__value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--rxp-gray-900, #111827);
+    line-height: 1.1;
+    margin-bottom: var(--rxp-spacing-xs, 8px);
+    font-feature-settings: "tnum"; // Aligns digits perfectly for financial/stat displays
+  }
+
+  &__label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--rxp-gray-600, #4b5563);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__sub {
+    font-size: 0.85rem;
+    color: var(--rxp-gray-500, #6b7280);
+    margin-top: var(--rxp-spacing-sm, 12px);
+    line-height: 1.4;
+  }
+
+  &__urgent {
+    color: #d97706; // Amber warning color
+    font-weight: 600;
+    background: #fffbeb;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 4px;
+  }
+
+  // Action buttons area (e.g., "Review Now")
+  mat-card-actions {
+    padding: var(--rxp-spacing-md, 16px) var(--rxp-spacing-lg, 24px) !important;
+    border-top: 1px solid var(--rxp-gray-100, #f3f4f6);
+    background-color: var(--rxp-gray-50, #f9fafb);
+    display: flex;
+    justify-content: center;
+    margin: 0 !important;
+
+    a {
+      width: 100%;
+      border-radius: var(--rxp-radius-md, 8px);
+    }
+  }
+
+  // ── Revenue Card Variant ─────────────────────────────────────────
+  &--revenue {
+    background-color: #f0fdf4; // Very light emerald tint
+    border-color: #bbf7d0 !important;
+
+    mat-icon {
+      color: #10b981; // Emerald
+    }
+
+    .kpi__value {
+      color: #065f46;
+    }
+
+    .kpi__label {
+      color: #047857;
+    }
+  }
+}
+
+// ── Publish Rate Section ───────────────────────────────────────────
+.publish-rate {
+  border-radius: var(--rxp-radius-lg, 16px) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid var(--rxp-gray-200, #e5e7eb) !important;
+  background-color: #ffffff;
+  padding: var(--rxp-spacing-lg, 24px) !important;
+
+  h3 {
+    font-family: var(--rxp-font-display, 'Playfair Display', Georgia, serif);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--rxp-gray-900, #111827);
+    margin: 0 0 var(--rxp-spacing-md, 16px);
+  }
+
+  mat-progress-bar {
+    height: 8px;
+    border-radius: var(--rxp-radius-full, 9999px);
+    margin-bottom: var(--rxp-spacing-sm, 12px);
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--rxp-gray-600, #4b5563);
+    font-weight: 500;
+  }
+}
+
+// ── Error Banner ───────────────────────────────────────────────────
+.error {
+  margin-top: var(--rxp-spacing-lg, 24px);
+  padding: var(--rxp-spacing-md, 16px) var(--rxp-spacing-lg, 24px);
+  background-color: #fef2f2; // Light red
+  color: #b91c1c; // Dark red
+  border: 1px solid #f87171;
+  border-radius: var(--rxp-radius-md, 8px);
+  font-weight: 500;
+  text-align: center;
+}
+
+// ── Responsive Adjustments ─────────────────────────────────────────
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: var(--rxp-spacing-lg, 24px) var(--rxp-spacing-md, 16px);
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr; // Stack cards vertically on mobile
+  }
+
+  .kpi mat-card-content {
+    padding: var(--rxp-spacing-lg, 24px) !important;
+  }
+}

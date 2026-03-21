@@ -1,1 +1,50 @@
-<p>admin-shell works!</p>
+<div class="admin-shell">
+
+  <div class="admin-shell__header">
+    <mat-icon class="admin-shell__header-icon">admin_panel_settings</mat-icon>
+    <div>
+      <h1 class="admin-shell__title">Admin Panel</h1>
+      <p class="admin-shell__subtitle">RuralXperience Platform Management</p>
+    </div>
+  </div>
+
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel"
+       class="admin-shell__tabs">
+
+    <a mat-tab-link routerLink="dashboard"
+       routerLinkActive #dashActive="routerLinkActive"
+       [active]="dashActive.isActive">
+      <mat-icon>dashboard</mat-icon>
+      Dashboard
+    </a>
+
+    <a mat-tab-link routerLink="moderation"
+       routerLinkActive #modActive="routerLinkActive"
+       [active]="modActive.isActive">
+      <mat-icon>rate_review</mat-icon>
+      Moderation
+    </a>
+
+    <a mat-tab-link routerLink="users"
+       routerLinkActive #usersActive="routerLinkActive"
+       [active]="usersActive.isActive">
+      <mat-icon>group</mat-icon>
+      Users
+    </a>
+
+    <a mat-tab-link routerLink="audit"
+       routerLinkActive #auditActive="routerLinkActive"
+       [active]="auditActive.isActive">
+      <mat-icon>history</mat-icon>
+      Audit Log
+    </a>
+
+  </nav>
+
+  <mat-tab-nav-panel #tabPanel>
+    <div class="admin-shell__content">
+      <router-outlet />
+    </div>
+  </mat-tab-nav-panel>
+
+</div>
