@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit, signal} from '@angular/core';
 import {AdminService} from '@rxp/features/admin/admin-service';
 import {MatDialog} from '@angular/material/dialog';
 import {NotificationService} from '@rxp/features/notification/notification-service';
@@ -29,6 +29,7 @@ import {MatIconButton} from '@angular/material/button';
 
 @Component({
   selector: 'rxp-user-management',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatFormField,
     MatLabel,

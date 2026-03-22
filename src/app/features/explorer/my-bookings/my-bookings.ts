@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
@@ -21,6 +21,7 @@ import {ConfirmDialog, ConfirmDialogData} from '@rxp/shared/components/confirm-d
 
 @Component({
   selector: 'rxp-my-bookings',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     AsyncPipe, RouterLink,
     MatCardModule, MatButtonModule, MatChipsModule,

@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, signal, viewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit, signal, viewChild} from '@angular/core';
 import {AdminService} from '@rxp/features/admin/admin-service';
 import {NotificationService} from '@rxp/features/notification/notification-service';
 import {AuditLogEntry} from '@rxp/core/models/admin.model';
@@ -14,6 +14,7 @@ import {DatePipe, TitleCasePipe} from '@angular/common';
 
 @Component({
   selector: 'rxp-audit-log',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatFormField,
     MatLabel,

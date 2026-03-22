@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatFormFieldModule }  from '@angular/material/form-field';
 import { MatInputModule }      from '@angular/material/input';
@@ -6,6 +6,7 @@ import { MatButtonModule }     from '@angular/material/button';
 
 @Component({
   selector: 'rxp-contact-form',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     FormsModule, MatFormFieldModule,
     MatInputModule, MatButtonModule

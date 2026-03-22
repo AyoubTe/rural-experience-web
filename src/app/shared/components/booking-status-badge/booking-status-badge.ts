@@ -1,10 +1,11 @@
-import {Component, computed, input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, input} from '@angular/core';
 import {BookingStatus} from '@rxp/core/models/booking.model';
 import {MatChip} from '@angular/material/chips';
 import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'rxp-booking-status-badge',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatChip,
     MatIcon

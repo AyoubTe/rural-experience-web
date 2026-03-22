@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit, signal} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {NotificationService} from '@rxp/features/notification/notification-service';
 import {ExperienceService} from '@rxp/features/experience/experience-service';
@@ -19,6 +19,7 @@ import {MatButton, MatIconButton} from '@angular/material/button';
 
 @Component({
   selector: 'rxp-host-experiences',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatIcon,
     MatProgressBar,

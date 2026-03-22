@@ -6,6 +6,7 @@ import {API_ENDPOINTS} from '@rxp/core/constants/endpoints';
 import {Router} from '@angular/router';
 import {AuthResponse, AuthUser} from '@rxp/core/models/responses.model';
 import {catchError, Observable, tap, throwError} from 'rxjs';
+import {RxStompService} from '@rxp/core/websocket/rxstomp-service';
 
 
 const ACCESS_TOKEN_KEY = 'rxp_access-token';
@@ -20,6 +21,7 @@ export class AuthService {
   private baseUrl = environment.API_BASE_URL;
   private http = inject(HttpClient);
   private router = inject(Router);
+  private wsService = inject(RxStompService)
 
   // ── Reactive state ─────────────────────────────────────────────
   private _currentUser = signal<AuthUser | null>(
@@ -51,6 +53,7 @@ export class AuthService {
       if (user && token) {
         localStorage.setItem(USER_KEY, JSON.stringify(user));
         localStorage.setItem(ACCESS_TOKEN_KEY, token);
+        this.wsService.connect(token);
       } else {
         localStorage.removeItem(USER_KEY);
         localStorage.removeItem(ACCESS_TOKEN_KEY);
@@ -105,6 +108,9 @@ export class AuthService {
   logout(): void {
     this._currentUser.set(null);
     this._accessToken.set(null);
+
+    // Disconnect WebSocket on logout
+    this.wsService.disconnect()
     this.router.navigate(['/']);
   }
 
@@ -132,6 +138,9 @@ export class AuthService {
     };
 
     this._currentUser.set(user);
+
+    // Connect websocket after successful authentication
+    this.wsService.connect(response.accessToken);
   }
 
   private loadUserFromStorage(): AuthUser | null {

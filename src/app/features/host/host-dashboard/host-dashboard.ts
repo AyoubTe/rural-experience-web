@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {combineLatest, map} from 'rxjs';
 
@@ -10,6 +10,7 @@ import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'rxp-host-dashboard',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     AsyncPipe,
     MatCard,

@@ -17,6 +17,8 @@ import {provideStoreDevtools} from '@ngrx/store-devtools';
 import {bookingReducer} from '@rxp/features/booking/store/booking.reducer';
 import {BookingEffects} from '@rxp/features/booking/store/booking.effects';
 import {provideEffects} from '@ngrx/effects';
+import {NotificationEffects} from '@rxp/features/notification/store/notification.effects';
+import {notificationReducer} from '@rxp/features/notification/store/notification.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -36,7 +38,8 @@ export const appConfig: ApplicationConfig = {
     },
     provideStore(reducers, { metaReducers }),
     provideState('booking', bookingReducer),
-    provideEffects([BookingEffects]),
+    provideState('notifications', notificationReducer),
+    provideEffects(BookingEffects, NotificationEffects),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),

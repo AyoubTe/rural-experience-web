@@ -37,6 +37,8 @@
   <span class="spacer"></span>
 
   @if (authService.isAuthenticated()) {
+  <!-- Notification bell -->
+  <rxp-notification-centre />
   <!-- User menu when logged in -->
   <button mat-icon-button [matMenuTriggerFor]="userMenu"
           class="app-toolbar__user-btn"
@@ -81,7 +83,7 @@
     </button>
   </mat-menu>
 
-} @else {
+  } @else {
   <!-- Not authenticated -->
   <a mat-stroked-button routerLink="/auth/login" class="app-toolbar__login-btn">
     Log In
@@ -208,3 +210,7 @@
   </mat-sidenav-content>
 
 </mat-sidenav-container>
+
+@if (authService.isAuthenticated()) {
+  <rxp-connection-banner />
+}

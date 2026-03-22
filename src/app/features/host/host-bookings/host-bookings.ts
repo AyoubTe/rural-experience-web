@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {MatDialog} from '@angular/material/dialog';
 import {NotificationService} from '@rxp/features/notification/notification-service';
@@ -17,6 +17,7 @@ import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'rxp-host-bookings',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatProgressBar,
     MatTabGroup,

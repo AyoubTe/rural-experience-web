@@ -1,4 +1,4 @@
-import {Component, inject, input, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, input, signal} from '@angular/core';
 import {NotificationService} from '@rxp/features/notification/notification-service';
 import {ExperiencePhoto} from '@rxp/core/models/experience.model';
 
@@ -14,6 +14,7 @@ import {PhotoResponse} from '@rxp/core/models/responses.model';
 
 @Component({
   selector: 'rxp-photo-manager',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CdkDropList,
     CdkDrag,

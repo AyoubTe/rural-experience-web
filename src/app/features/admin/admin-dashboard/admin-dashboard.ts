@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit, signal} from '@angular/core';
 import {AdminService} from '@rxp/features/admin/admin-service';
 import {PlatformStats} from '@rxp/core/models/admin.model';
 import {MatProgressBar} from '@angular/material/progress-bar';
@@ -10,6 +10,7 @@ import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'rxp-admin-dashboard',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatProgressBar,
     MatCard,

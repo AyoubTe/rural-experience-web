@@ -1,4 +1,4 @@
-import {Component, inject, signal} from '@angular/core';
+import {Component, computed, inject, signal} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -16,6 +16,11 @@ import {map} from 'rxjs';
 import {AuthService} from '@rxp/core/auth/auth-service';
 import {Store} from '@ngrx/store';
 import * as BookingSelectors from '@rxp/features/booking/store/booking.selectors';
+import * as NotifSelectors from '@rxp/features/notification/store/notification.selectors';
+import * as NotifActions from '@rxp/features/notification/store/notification.actions';
+import {AppNotification} from '@rxp/core/models/notification.model';
+import {NotificationCentre} from '@rxp/features/notification/notification-centre/notification-centre';
+import {ConnectionBanner} from '@rxp/core/websocket/connection-banner/connection-banner';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +28,7 @@ import * as BookingSelectors from '@rxp/features/booking/store/booking.selectors
     RouterOutlet, RouterLink, RouterLinkActive,
     MatToolbarModule, MatSidenavModule, MatListModule,
     MatIconModule, MatButtonModule, MatMenuModule,
-    MatDividerModule, MatBadgeModule,
+    MatDividerModule, MatBadgeModule, NotificationCentre, ConnectionBanner,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
@@ -63,4 +68,50 @@ export class App {
     ),
     { initialValue: 0 }
   );
+
+  notifications = toSignal(
+    this.store.select(NotifSelectors.selectNotifications),
+    { initialValue: [] }
+  );
+
+  unreadCount = toSignal(
+    this.store.select(NotifSelectors.selectUnreadCount),
+    { initialValue: 0 }
+  );
+
+  hasUnread = computed(() => this.unreadCount() > 0);
+
+  onMarkAllRead(): void {
+    this.store.dispatch(NotifActions.markAllAsRead());
+  }
+
+  onMarkRead(id: string): void {
+    this.store.dispatch(NotifActions.markAsRead({ id }));
+  }
+
+  onClearAll(): void {
+    this.store.dispatch(NotifActions.clearAll());
+  }
+
+  notificationIcon(type: AppNotification['type']): string {
+    const icons: Record<AppNotification['type'], string> = {
+      BOOKING_CONFIRMED:  'check_circle',
+      BOOKING_DECLINED:   'cancel',
+      BOOKING_CANCELLED:  'event_busy',
+      BOOKING_COMPLETED:  'verified',
+      NEW_REVIEW:         'star',
+      BOOKING_REQUEST:    'book_online',
+      SYSTEM:             'info',
+    };
+    return icons[type] ?? 'notifications';
+  }
+
+  notificationLink(n: AppNotification): string[] | null {
+    if (!n.relatedId) return null;
+    switch (n.relatedType) {
+      case 'Booking':    return ['/my-bookings', String(n.relatedId)];
+      case 'Experience': return ['/experiences',  String(n.relatedId)];
+      default:           return null;
+    }
+  }
 }

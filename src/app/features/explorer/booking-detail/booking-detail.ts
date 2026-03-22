@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit, signal} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {MatDialog} from '@angular/material/dialog';
@@ -20,6 +20,7 @@ import {ExperienceService} from '@rxp/features/experience/experience-service';
 
 @Component({
   selector: 'rxp-booking-detail',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatIcon,
     MatCard,

@@ -1,7 +1,8 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import {Component, ViewChild, ElementRef, AfterViewInit, ChangeDetectionStrategy} from '@angular/core';
 
 @Component({
   selector: 'rxp-search-bar',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   templateUrl: './search-bar.html',
   styleUrl: './search-bar.scss',

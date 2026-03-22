@@ -1,4 +1,4 @@
-import {Component, computed, inject, OnInit, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, inject, OnInit, signal} from '@angular/core';
 import {AdminService} from '@rxp/features/admin/admin-service';
 import {MatDialog} from '@angular/material/dialog';
 import {NotificationService} from '@rxp/features/notification/notification-service';
@@ -25,6 +25,7 @@ import {MatTooltip} from '@angular/material/tooltip';
 
 @Component({
   selector: 'rxp-moderation',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatButton,
     MatIcon,

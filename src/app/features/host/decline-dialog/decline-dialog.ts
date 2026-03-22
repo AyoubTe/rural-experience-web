@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {MatIcon} from '@angular/material/icon';
 import {
   MAT_DIALOG_DATA,
@@ -13,6 +13,7 @@ import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'rxp-decline-dialog',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatIcon,
     MatDialogContent,

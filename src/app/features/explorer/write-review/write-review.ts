@@ -1,4 +1,4 @@
-import {Component, inject, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ReviewService} from '@rxp/features/review/review-service';
@@ -9,6 +9,7 @@ import {MatError, MatFormField, MatHint, MatLabel} from '@angular/material/input
 
 @Component({
   selector: 'rxp-write-review',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     ReactiveFormsModule,
     MatIcon,
