@@ -34,9 +34,11 @@
           <!-- Experience -->
           <div class="booking-detail__experience">
             <img
-              [src]="booking.experienceCoverPhoto
+              [ngSrc]="booking.experienceCoverPhoto
                      ?? 'assets/images/placeholder-experience.jpg'"
               [alt]="booking.experienceTitle"
+              width="50"
+              height="50"
               class="booking-detail__exp-photo">
             <div>
               <h2>{{ booking.experienceTitle }}</h2>
@@ -156,15 +158,16 @@
           <mat-card-content>
             <h3>Your Host</h3>
             <div class="host-info">
-              <!--
-              @if (booking.host.avatarUrl) {
-                <img [src]="booking.host.avatarUrl"
-                     [alt]="booking.explorerFirstName"
+              @if (host().avatarUrl) {
+                <img [ngSrc]="host().avatarUrl ?? 'assets/images/placeholder-experience.jpg'"
+                     [alt]="host().firstName"
+                     width="20"
+                     height="20"
                      class="host-avatar">
-              } -->
+              }
               <span>
-                {{ booking.explorerFirstName }}
-                {{ booking.explorerLastName}}
+                {{ host().firstName }}
+                {{ host().lastName}}
               </span>
             </div>
           </mat-card-content>

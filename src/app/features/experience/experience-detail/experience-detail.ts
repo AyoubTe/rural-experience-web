@@ -2,7 +2,7 @@ import {Component, computed, inject, signal} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {Experience} from '@rxp/core/models/experience.model';
 import {MatIcon} from '@angular/material/icon';
-import {CurrencyPipe, DecimalPipe} from '@angular/common';
+import {CurrencyPipe, DecimalPipe, NgOptimizedImage} from '@angular/common';
 import {AuthService} from '@rxp/core/auth/auth-service';
 import {MatButton} from '@angular/material/button';
 
@@ -13,8 +13,8 @@ import {MatButton} from '@angular/material/button';
     DecimalPipe,
     CurrencyPipe,
     RouterLink,
-    MatButton
-
+    MatButton,
+    NgOptimizedImage
   ],
   templateUrl: './experience-detail.html',
   styleUrl: './experience-detail.scss',

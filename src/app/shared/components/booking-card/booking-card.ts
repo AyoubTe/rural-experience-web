@@ -1,15 +1,16 @@
 import {
   Component, ChangeDetectionStrategy,
-  input, output, computed
+  input, output, computed, OnInit, signal, inject
 } from '@angular/core';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { BookingResponse, BookingStatus } from '@rxp/core/models/responses.model';
+import {BookingResponse, BookingStatus, HostProfileResponse} from '@rxp/core/models/responses.model';
 import {DurationPipe} from '@rxp/shared/pipes/duration/duration-pipe';
 import {MatCard, MatCardActions, MatCardContent} from '@angular/material/card';
 import {MatChip} from '@angular/material/chips';
+import {ExperienceService} from '@rxp/features/experience/experience-service';
 
 interface StatusConfig {
   label:  string;
@@ -29,14 +30,33 @@ interface StatusConfig {
     MatButtonModule, MatIconModule, DurationPipe, MatCardActions, MatCardContent, MatChip, MatCard,
   ],
 })
-export class BookingCard {
+export class BookingCard implements OnInit {
+
   // ── Inputs ──────────────────────────────────────────────────────
   booking      = input.required<BookingResponse>();
   isCancelling = input<boolean>(false);
+  private experienceService = inject(ExperienceService);
 
   // ── Outputs ─────────────────────────────────────────────────────
   cancel  = output<number>();
   review  = output<number>();
+
+  host = signal<HostProfileResponse>({
+    createdAt: '',
+    firstName: '',
+    id: 0,
+    lastName: '',
+    location: '',
+    totalEarnings: 0,
+    userId: 0,
+    verified: false
+  });
+
+  ngOnInit(): void {
+    this.experienceService.getHostByExpId(this.booking().experienceId).subscribe({
+      next: h => this.host.set(h)
+    });
+  }
 
   // ── Computed ────────────────────────────────────────────────────
   statusConfig = computed<StatusConfig>(() => {

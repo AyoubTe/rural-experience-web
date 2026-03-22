@@ -3,8 +3,11 @@
   <!-- Cover photo -->
   <div class="experience-detail__hero">
     <img class="experience-detail__cover"
-         [src]="photoUrl()"
-         [alt]="experience().title">
+         [ngSrc]="photoUrl()"
+         [alt]="experience().title"
+         width="20"
+         height="20"
+    >
     <div class="experience-detail__hero-overlay">
       <span class="experience-detail__category">
         {{ experience().categoryEmoji }} {{ experience().categoryName }}

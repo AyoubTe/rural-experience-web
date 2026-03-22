@@ -6,7 +6,7 @@ import {catchError, Observable, retry, throwError} from 'rxjs';
 import {ApiError, PageResponse} from '@rxp/core/models/api.model';
 import {API_ENDPOINTS} from '@rxp/core/constants/endpoints';
 import {CreateExperienceRequest} from '@rxp/core/models/requests.model';
-import {ExperienceResponse, ExperienceSummaryResponse} from '@rxp/core/models/responses.model';
+import {ExperienceResponse, ExperienceSummaryResponse, HostProfileResponse} from '@rxp/core/models/responses.model';
 import {handleApiError} from '@rxp/core/http/api-error.util';
 
 @Injectable({
@@ -146,5 +146,11 @@ export class ExperienceService {
       `${this.baseUrl}${API_ENDPOINTS.EXPERIENCES.UPDATE(id)}`,
       payload
     ).pipe(catchError(handleApiError));
+  }
+
+  getHostByExpId(id: number | undefined) : Observable<HostProfileResponse> {
+    return  this.http.get<HostProfileResponse>(
+      `${this.baseUrl}${API_ENDPOINTS.EXPERIENCES.GET_HOST_BY_EXP_ID(id)}`
+    ).pipe(catchError(this.handleError));
   }
 }

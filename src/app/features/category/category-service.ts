@@ -22,7 +22,16 @@ export class CategoryService {
    * This mirrors the Spring Boot cache from Chapter 14:
    * the frontend also caches the reference data.
    */
-  categories$: Observable<Category[]> =
+  /**
+   * shareReplay(1) makes this Observable hot and multicasted:
+   * - First subscriber triggers the HTTP call
+   * - All subsequent subscribers receive the cached result immediately
+   * - The HTTP request is made exactly once per app session
+   *
+   * Perfect for: categories, countries, feature flags — data that
+   * changes once a day (if that) and is needed by multiple components.
+   */
+  readonly categories$: Observable<Category[]> =
     this.http.get<Category[]>(this.baseUrl + API_ENDPOINTS.CATEGORIES.BASE).pipe(
       shareReplay(1),
       catchError(() => {

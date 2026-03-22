@@ -31,6 +31,7 @@ import {CategoryService} from '@rxp/features/category/category-service';
 import {takeUntilDestroyed, toObservable, toSignal} from '@angular/core/rxjs-interop';
 import {AsyncPipe} from '@angular/common';
 import {ExperienceFilterService} from '@rxp/features/experience/experience-filter';
+import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'rxp-experience-list',
@@ -41,7 +42,7 @@ import {ExperienceFilterService} from '@rxp/features/experience/experience-filte
   imports: [
     FormsModule,
     ExperienceCard,
-    MatPaginator, MatIconModule, MatProgressSpinner, AsyncPipe,
+    MatPaginator, MatIconModule, MatProgressSpinner, AsyncPipe, MatButton,
   ],
 })
 export class ExperienceListComponent implements OnInit, OnDestroy {

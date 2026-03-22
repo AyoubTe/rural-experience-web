@@ -11,6 +11,7 @@ export const API_ENDPOINTS = {
     BASE: '/experiences', // GET all, POST new
     GET_HOST_EXPERIENCES: '/experiences/host-experiences',
     GET_BY_ID: (id: number | string) => `/experiences/${id}`,
+    GET_HOST_BY_EXP_ID: (id: number | undefined) => `/experiences/${id}/host`,
     DELETE: (id: number | string) => `/experiences/${id}`,
     GET_PHOTOS: (id: number | string) => `/experiences/${id}/photos`,
     UPDATE: (id: number | string) => `/experiences/${id}`,

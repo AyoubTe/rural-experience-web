@@ -12,9 +12,11 @@ import * as BookingSelectors from '../../booking/store/booking.selectors';
 import {MatIcon} from '@angular/material/icon';
 import {MatCard, MatCardActions, MatCardContent} from '@angular/material/card';
 import {MatDivider} from '@angular/material/list';
-import {CurrencyPipe, DatePipe} from '@angular/common';
+import {CurrencyPipe, DatePipe, NgOptimizedImage} from '@angular/common';
 import {BookingStatusBadge} from '@rxp/shared/components/booking-status-badge/booking-status-badge';
 import {MatButton, MatIconButton} from '@angular/material/button';
+import {HostProfileResponse} from '@rxp/core/models/responses.model';
+import {ExperienceService} from '@rxp/features/experience/experience-service';
 
 @Component({
   selector: 'rxp-booking-detail',
@@ -29,7 +31,8 @@ import {MatButton, MatIconButton} from '@angular/material/button';
     MatCardActions,
     BookingStatusBadge,
     MatIconButton,
-    MatButton
+    MatButton,
+    NgOptimizedImage
   ],
   templateUrl: './booking-detail.html',
   styleUrl: './booking-detail.scss',
@@ -40,6 +43,18 @@ export class BookingDetail implements OnInit {
   private store  = inject(Store);
   private dialog = inject(MatDialog);
   private notify = inject(NotificationService);
+  private experienceService = inject(ExperienceService);
+
+  host = signal<HostProfileResponse>({
+    createdAt: '',
+    firstName: '',
+    id: 0,
+    lastName: '',
+    location: '',
+    totalEarnings: 0,
+    userId: 0,
+    verified: false
+  });
 
   private bookingId = Number(
     this.route.snapshot.paramMap.get('id')
@@ -71,6 +86,13 @@ export class BookingDetail implements OnInit {
     this.store.dispatch(
       BookingActions.selectBooking({ bookingId: this.bookingId })
     );
+
+    if(this.booking()?.experienceId){
+      this.experienceService.getHostByExpId(this.booking()?.experienceId).subscribe({
+        next: h => this.host.set(h),
+        error: err => this.notify.error(err.message),
+      });
+    }
   }
 
   onCancel(): void {
