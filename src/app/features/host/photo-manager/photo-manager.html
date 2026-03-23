@@ -1,13 +1,12 @@
 <div class="photo-manager">
 
   <div class="photo-manager__header">
-    <h3>Experience Photos</h3>
-    <p class="photo-manager__hint">
+    <h3 i18n="@@photoManager.title">Experience Photos</h3>
+    <p class="photo-manager__hint" i18n="@@photoManager.hint">
       Drag to reorder. The first photo is your cover image.
     </p>
   </div>
 
-  <!-- Drop zone / photo grid -->
   <div
     class="photo-manager__grid"
     cdkDropList
@@ -22,28 +21,25 @@
         cdkDrag
         [cdkDragData]="photo">
 
-        <!-- Drag preview (shown while dragging) -->
         <div class="photo-tile__drag-preview" *cdkDragPreview>
           <img [src]="photo.url" [alt]="photo.altText">
         </div>
 
-        <!-- Drag placeholder (shown in original position) -->
         <div class="photo-tile__drag-placeholder" *cdkDragPlaceholder>
           <mat-icon>add_photo_alternate</mat-icon>
         </div>
 
-        <!-- Photo content -->
         <img class="photo-tile__img"
              [src]="photo.url"
              [alt]="photo.altText"
+             i18n-alt="@@photoManager.photoAlt"
              loading="lazy">
 
-        <!-- Cover badge -->
         @if (i === 0) {
-          <span class="photo-tile__cover-badge">Cover</span>
+          <span class="photo-tile__cover-badge"
+                i18n="@@photoManager.coverBadge">Cover</span>
         }
 
-        <!-- Upload progress overlay -->
         @if (!photo.uploadedAt) {
           <div class="photo-tile__progress-overlay">
             <mat-progress-bar
@@ -54,22 +50,21 @@
           </div>
         }
 
-        <!-- Actions overlay (shown on hover) -->
         @if (photo.uploadedAt) {
           <div class="photo-tile__actions">
-            <!-- Drag handle -->
             <button mat-icon-button
                     cdkDragHandle
                     class="photo-tile__drag-handle"
-                    aria-label="Drag to reorder">
+                    aria-label="Drag to reorder"
+                    i18n-aria-label="@@photoManager.dragAria">
               <mat-icon>drag_indicator</mat-icon>
             </button>
 
-            <!-- Delete -->
             <button mat-icon-button
                     class="photo-tile__delete"
                     (click)="onDeletePhoto(photo)"
-                    aria-label="Delete photo">
+                    aria-label="Delete photo"
+                    i18n-aria-label="@@photoManager.deleteAria">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
@@ -78,7 +73,6 @@
       </div>
     }
 
-    <!-- Upload button tile -->
     <label class="photo-tile photo-tile--upload"
            [class.photo-tile--loading]="isUploading()"
            role="button"
@@ -89,12 +83,12 @@
              hidden
              (change)="onFileSelected($event)">
       <mat-icon>add_photo_alternate</mat-icon>
-      <span>Add Photos</span>
+      <span i18n="@@photoManager.addPhotosBtn">Add Photos</span>
     </label>
 
   </div>
 
-  <p class="photo-manager__limits">
+  <p class="photo-manager__limits" i18n="@@photoManager.limits">
     JPEG, PNG or WebP · Max 10 MB per photo · Up to 10 photos
   </p>
 

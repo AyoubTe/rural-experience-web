@@ -4,11 +4,12 @@
     <div class="booking-detail__success-banner" role="status">
       <mat-icon>check_circle</mat-icon>
       <div>
-        <strong>Booking request sent!</strong>
-        <p>The host will review your request and respond soon.</p>
+        <strong i18n="@@bookingDetail.successTitle">Booking request sent!</strong>
+        <p i18n="@@bookingDetail.successDesc">The host will review your request and respond soon.</p>
       </div>
       <button mat-icon-button (click)="justBooked.set(false)"
-              aria-label="Dismiss">
+              aria-label="Dismiss"
+              i18n-aria-label="@@bookingDetail.dismissAria">
         <mat-icon>close</mat-icon>
       </button>
     </div>
@@ -16,27 +17,25 @@
 
   @if (booking(); as booking) {
 
-    <!-- Header -->
     <div class="booking-detail__header">
       <button mat-icon-button routerLink="/my-bookings"
-              aria-label="Back to bookings">
+              aria-label="Back to bookings"
+              i18n-aria-label="@@bookingDetail.backAria">
         <mat-icon>arrow_back</mat-icon>
       </button>
-      <h1>Booking #{{ booking.id }}</h1>
+      <h1 i18n="@@bookingDetail.title">Booking #{{ booking.id }}</h1>
     </div>
 
     <div class="booking-detail__layout">
 
-      <!-- Main info -->
       <mat-card class="booking-detail__main">
         <mat-card-content>
 
-          <!-- Experience -->
           <div class="booking-detail__experience">
             <img
-              [ngSrc]="booking.experienceCoverPhoto
-                     ?? 'assets/images/placeholder-experience.jpg'"
-              [alt]="booking.experienceTitle"
+              [ngSrc]="booking.experienceCoverPhoto ?? 'assets/images/placeholder-experience.jpg'"
+              alt="{{ booking.experienceTitle }}"
+              i18n-alt="@@bookingDetail.expPhotoAlt"
               width="50"
               height="50"
               class="booking-detail__exp-photo">
@@ -47,9 +46,8 @@
                 {{ booking.experienceLocation }}
               </p>
               <a mat-button
-                 [routerLink]="['/experiences',
-                                booking.experienceId]">
-                View Experience
+                 [routerLink]="['/experiences', booking.experienceId]">
+                <span i18n="@@bookingDetail.viewExpBtn">View Experience</span>
                 <mat-icon iconSuffix>arrow_forward</mat-icon>
               </a>
             </div>
@@ -57,14 +55,13 @@
 
           <mat-divider />
 
-          <!-- Stay details -->
-          <h3>Your Stay</h3>
+          <h3 i18n="@@bookingDetail.yourStay">Your Stay</h3>
           <div class="booking-detail__details">
             <div class="detail-item">
               <mat-icon>calendar_today</mat-icon>
               <div>
-                <label>Dates</label>
-                <span>
+                <label i18n="@@bookingDetail.datesLabel">Dates</label>
+                <span i18n="@@bookingDetail.dateRange">
                   {{ booking.startDate | date:'d MMMM yyyy' }}
                   to
                   {{ booking.endDate | date:'d MMMM yyyy' }}
@@ -75,18 +72,17 @@
             <div class="detail-item">
               <mat-icon>group</mat-icon>
               <div>
-                <label>Guests</label>
-                <span>{{ booking.numberOfGuests }} guests</span>
+                <label i18n="@@bookingDetail.guestsLabel">Guests</label>
+                <span i18n="@@bookingDetail.guestsValue">{{ booking.numberOfGuests }} guests</span>
               </div>
             </div>
 
             <div class="detail-item">
               <mat-icon>euro</mat-icon>
               <div>
-                <label>Total price</label>
+                <label i18n="@@bookingDetail.totalPriceLabel">Total price</label>
                 <span>
-                  {{ booking.totalPrice
-                  | currency:'EUR':'symbol':'1.0-0' }}
+                  {{ booking.totalPrice | currency:'EUR':'symbol':'1.0-0' }}
                 </span>
               </div>
             </div>
@@ -95,7 +91,7 @@
               <div class="detail-item">
                 <mat-icon>notes</mat-icon>
                 <div>
-                  <label>Special requests</label>
+                  <label i18n="@@bookingDetail.specialRequestsLabel">Special requests</label>
                   <span>{{ booking.specialRequests }}</span>
                 </div>
               </div>
@@ -105,29 +101,28 @@
         </mat-card-content>
       </mat-card>
 
-      <!-- Sidebar -->
       <aside class="booking-detail__sidebar">
 
-        <!-- Status card -->
         <mat-card class="booking-detail__status-card">
           <mat-card-content>
-            <h3>Status</h3>
+            <h3 i18n="@@bookingDetail.statusTitle">Status</h3>
             <rxp-booking-status-badge [status]="booking.status" />
+
             @switch (booking.status) {
               @case ('PENDING') {
-                <p class="status-note">
+                <p class="status-note" i18n="@@bookingDetail.statusNotePending">
                   Your request has been sent. The host typically
                   responds within 24 hours.
                 </p>
               }
               @case ('CONFIRMED') {
-                <p class="status-note">
+                <p class="status-note" i18n="@@bookingDetail.statusNoteConfirmed">
                   Your booking is confirmed! Get ready for an
                   amazing experience.
                 </p>
               }
               @case ('COMPLETED') {
-                <p class="status-note">
+                <p class="status-note" i18n="@@bookingDetail.statusNoteCompleted">
                   How was it? Share your experience with other
                   explorers.
                 </p>
@@ -139,28 +134,27 @@
               <button mat-flat-button color="primary"
                       (click)="onWriteReview()">
                 <mat-icon>rate_review</mat-icon>
-                Write a Review
+                <span i18n="@@bookingDetail.writeReviewBtn">Write a Review</span>
               </button>
             }
-            @if (booking.status === 'PENDING' ||
-            booking.status === 'CONFIRMED') {
+            @if (booking.status === 'PENDING' || booking.status === 'CONFIRMED') {
               <button mat-stroked-button color="warn"
                       (click)="onCancel()"
                       [disabled]="cancelling()">
-                Cancel Booking
+                <span i18n="@@bookingDetail.cancelBtn">Cancel Booking</span>
               </button>
             }
           </mat-card-actions>
         </mat-card>
 
-        <!-- Host card -->
         <mat-card class="booking-detail__host-card">
           <mat-card-content>
-            <h3>Your Host</h3>
+            <h3 i18n="@@bookingDetail.yourHostTitle">Your Host</h3>
             <div class="host-info">
               @if (host().avatarUrl) {
                 <img [ngSrc]="host().avatarUrl ?? 'assets/images/placeholder-experience.jpg'"
-                     [alt]="host().firstName"
+                     alt="{{ host().firstName }}"
+                     i18n-alt="@@bookingDetail.hostAvatarAlt"
                      width="20"
                      height="20"
                      class="host-avatar">
@@ -177,9 +171,8 @@
     </div>
 
   } @else {
-    <!-- Loading / not found -->
     <div class="booking-detail__loading">
-      <p>Loading booking details...</p>
+      <p i18n="@@bookingDetail.loadingText">Loading booking details...</p>
     </div>
   }
 

@@ -7,6 +7,8 @@ import * as BookingSelectors from '../../booking/store/booking.selectors';
 import {AsyncPipe, CurrencyPipe} from '@angular/common';
 import {MatCard, MatCardContent} from '@angular/material/card';
 import {MatIcon} from '@angular/material/icon';
+import {MatButton} from '@angular/material/button';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'rxp-host-dashboard',
@@ -16,7 +18,9 @@ import {MatIcon} from '@angular/material/icon';
     MatCard,
     MatCardContent,
     MatIcon,
-    CurrencyPipe
+    CurrencyPipe,
+    MatButton,
+    RouterLink
   ],
   templateUrl: './host-dashboard.html',
   styleUrl: './host-dashboard.scss',

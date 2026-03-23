@@ -21,6 +21,7 @@ import * as NotifActions from '@rxp/features/notification/store/notification.act
 import {AppNotification} from '@rxp/core/models/notification.model';
 import {NotificationCentre} from '@rxp/features/notification/notification-centre/notification-centre';
 import {ConnectionBanner} from '@rxp/core/websocket/connection-banner/connection-banner';
+import {LanguageSwitcher} from '@rxp/shared/components/language-switcher/language-switcher';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,7 @@ import {ConnectionBanner} from '@rxp/core/websocket/connection-banner/connection
     RouterOutlet, RouterLink, RouterLinkActive,
     MatToolbarModule, MatSidenavModule, MatListModule,
     MatIconModule, MatButtonModule, MatMenuModule,
-    MatDividerModule, MatBadgeModule, NotificationCentre, ConnectionBanner,
+    MatDividerModule, MatBadgeModule, NotificationCentre, ConnectionBanner, LanguageSwitcher,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'

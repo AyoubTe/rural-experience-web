@@ -1,25 +1,21 @@
 <div class="audit-log">
 
   <div class="audit-log__header">
-    <h2>Audit Log</h2>
+    <h2 i18n="@@auditLog.title">Audit Log</h2>
 
     <mat-form-field appearance="outline">
-      <mat-label>Filter by action</mat-label>
+      <mat-label i18n="@@auditLog.filterLabel">Filter by action</mat-label>
       <mat-select [(ngModel)]="actionFilter"
                   (ngModelChange)="onActionFilterChange()">
-        <mat-option value="">All actions</mat-option>
-        <mat-option value="EXPERIENCE_APPROVED">Approved</mat-option>
-        <mat-option value="EXPERIENCE_REJECTED">Rejected</mat-option>
-        <mat-option value="USER_SUSPENDED">User Suspended</mat-option>
-        <mat-option value="USER_ROLE_CHANGED">Role Changed</mat-option>
+        <mat-option value="" i18n="@@auditLog.filterAll">All actions</mat-option>
+        <mat-option value="EXPERIENCE_APPROVED" i18n="@@auditLog.filterApproved">Approved</mat-option>
+        <mat-option value="EXPERIENCE_REJECTED" i18n="@@auditLog.filterRejected">Rejected</mat-option>
+        <mat-option value="USER_SUSPENDED" i18n="@@auditLog.filterUserSuspended">User Suspended</mat-option>
+        <mat-option value="USER_ROLE_CHANGED" i18n="@@auditLog.filterRoleChanged">Role Changed</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
 
-  <!--
-    itemSize = fixed row height in px
-    The viewport renders only visible rows — crucial for large logs
-  -->
   <cdk-virtual-scroll-viewport
     [itemSize]="ROW_HEIGHT"
     class="audit-viewport"
@@ -54,13 +50,12 @@
 
     </div>
 
-    <!-- Loading indicator at bottom -->
     @if (isLoading()) {
-      <div class="audit-loading">Loading more...</div>
+      <div class="audit-loading" i18n="@@auditLog.loadingMore">Loading more...</div>
     }
 
     @if (!hasMore() && entries().length > 0) {
-      <div class="audit-end">
+      <div class="audit-end" i18n="@@auditLog.endOfLog">
         End of log — {{ entries().length }} entries total
       </div>
     }

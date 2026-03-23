@@ -9,12 +9,12 @@
          [src]="booking().experienceCoverPhoto
                 ?? 'assets/images/placeholder-experience.jpg'"
          [alt]="booking().experienceTitle"
+         i18n-alt="@@bookingCard.photoAlt"
          loading="lazy">
 
     <div class="booking-card__info">
 
       <div class="booking-card__status-row">
-        <!-- Status chip -->
         <mat-chip
           class="booking-card__status-chip"
           [class]="statusConfig().cssClass"
@@ -23,20 +23,17 @@
           {{ statusConfig().label }}
         </mat-chip>
 
-        <!-- Booking reference -->
         <span class="booking-card__ref">
           #{{ booking().id }}
         </span>
       </div>
 
-      <!-- Experience title -->
       <h3 class="booking-card__title">
         <a [routerLink]="['/experiences', booking().experienceId]">
           {{ booking().experienceTitle }}
         </a>
       </h3>
 
-      <!-- Location -->
       <p class="booking-card__location">
         <mat-icon inline>place</mat-icon>
         {{ booking().experienceLocation }}
@@ -64,7 +61,11 @@
       <mat-icon class="booking-card__detail-icon">group</mat-icon>
       <span>
         {{ booking().numberOfGuests }}
-        {{ booking().numberOfGuests === 1 ? 'guest' : 'guests' }}
+        @if (booking().numberOfGuests === 1) {
+          <ng-container i18n="@@bookingCard.guest">guest</ng-container>
+        } @else {
+          <ng-container i18n="@@bookingCard.guests">guests</ng-container>
+        }
       </span>
     </div>
 
@@ -75,9 +76,11 @@
         <strong>
           {{ booking().totalPrice | currency:'EUR':'symbol':'1.0-0' }}
         </strong>
-        total
+        <ng-container i18n="@@bookingCard.total">total</ng-container>
         @if (booking().status === 'PENDING') {
-          <span class="muted"> — not yet charged</span>
+          <span class="muted" i18n="@@bookingCard.notYetCharged">
+            — not yet charged
+          </span>
         }
       </span>
     </div>
@@ -86,7 +89,7 @@
     <div class="booking-card__detail-row">
       <mat-icon class="booking-card__detail-icon">person</mat-icon>
       <span>
-        Hosted by
+        <ng-container i18n="@@bookingCard.hostedBy">Hosted by</ng-container>
         {{ host().firstName }} {{ host().lastName }}
       </span>
     </div>
@@ -105,7 +108,8 @@
   <mat-card-actions class="booking-card__actions" align="end">
 
     <a mat-button
-       [routerLink]="['/my-bookings', booking().id]">
+       [routerLink]="['/my-bookings', booking().id]"
+       i18n="@@bookingCard.viewDetails">
       View Details
     </a>
 
@@ -113,7 +117,7 @@
       <button mat-stroked-button color="primary"
               (click)="onReview()">
         <mat-icon>rate_review</mat-icon>
-        Write Review
+        <span i18n="@@bookingCard.writeReview">Write Review</span>
       </button>
     }
 
@@ -124,12 +128,12 @@
       @if (isCancelling()) {
         <ng-container>
           <mat-icon>hourglass_empty</mat-icon>
-          Cancelling...
+          <span i18n="@@bookingCard.cancelling">Cancelling...</span>
         </ng-container>
       } @else {
         <ng-container>
           <mat-icon>cancel</mat-icon>
-          Cancel
+          <span i18n="@@bookingCard.cancel">Cancel</span>
         </ng-container>
       }
     </button>

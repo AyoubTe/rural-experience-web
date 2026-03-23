@@ -1,74 +1,80 @@
 <div class="register">
-  <h2>Create your account</h2>
+  <h2 i18n="@@register.title">Create your account</h2>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-    <!-- Name row -->
     <div class="name-row">
       <mat-form-field appearance="outline">
-        <mat-label>First name</mat-label>
+        <mat-label i18n="@@register.firstNameLabel">First name</mat-label>
         <input matInput formControlName="firstName"
                autocomplete="given-name">
         <mat-error>
           @if (form.get('firstName')?.hasError('required')) {
-            First name is required
+            <span i18n="@@register.firstNameRequiredError">First name is required</span>
           }
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Last name</mat-label>
+        <mat-label i18n="@@register.lastNameLabel">Last name</mat-label>
         <input matInput formControlName="lastName"
                autocomplete="family-name">
       </mat-form-field>
     </div>
 
-    <!-- Email -->
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Email address</mat-label>
+      <mat-label i18n="@@register.emailLabel">Email address</mat-label>
       <input matInput formControlName="email"
              type="email" autocomplete="email">
       <mat-icon matPrefix>mail</mat-icon>
       <mat-error>
         @if (form.get('email')?.hasError('email')) {
-          Enter a valid email address
+          <span i18n="@@register.emailInvalidError">Enter a valid email address</span>
         }
       </mat-error>
     </mat-form-field>
 
-    <!-- Account type -->
     <div class="role-select">
-      <p class="role-select__label">I want to:</p>
+      <p class="role-select__label" i18n="@@register.roleLabel">I want to:</p>
       <mat-radio-group formControlName="role" class="role-group">
-        <mat-radio-button value="EXPLORER">
+        <mat-radio-button value="EXPLORER" i18n="@@register.roleExplorer">
           Explore rural experiences
         </mat-radio-button>
-        <mat-radio-button value="HOST">
+        <mat-radio-button value="HOST" i18n="@@register.roleHost">
           Host experiences on my farm
         </mat-radio-button>
       </mat-radio-group>
     </div>
 
-    <!-- Password -->
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Password</mat-label>
+      <mat-label i18n="@@register.passwordLabel">Password</mat-label>
       <input matInput formControlName="password"
              [type]="showPassword() ? 'text' : 'password'"
              autocomplete="new-password">
-      <button matSuffix mat-icon-button type="button"
-              (click)="updateShowPassword()">
-        <mat-icon>
-          {{ showPassword() ? 'visibility_off' : 'visibility' }}
-        </mat-icon>
-      </button>
+
+      @if (showPassword()) {
+        <button matSuffix mat-icon-button type="button"
+                (click)="updateShowPassword()"
+                aria-label="Hide password"
+                i18n-aria-label="@@register.hidePasswordAria">
+          <mat-icon>visibility_off</mat-icon>
+        </button>
+      } @else {
+        <button matSuffix mat-icon-button type="button"
+                (click)="updateShowPassword()"
+                aria-label="Show password"
+                i18n-aria-label="@@register.showPasswordAria">
+          <mat-icon>visibility</mat-icon>
+        </button>
+      }
+
       @if (passwordError) {
         <mat-error>{{ passwordError }}</mat-error>
       }
     </mat-form-field>
 
-    <!-- Confirm password -->
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Confirm password</mat-label>
+      <mat-label i18n="@@register.confirmPasswordLabel">Confirm password</mat-label>
       <input matInput formControlName="confirmPassword"
              [type]="showPassword() ? 'text' : 'password'"
              autocomplete="new-password">
@@ -88,14 +94,17 @@
             type="submit"
             class="register__submit"
             [disabled]="form.invalid || isLoading()">
-      @if (isLoading()) { Creating account... }
-      @else { Create Account }
+      @if (isLoading()) {
+        <span i18n="@@register.creatingAccount">Creating account...</span>
+      } @else {
+        <span i18n="@@register.submitBtn">Create Account</span>
+      }
     </button>
 
   </form>
 
   <p class="register__login">
-    Already have an account?
-    <a routerLink="/auth/login">Log in</a>
+    <span i18n="@@register.haveAccount">Already have an account?</span>
+    <a routerLink="/auth/login" i18n="@@register.loginLink">Log in</a>
   </p>
 </div>

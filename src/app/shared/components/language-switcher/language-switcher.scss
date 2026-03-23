@@ -1,0 +1,11 @@
+.lang-switcher {
+  font-size: 0.875rem;
+}
+.lang-switcher__flag {
+  font-size: 1.1rem;
+  margin-right: 4px;
+}
+.active-locale {
+  font-weight: 700;
+  color: var(--rxp-green-700);
+}

@@ -1,52 +1,63 @@
 <div class="login">
-  <h2 class="login__title">Welcome back</h2>
-  <p class="login__subtitle">
+  <h2 class="login__title" i18n="@@login.title">Welcome back</h2>
+  <p class="login__subtitle" i18n="@@login.subtitle">
     Log in to explore rural experiences
   </p>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login__form">
 
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Email address</mat-label>
+      <mat-label i18n="@@login.emailLabel">Email address</mat-label>
       <input matInput
              formControlName="email"
              type="email"
              autocomplete="email"
-             placeholder="you@example.com">
+             placeholder="you@example.com"
+             i18n-placeholder="@@login.emailPlaceholder">
       <mat-icon matPrefix>mail</mat-icon>
       <mat-error>
         @if (form.get('email')?.hasError('required')) {
-          Email is required
+          <span i18n="@@login.emailRequiredError">Email is required</span>
         } @else if (form.get('email')?.hasError('email')) {
-          Enter a valid email address
+          <span i18n="@@login.emailInvalidError">Enter a valid email address</span>
         }
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Password</mat-label>
+      <mat-label i18n="@@login.passwordLabel">Password</mat-label>
       <input matInput
              formControlName="password"
              [type]="showPassword() ? 'text' : 'password'"
              autocomplete="current-password">
       <mat-icon matPrefix>lock</mat-icon>
-      <button matSuffix mat-icon-button
-              type="button"
-              (click)="togglePassword()"
-              [attr.aria-label]="showPassword()
-                ? 'Hide password' : 'Show password'">
-        <mat-icon>
-          {{ showPassword() ? 'visibility_off' : 'visibility' }}
-        </mat-icon>
-      </button>
+
+      @if (showPassword()) {
+        <button matSuffix mat-icon-button
+                type="button"
+                (click)="togglePassword()"
+                aria-label="Hide password"
+                i18n-aria-label="@@login.hidePasswordAria">
+          <mat-icon>visibility_off</mat-icon>
+        </button>
+      } @else {
+        <button matSuffix mat-icon-button
+                type="button"
+                (click)="togglePassword()"
+                aria-label="Show password"
+                i18n-aria-label="@@login.showPasswordAria">
+          <mat-icon>visibility</mat-icon>
+        </button>
+      }
+
       <mat-error>
         @if (form.get('password')?.hasError('required')) {
-          Password is required
+          <span i18n="@@login.passwordRequiredError">Password is required</span>
         }
       </mat-error>
     </mat-form-field>
 
-    <a class="login__forgot" routerLink="/auth/forgot-password">
+    <a class="login__forgot" routerLink="/auth/forgot-password" i18n="@@login.forgotPassword">
       Forgot your password?
     </a>
 
@@ -65,16 +76,16 @@
       @if (isLoading()) {
         <ng-container>
           <mat-icon>hourglass_empty</mat-icon>
-          Logging in...
+          <span i18n="@@login.loggingIn">Logging in...</span>
         </ng-container>
       } @else {
-        Log In
+        <span i18n="@@login.submitBtn">Log In</span>
       }
     </button>
   </form>
 
   <p class="login__register">
-    Don't have an account?
-    <a routerLink="/auth/register">Sign up free</a>
+    <span i18n="@@login.noAccount">Don't have an account?</span>
+    <a routerLink="/auth/register" i18n="@@login.signUpFree">Sign up free</a>
   </p>
 </div>

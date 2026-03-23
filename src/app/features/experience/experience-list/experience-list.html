@@ -1,59 +1,61 @@
 <div class="experience-list">
 
-  <!-- Page header -->
   <header class="experience-list__header">
     <div class="experience-list__header-text">
-      <h1>Rural Experiences</h1>
-      <p class="experience-list__subtitle">
+      <h1 i18n="@@experienceList.title">Rural Experiences</h1>
+      <p class="experience-list__subtitle" i18n="@@experienceList.subtitle">
         Discover authentic farm stays, fishing retreats, and
         artisan workshops across France.
       </p>
     </div>
 
-    <!-- Results count -->
     @if (!isLoading()) {
       <p class="experience-list__count">
         @if (activeFilterCount() > 0) {
-          {{ filteredExperiences().length }} of
-          {{ experiences().length }} experiences
+          <span i18n="@@experienceList.filteredCount">
+            {{ filteredExperiences().length }} of
+            {{ experiences().length }} experiences
+          </span>
         } @else {
-          {{ experiences().length }} experiences available
+          <span i18n="@@experienceList.totalCount">
+            {{ experiences().length }} experiences available
+          </span>
         }
       </p>
     }
   </header>
 
-  <!-- Search and filter bar -->
   <div class="experience-list__filters">
 
-    <!-- Keyword search -->
     <div class="search-box">
       <span class="search-box__icon"> 🔍 </span>
       <input
         class="search-box__input"
         type="text"
         placeholder="Search by name, location..."
+        i18n-placeholder="@@experienceList.searchPlaceholder"
         [value]="keyword()"
         (input)="onKeywordChange($any($event.target).value)">
       @if (keyword()) {
         <button
           class="search-box__clear"
           (click)="onKeywordChange('')"
-          aria-label="Clear search">
+          aria-label="Clear search"
+          i18n-aria-label="@@experienceList.clearSearchAria">
           ✕
         </button>
       }
     </div>
 
-    <!-- category chips -->
     <div class="category-chips" role="group"
-         aria-label="Filter by category">
+         aria-label="Filter by category"
+         i18n-aria-label="@@experienceList.filterCategoryAria">
 
       <button
         class="chip"
         [class.chip--active]="selectedCategoryId() === null"
         (click)="onCategorySelect(null)">
-        All
+        <span i18n="@@experienceList.categoryAll">All</span>
       </button>
 
       @for (category of categories$ | async; track category.id) {
@@ -67,40 +69,45 @@
       }
     </div>
 
-    <!-- Active filter count + clear -->
     @if (activeFilterCount() > 0) {
       <button
         class="clear-filters-btn"
         (click)="clearAllFilters()">
-        Clear {{ activeFilterCount() }}
-        {{ activeFilterCount() === 1 ? 'filter' : 'filters' }}
+
+        @if (activeFilterCount() === 1) {
+          <span i18n="@@experienceList.clearSingleFilter">
+            Clear {{ activeFilterCount() }} filter
+          </span>
+        } @else {
+          <span i18n="@@experienceList.clearMultipleFilters">
+            Clear {{ activeFilterCount() }} filters
+          </span>
+        }
+
       </button>
     }
   </div>
 
-  <!-- States -->
   @if (isLoading()) {
     <div class="state-container">
       <mat-progress-spinner mode="indeterminate" diameter="48" />
-      <p>Finding experiences for you...</p>
+      <p i18n="@@experienceList.loadingText">Finding experiences for you...</p>
     </div>
   } @else if (errorMessage()) {
-    <!-- Error -->
     <div class="state-container state-container--error">
       <mat-icon class="error-icon">error_outline</mat-icon>
-      <h3>Something went wrong</h3>
+      <h3 i18n="@@experienceList.errorTitle">Something went wrong</h3>
       <p>{{ errorMessage() }}</p>
       <button mat-flat-button color="primary"
               (click)="loadExperiences()">
         <mat-icon>refresh</mat-icon>
-        Try Again
+        <span i18n="@@experienceList.tryAgainBtn">Try Again</span>
       </button>
     </div>
   }
 
   @else {
 
-    <!-- Experiences grid -->
     @for (exp of filteredExperiences(); track exp.id) {
       <div class="experience-list__grid-wrapper">
         <rxp-experience-card
@@ -108,22 +115,23 @@
           (booked)="onExperienceBooked($event)" />
       </div>
     } @empty {
-      <!-- Empty state -->
       <div class="experience-list__empty">
         <p class="experience-list__empty-icon"></p>
-        <h3>No experiences found</h3>
+        <h3 i18n="@@experienceList.emptyTitle">No experiences found</h3>
+
         @if (activeFilterCount() > 0) {
-          <p>
+          <p i18n="@@experienceList.emptyWithFilters">
             No experiences match your current filters.
             Try broadening your search.
           </p>
           <button
             class="btn btn--primary"
-            (click)="clearAllFilters()">
+            (click)="clearAllFilters()"
+            i18n="@@experienceList.clearAllFiltersBtn">
             Clear all filters
           </button>
         } @else {
-          <p>
+          <p i18n="@@experienceList.emptyWithoutFilters">
             Check back soon — new experiences are added regularly.
           </p>
         }
@@ -131,7 +139,6 @@
     }
   }
 
-  <!-- Pagination -->
   @if (totalPages() > 1) {
     <mat-paginator
       [length]="totalElements()"
@@ -139,7 +146,8 @@
       [pageIndex]="currentPage()"
       [pageSizeOptions]="[6, 12, 24]"
       (page)="onPageChange($event.pageIndex)"
-      aria-label="Select page">
+      aria-label="Select page"
+      i18n-aria-label="@@experienceList.paginatorAria">
     </mat-paginator>
   }
 

@@ -6,7 +6,8 @@
         matBadgeColor="warn"
         matBadgeSize="small"
         [matBadgeHidden]="!hasUnread()"
-        aria-label="Notifications">
+        aria-label="Notifications"
+        i18n-aria-label="@@notifCentre.bellAria">
   <mat-icon>
     {{ hasUnread() ? 'notifications_active' : 'notifications' }}
   </mat-icon>
@@ -18,10 +19,10 @@
 
   <!-- Header -->
   <div class="notif-header" (click)="$event.stopPropagation()">
-    <h3>Notifications</h3>
+    <h3 i18n="@@notifCentre.title">Notifications</h3>
     @if (notifications().length > 0) {
       <button mat-button (click)="onClearAll()">
-        Clear all
+        <span i18n="@@notifCentre.clearAll">Clear all</span>
       </button>
     }
   </div>
@@ -52,6 +53,7 @@
           <a mat-icon-button
              [routerLink]="link"
              matTooltip="View details"
+             i18n-matTooltip="@@notifCentre.viewDetailsTooltip"
              (click)="$event.stopPropagation()">
             <mat-icon>arrow_forward</mat-icon>
           </a>
@@ -61,7 +63,7 @@
     } @empty {
       <div class="notif-empty">
         <mat-icon>notifications_none</mat-icon>
-        <p>No notifications yet</p>
+        <p i18n="@@notifCentre.empty">No notifications yet</p>
       </div>
     }
   </div>

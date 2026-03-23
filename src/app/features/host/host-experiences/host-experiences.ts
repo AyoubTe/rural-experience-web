@@ -49,6 +49,10 @@ export class HostExperiences implements OnInit {
   private dialog = inject(MatDialog);
   private notify = inject(NotificationService);
 
+  awaitingModerationTooltip = $localize`:@@hostExperiences.tooltipAwaiting:Awaiting moderation approval`;
+  publishTooltip = $localize`:@@hostExperiences.tooltipPublish:Publish`;
+  unpublishTooltip = $localize`:@@hostExperiences.tooltipUnpublish:Unpublish`;
+
   experiences  = signal<ExperienceSummaryResponse[]>([]);
   isLoading    = signal(true);
   togglingId   = signal<number | null>(null); // Which toggle is in flight

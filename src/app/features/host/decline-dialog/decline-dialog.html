@@ -1,22 +1,23 @@
 <h2 mat-dialog-title>
   <mat-icon color="warn">cancel</mat-icon>
-  Decline this booking?
+  <span i18n="@@declineDialog.title">Decline this booking?</span>
 </h2>
 
 <mat-dialog-content>
-  <p>
+  <p i18n="@@declineDialog.description">
     The explorer will be notified that their request
     was declined. Optionally, you can provide a reason.
   </p>
 
   <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Reason (optional)</mat-label>
+    <mat-label i18n="@@declineDialog.reasonLabel">Reason (optional)</mat-label>
     <textarea matInput
               [formControl]="reasonCtrl"
               rows="3"
-              placeholder="e.g. Dates no longer available">
+              placeholder="e.g. Dates no longer available"
+              i18n-placeholder="@@declineDialog.reasonPlaceholder">
         </textarea>
-    <mat-hint align="end">
+    <mat-hint align="end" i18n="@@declineDialog.charCount">
       {{ reasonCtrl.value.length }}/300
     </mat-hint>
   </mat-form-field>
@@ -24,10 +25,10 @@
 
 <mat-dialog-actions align="end">
   <button mat-button [mat-dialog-close]="false">
-    Keep Pending
+    <span i18n="@@declineDialog.keepPendingBtn">Keep Pending</span>
   </button>
   <button mat-flat-button color="warn"
           (click)="onDecline()">
-    Decline Booking
+    <span i18n="@@declineDialog.declineBtn">Decline Booking</span>
   </button>
 </mat-dialog-actions>

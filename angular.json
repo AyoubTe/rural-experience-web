@@ -2,14 +2,20 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "schematicCollections": [
-      "@ngrx/schematics"
-    ]
+    "schematicCollections": ["@ngrx/schematics"]
   },
   "newProjectRoot": "projects",
   "projects": {
     "rural-experience-web": {
       "projectType": "application",
+      "i18n": {
+        "sourceLocale": "en-GB",
+        "locales": {
+          "fr": {
+            "translation": "src/locale/messages.fr.xlf"
+          }
+        }
+      },
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
@@ -33,25 +39,30 @@
             ],
             "styles": [
               "src/styles.scss"
+            ],
+            "polyfills": [
+              "@angular/localize/init"
             ]
           },
           "configurations": {
             "production": {
+              "localize": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "1MB",
+                  "maximumError": "2MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "8kB",
+                  "maximumError": "16kB"
                 }
               ],
               "outputHashing": "all"
             },
             "development": {
+              "localize": false,
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
@@ -61,6 +72,9 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
+            },
+            "fr": {
+              "localize": ["fr"]
             }
           },
           "defaultConfiguration": "production"
@@ -73,6 +87,9 @@
             },
             "development": {
               "buildTarget": "rural-experience-web:build:development"
+            },
+            "fr": {
+              "buildTarget": "rural-experience-web:build:development,fr"
             }
           },
           "defaultConfiguration": "development"
@@ -84,6 +101,10 @@
           "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "tsconfig.spec.json",
+            "browser": "src/main.ts",
+            "allowedCommonJsDependencies": [
+              "@stomp/stompjs"
+            ],
             "inlineStyleLanguage": "scss",
             "assets": [
               {
@@ -93,6 +114,9 @@
             ],
             "styles": [
               "src/styles.scss"
+            ],
+            "polyfills": [
+              "@angular/localize/init"
             ]
           }
         }

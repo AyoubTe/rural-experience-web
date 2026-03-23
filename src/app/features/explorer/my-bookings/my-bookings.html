@@ -1,56 +1,53 @@
 <div class="my-bookings">
-  <h1>My Bookings</h1>
+  <h1 i18n="@@myBookings.title">My Bookings</h1>
 
   @if (summary$ | async; as summary) {
     <div class="dashboard-stats">
       <div class="stat-card">
         <mat-icon class="stat-card__icon">travel_explore</mat-icon>
         <div class="stat-card__value">{{ summary.totalBookings }}</div>
-        <div class="stat-card__label">Total bookings</div>
+        <div class="stat-card__label" i18n="@@myBookings.statTotal">Total bookings</div>
       </div>
 
       <div class="stat-card stat-card--highlight">
         <mat-icon class="stat-card__icon">event_available</mat-icon>
         <div class="stat-card__value">{{ summary.upcoming }}</div>
-        <div class="stat-card__label">Upcoming</div>
+        <div class="stat-card__label" i18n="@@myBookings.statUpcoming">Upcoming</div>
       </div>
 
       @if (summary.awaitingResponse > 0) {
         <div class="stat-card stat-card--warning">
           <mat-icon class="stat-card__icon">hourglass_empty</mat-icon>
           <div class="stat-card__value">{{ summary.awaitingResponse }}</div>
-          <div class="stat-card__label">Awaiting host</div>
+          <div class="stat-card__label" i18n="@@myBookings.statAwaiting">Awaiting host</div>
         </div>
       }
 
       <div class="stat-card">
         <mat-icon class="stat-card__icon">star</mat-icon>
         <div class="stat-card__value">{{ summary.experiencesHad }}</div>
-        <div class="stat-card__label">Experiences completed</div>
+        <div class="stat-card__label" i18n="@@myBookings.statCompleted">Experiences completed</div>
       </div>
     </div>
   }
 
-  <!-- Loading bar -->
   @if (loading$ | async) {
     <mat-progress-bar mode="indeterminate" color="primary" />
   }
 
-  <!-- Error -->
   @if (error$ | async; as error) {
     <div class="error-banner" role="alert">
       <mat-icon>error_outline</mat-icon>
-      {{ error }}
+      <span>{{ error }}</span>
     </div>
   }
 
   @if (bookingGroups$ | async; as groups) {
     <mat-tab-group animationDuration="200ms">
 
-      <!-- Upcoming -->
       <mat-tab>
         <ng-template mat-tab-label>
-          Upcoming
+          <span i18n="@@myBookings.tabUpcoming">Upcoming</span>
           @if (groups.confirmed.length > 0) {
             <span class="tab-count">
               {{ groups.confirmed.length }}
@@ -65,20 +62,19 @@
               (cancel)="onCancelBooking($event)" />
           } @empty {
             <div class="empty-state">
-              <p>No upcoming bookings.</p>
+              <p i18n="@@myBookings.emptyUpcoming">No upcoming bookings.</p>
               <a mat-flat-button color="primary"
                  routerLink="/experiences">
-                Browse Experiences
+                <span i18n="@@myBookings.browseBtn">Browse Experiences</span>
               </a>
             </div>
           }
         </div>
       </mat-tab>
 
-      <!-- Pending -->
       <mat-tab>
         <ng-template mat-tab-label>
-          Pending
+          <span i18n="@@myBookings.tabPending">Pending</span>
           @if (groups.pending.length > 0) {
             <span class="tab-count tab-count--warning">
               {{ groups.pending.length }}
@@ -92,29 +88,27 @@
               [booking]="booking"
               (cancel)="onCancelBooking($event)" />
           } @empty {
-            <p class="empty-state__msg">No pending requests.</p>
+            <p class="empty-state__msg" i18n="@@myBookings.emptyPending">No pending requests.</p>
           }
         </div>
       </mat-tab>
 
-      <!-- Completed -->
-      <mat-tab label="Completed">
+      <mat-tab label="Completed" i18n-label="@@myBookings.tabCompleted">
         <div class="booking-list">
           @for (booking of groups.completed; track booking.id) {
             <rxp-booking-card [booking]="booking" />
           } @empty {
-            <p class="empty-state__msg">No completed bookings yet.</p>
+            <p class="empty-state__msg" i18n="@@myBookings.emptyCompleted">No completed bookings yet.</p>
           }
         </div>
       </mat-tab>
 
-      <!-- Cancelled -->
-      <mat-tab label="Cancelled">
+      <mat-tab label="Cancelled" i18n-label="@@myBookings.tabCancelled">
         <div class="booking-list">
           @for (booking of groups.cancelled; track booking.id) {
             <rxp-booking-card [booking]="booking" />
           } @empty {
-            <p class="empty-state__msg">No cancelled bookings.</p>
+            <p class="empty-state__msg" i18n="@@myBookings.emptyCancelled">No cancelled bookings.</p>
           }
         </div>
       </mat-tab>

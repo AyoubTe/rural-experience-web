@@ -5,23 +5,31 @@
     <a mat-tab-link routerLink="dashboard"
        routerLinkActive #dashActive="routerLinkActive"
        [active]="dashActive.isActive">
-      <mat-icon>dashboard</mat-icon> Dashboard
+      <mat-icon>dashboard</mat-icon>
+      <span i18n="@@hostShell.tabDashboard">Dashboard</span>
     </a>
+
     <a mat-tab-link routerLink="experiences"
        routerLinkActive #expActive="routerLinkActive"
        [active]="expActive.isActive">
-      <mat-icon>landscape</mat-icon> My Experiences
+      <mat-icon>landscape</mat-icon>
+      <span i18n="@@hostShell.tabExperiences">My Experiences</span>
     </a>
+
     <a mat-tab-link routerLink="bookings"
        routerLinkActive #bookActive="routerLinkActive"
        [active]="bookActive.isActive">
-      <mat-icon>book_online</mat-icon> Bookings
+      <mat-icon>book_online</mat-icon>
+      <span i18n="@@hostShell.tabBookings">Bookings</span>
     </a>
+
     <a mat-tab-link routerLink="profile"
        routerLinkActive #profActive="routerLinkActive"
        [active]="profActive.isActive">
-      <mat-icon>person</mat-icon> Profile
+      <mat-icon>person</mat-icon>
+      <span i18n="@@hostShell.tabProfile">Profile</span>
     </a>
+
   </nav>
 
   <mat-tab-nav-panel #tabPanel>

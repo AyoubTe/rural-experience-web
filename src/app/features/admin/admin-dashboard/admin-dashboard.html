@@ -1,12 +1,11 @@
 <div class="admin-dashboard">
-  <h2>Platform Overview</h2>
+  <h2 i18n="@@adminDashboard.title">Platform Overview</h2>
 
   @if (isLoading()) {
     <mat-progress-bar mode="indeterminate" />
   }
 
   @if (stats(); as s) {
-    <!-- KPI Cards -->
     <div class="stats-grid">
 
       <mat-card class="kpi">
@@ -15,8 +14,8 @@
           <div class="kpi__value">
             {{ s.totalUsers | number }}
           </div>
-          <div class="kpi__label">Total Users</div>
-          <div class="kpi__sub">
+          <div class="kpi__label" i18n="@@adminDashboard.totalUsers">Total Users</div>
+          <div class="kpi__sub" i18n="@@adminDashboard.userBreakdown">
             {{ s.totalExplorers | number }} explorers ·
             {{ s.totalHosts | number }} hosts
           </div>
@@ -29,10 +28,10 @@
           <div class="kpi__value">
             {{ s.totalExperiences | number }}
           </div>
-          <div class="kpi__label">Experiences</div>
+          <div class="kpi__label" i18n="@@adminDashboard.experiences">Experiences</div>
           <div class="kpi__sub">
-            {{ s.publishedCount | number }} live ·
-            <span [class.kpi__urgent]="s.pendingReview > 0">
+            <span i18n="@@adminDashboard.liveExperiences">{{ s.publishedCount | number }} live</span> ·
+            <span [class.kpi__urgent]="s.pendingReview > 0" i18n="@@adminDashboard.pendingReview">
               {{ s.pendingReview }} pending review
             </span>
           </div>
@@ -40,7 +39,8 @@
         @if (s.pendingReview > 0) {
           <mat-card-actions>
             <a mat-stroked-button color="warn"
-               routerLink="../moderation">
+               routerLink="../moderation"
+               i18n="@@adminDashboard.reviewNow">
               Review Now
             </a>
           </mat-card-actions>
@@ -53,7 +53,7 @@
           <div class="kpi__value">
             {{ s.totalBookings | number }}
           </div>
-          <div class="kpi__label">Total Bookings</div>
+          <div class="kpi__label" i18n="@@adminDashboard.totalBookings">Total Bookings</div>
         </mat-card-content>
       </mat-card>
 
@@ -63,7 +63,7 @@
           <div class="kpi__value">
             {{ s.totalRevenue | currency:'EUR':'symbol':'1.0-0' }}
           </div>
-          <div class="kpi__label">Platform Revenue</div>
+          <div class="kpi__label" i18n="@@adminDashboard.platformRevenue">Platform Revenue</div>
         </mat-card-content>
       </mat-card>
 
@@ -73,8 +73,8 @@
           <div class="kpi__value">
             {{ s.avgRating | number:'1.1-1' }}
           </div>
-          <div class="kpi__label">Average Rating</div>
-          <div class="kpi__sub">
+          <div class="kpi__label" i18n="@@adminDashboard.avgRating">Average Rating</div>
+          <div class="kpi__sub" i18n="@@adminDashboard.reviewsThisMonth">
             {{ s.reviewsThisMonth | number }} reviews this month
           </div>
         </mat-card-content>
@@ -82,16 +82,15 @@
 
     </div>
 
-    <!-- Experience publish rate -->
     <mat-card class="publish-rate">
       <mat-card-content>
-        <h3>Experience Publish Rate</h3>
+        <h3 i18n="@@adminDashboard.publishRateTitle">Experience Publish Rate</h3>
         <mat-progress-bar
           mode="determinate"
           [value]="(s.publishedCount / s.totalExperiences) * 100"
           color="primary">
         </mat-progress-bar>
-        <p>
+        <p i18n="@@adminDashboard.publishRateDesc">
           {{ s.publishedCount | number }} of
           {{ s.totalExperiences | number }} experiences live
           ({{ s.publishedCount / s.totalExperiences

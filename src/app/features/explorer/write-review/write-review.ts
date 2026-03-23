@@ -5,7 +5,8 @@ import {ReviewService} from '@rxp/features/review/review-service';
 import {NotificationService} from '@rxp/features/notification/notification-service';
 import {CreateReviewRequest} from '@rxp/core/models/requests.model';
 import {MatIcon} from '@angular/material/icon';
-import {MatError, MatFormField, MatHint, MatLabel} from '@angular/material/input';
+import {MatError, MatFormField, MatHint, MatInput, MatLabel} from '@angular/material/input';
+import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'rxp-write-review',
@@ -16,7 +17,9 @@ import {MatError, MatFormField, MatHint, MatLabel} from '@angular/material/input
     MatFormField,
     MatLabel,
     MatHint,
-    MatError
+    MatError,
+    MatInput,
+    MatButton
   ],
   templateUrl: './write-review.html',
   styleUrl: './write-review.scss',

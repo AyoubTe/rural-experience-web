@@ -1,6 +1,8 @@
 <h2 mat-dialog-title>
   @if (data.danger) {
-    <mat-icon color="warn">warning</mat-icon>
+    <mat-icon color="warn"
+              aria-label="Warning"
+              i18n-aria-label="@@confirmDialog.warningAria">warning</mat-icon>
   }
   {{ data.title }}
 </h2>

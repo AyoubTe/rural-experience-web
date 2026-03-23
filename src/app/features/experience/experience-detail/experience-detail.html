@@ -1,10 +1,10 @@
 <div class="experience-detail">
 
-  <!-- Cover photo -->
   <div class="experience-detail__hero">
     <img class="experience-detail__cover"
          [ngSrc]="photoUrl()"
-         [alt]="experience().title"
+         alt="{{ experience().title }}"
+         i18n-alt="@@experienceDetail.coverAlt"
          width="20"
          height="20"
     >
@@ -17,41 +17,42 @@
 
   <div class="experience-detail__body">
 
-    <!-- Left column -->
     <div class="experience-detail__main">
 
-      <!-- Title & rating -->
       <div class="experience-detail__header">
         <h1 class="experience-detail__title">{{ experience().title }}</h1>
         <div class="experience-detail__rating">
           <mat-icon>star</mat-icon>
           <span>{{ experience().averageRating | number:'1.1-1' }}</span>
-          <span class="experience-detail__review-count">
+          <span class="experience-detail__review-count" i18n="@@experienceDetail.reviewCount">
             ({{ experience().reviewCount }} reviews)
           </span>
         </div>
       </div>
 
-      <!-- Meta row -->
       <div class="experience-detail__meta">
         <span>
           <mat-icon>place</mat-icon>
           {{ experience().location }}
         </span>
+
         <span>
           <mat-icon>schedule</mat-icon>
-          {{ experience().durationDays }}
-          {{ experience().durationDays === 1 ? 'day' : 'days' }}
+          @if (experience().durationDays === 1) {
+            <span i18n="@@experienceDetail.durationSingle">{{ experience().durationDays }} day</span>
+          } @else {
+            <span i18n="@@experienceDetail.durationMultiple">{{ experience().durationDays }} days</span>
+          }
         </span>
+
         <span>
           <mat-icon>group</mat-icon>
-          Up to {{ experience().maxGuests }} guests
+          <span i18n="@@experienceDetail.maxGuests">Up to {{ experience().maxGuests }} guests</span>
         </span>
       </div>
 
-      <!-- Description -->
       <section class="experience-detail__section">
-        <h2 class="experience-detail__section-title">About this experience</h2>
+        <h2 class="experience-detail__section-title" i18n="@@experienceDetail.aboutTitle">About this experience</h2>
         <p class="experience-detail__description">
           {{ experience().shortDescription }}
         </p>
@@ -59,19 +60,16 @@
 
     </div>
 
-    <!-- Right column — booking card -->
     <aside class="experience-detail__sidebar">
       <div class="experience-detail__booking-card">
 
-        <!-- Price -->
         <div class="experience-detail__price">
           <span class="experience-detail__price-amount">
             {{ experience().pricePerPerson | currency:'EUR':'symbol':'1.0-0' }}
           </span>
-          <span class="experience-detail__price-label">per person / day</span>
+          <span class="experience-detail__price-label" i18n="@@experienceDetail.priceLabel">per person / day</span>
         </div>
 
-        <!-- Host -->
         <div class="experience-detail__host">
           <div class="experience-detail__host-avatar">
             {{ experience().hostFirstName[0] }}{{ experience().hostLastName[0] }}
@@ -83,22 +81,21 @@
             @if (experience().hostVerified) {
               <span class="experience-detail__host-verified">
                 <mat-icon>verified</mat-icon>
-                Verified host
+                <span i18n="@@experienceDetail.verifiedHost">Verified host</span>
               </span>
             }
           </div>
         </div>
 
-        <!-- CTA -->
         @if (auth.hasRole("EXPLORER")){
           <a mat-flat-button color="primary"
              class="experience-detail__cta"
              [routerLink]="['/experiences', experience().id, 'book']">
-            Book this experience
+            <span i18n="@@experienceDetail.bookBtn">Book this experience</span>
           </a>
         }
 
-        <p class="experience-detail__no-charge">
+        <p class="experience-detail__no-charge" i18n="@@experienceDetail.noChargeNote">
           You won't be charged until the host confirms.
         </p>
 

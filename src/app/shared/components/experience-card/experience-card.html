@@ -11,6 +11,7 @@
     <img
       [src]="photoUrl()"
       [alt]="experience().title"
+      i18n-alt="@@experienceCard.photoAlt"
       loading="lazy"
       width="400"
       height="220">
@@ -31,11 +32,11 @@
       class="card__wishlist-btn"
       (click)="onToggleWishlist($event)"
       [attr.aria-label]="isWishlisted()
-        ? 'Remove from wishlist'
-        : 'Add to wishlist'"
+        ? removeFromWishlistLabel
+        : addToWishlistLabel"
       [matTooltip]="isWishlisted()
-        ? 'Remove from wishlist'
-        : 'Add to wishlist'">
+        ? removeFromWishlistLabel
+        : addToWishlistLabel">
       <mat-icon>
         {{ isWishlisted() ? 'favorite' : 'favorite_border' }}
       </mat-icon>
@@ -52,6 +53,7 @@
           class="card__avatar"
           [src]="experience().coverPhotoUrl"
           [alt]="hostName()"
+          i18n-alt="@@experienceCard.hostAvatarAlt"
           loading="lazy">
       } @else {
         <div class="card__avatar card__avatar--initials">
@@ -62,8 +64,8 @@
       @if (isVerifiedHost()) {
         <mat-icon
           class="card__verified-icon"
-          matTooltip="Verified host"
-          aria-label="Verified host">
+          [matTooltip]="verifiedHostLabel"
+          [attr.aria-label]="verifiedHostLabel">
           verified
         </mat-icon>
       }
@@ -94,9 +96,7 @@
     <mat-card-actions class="card__footer">
 
       <!-- Rating -->
-      <div class="card__rating" [attr.aria-label]="
-        experience().averageRating + ' out of 5 stars, ' +
-        experience().reviewCount + ' reviews'">
+      <div class="card__rating" [attr.aria-label]="ratingAriaLabel()">
         <div class="card__stars" aria-hidden="true">
           @for (star of stars(); track star.index) {
             <mat-icon class="card__star card__star--{{ star.type }}">
@@ -123,17 +123,18 @@
             {{ experience().pricePerPerson
             | currency:'EUR':'symbol':'1.0-0' }}
           </span>
-          <span class="card__price-unit">/person/day</span>
+          <span class="card__price-unit"
+                i18n="@@experienceCard.priceUnit">/person/day</span>
         </div>
 
-        @if (auth.hasRole("EXPLORER")){
+        @if (auth.hasRole("EXPLORER")) {
           <button
             mat-flat-button
             color="primary"
             class="card__book-btn"
             (click)="onBookNow($event)"
-            [attr.aria-label]="'Book ' + experience().title">
-            Book Now
+            [attr.aria-label]="bookNowAriaLabel()">
+            <span i18n="@@experienceCard.bookNowBtn">Book Now</span>
           </button>
         }
       </div>

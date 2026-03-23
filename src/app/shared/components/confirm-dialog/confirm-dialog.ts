@@ -4,7 +4,7 @@ import {
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
-  MatDialogRef
+  MatDialogRef, MatDialogTitle
 } from '@angular/material/dialog';
 import {MatIcon} from '@angular/material/icon';
 import {MatButton} from '@angular/material/button';
@@ -25,7 +25,8 @@ export interface ConfirmDialogData {
     MatDialogContent,
     MatIcon,
     MatDialogClose,
-    MatButton
+    MatButton,
+    MatDialogTitle
   ],
   templateUrl: './confirm-dialog.html',
   styleUrl: './confirm-dialog.scss',

@@ -1,0 +1,1454 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-GB" target-language="fr" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="toolbar.openNavAria" datatype="html">
+        <source>Open navigation</source>
+        <target>Ouvrir la navigation</target>
+      </trans-unit>
+      <trans-unit id="toolbar.logoAlt" datatype="html">
+        <source>Logo</source>
+        <target>Logo</target>
+      </trans-unit>
+      <trans-unit id="toolbar.experiences" datatype="html">
+        <source> Experiences </source>
+        <target> Expériences </target>
+      </trans-unit>
+      <trans-unit id="toolbar.howItWorks" datatype="html">
+        <source> How It Works </source>
+        <target> Comment ça marche </target>
+      </trans-unit>
+      <trans-unit id="toolbar.becomeHost" datatype="html">
+        <source> Become a Host </source>
+        <target> Devenir hôte </target>
+      </trans-unit>
+      <trans-unit id="toolbar.accountMenuAria" datatype="html">
+        <source>Account menu for <x id="INTERPOLATION" equiv-text="{{ authService.userDisplayName() }}"/></source>
+        <target>Menu du compte pour <x id="INTERPOLATION" equiv-text="{{ authService.userDisplayName() }}"/></target>
+      </trans-unit>
+      <trans-unit id="userMenu.myBookings" datatype="html">
+        <source>My Bookings</source>
+        <target>Mes réservations</target>
+      </trans-unit>
+      <trans-unit id="userMenu.hostDashboard" datatype="html">
+        <source>Host Dashboard</source>
+        <target>Tableau de bord Hôte</target>
+      </trans-unit>
+      <trans-unit id="userMenu.admin" datatype="html">
+        <source>Admin</source>
+        <target>Admin</target>
+      </trans-unit>
+      <trans-unit id="userMenu.logout" datatype="html">
+        <source>Log Out</source>
+        <target>Déconnexion</target>
+      </trans-unit>
+      <trans-unit id="toolbar.login" datatype="html">
+        <source> Log In </source>
+        <target> Connexion </target>
+      </trans-unit>
+      <trans-unit id="toolbar.signup" datatype="html">
+        <source> Sign Up </source>
+        <target> Inscription </target>
+      </trans-unit>
+
+      <trans-unit id="sidenav.home" datatype="html">
+        <source>Home</source>
+        <target>Accueil</target>
+      </trans-unit>
+      <trans-unit id="sidenav.myExperiences" datatype="html">
+        <source>MY Experiences</source>
+        <target>MES expériences</target>
+      </trans-unit>
+      <trans-unit id="sidenav.receivedBookings" datatype="html">
+        <source>Received Bookings</source>
+        <target>Réservations reçues</target>
+      </trans-unit>
+      <trans-unit id="sidenav.myBookings" datatype="html">
+        <source>My Bookings</source>
+        <target>Mes réservations</target>
+      </trans-unit>
+      <trans-unit id="sidenav.adminDashboard" datatype="html">
+        <source>Admin Dashboard</source>
+        <target>Tableau de bord Admin</target>
+      </trans-unit>
+      <trans-unit id="sidenav.hostDashboard" datatype="html">
+        <source>Host Dashboard</source>
+        <target>Tableau de bord Hôte</target>
+      </trans-unit>
+
+      <trans-unit id="footer.tagline" datatype="html">
+        <source> Connecting urban explorers with rural France </source>
+        <target> Connecter les explorateurs urbains à la France rurale </target>
+      </trans-unit>
+      <trans-unit id="footer.about" datatype="html">
+        <source>About</source>
+        <target>À propos</target>
+      </trans-unit>
+      <trans-unit id="footer.howItWorks" datatype="html">
+        <source>How It Works</source>
+        <target>Comment ça marche</target>
+      </trans-unit>
+      <trans-unit id="footer.contact" datatype="html">
+        <source>Contact</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="footer.privacy" datatype="html">
+        <source>Privacy</source>
+        <target>Confidentialité</target>
+      </trans-unit>
+      <trans-unit id="footer.terms" datatype="html">
+        <source>Terms</source>
+        <target>Conditions</target>
+      </trans-unit>
+      <trans-unit id="footer.copyright" datatype="html">
+        <source> © <x id="INTERPOLATION" equiv-text="{{ currentYear }}"/> RuralXperience. All rights reserved. </source>
+        <target> © <x id="INTERPOLATION" equiv-text="{{ currentYear }}"/> RuralXperience. Tous droits réservés. </target>
+      </trans-unit>
+
+      <trans-unit id="connectionBanner.reconnecting" datatype="html">
+        <source>Reconnecting to real-time updates...</source>
+        <target>Reconnexion aux mises à jour en temps réel...</target>
+      </trans-unit>
+
+      <trans-unit id="adminDashboard.title" datatype="html">
+        <source>Platform Overview</source>
+        <target>Aperçu de la plateforme</target>
+      </trans-unit>
+      <trans-unit id="adminDashboard.totalUsers" datatype="html">
+        <source>Total Users</source>
+        <target>Utilisateurs totaux</target>
+      </trans-unit>
+      <trans-unit id="adminDashboard.userBreakdown" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ s.totalExplorers | number }}"/> explorers · <x id="INTERPOLATION_1" equiv-text="{{ s.totalHosts | number }}"/> hosts </source>
+        <target> <x id="INTERPOLATION" equiv-text="{{ s.totalExplorers | number }}"/> explorateurs · <x id="INTERPOLATION_1" equiv-text="{{ s.totalHosts | number }}"/> hôtes </target>
+      </trans-unit>
+      <trans-unit id="adminDashboard.experiences" datatype="html">
+        <source>Experiences</source>
+        <target>Expériences</target>
+      </trans-unit>
+      <trans-unit id="adminDashboard.liveExperiences" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ s.publishedCount | number }}"/> live</source>
+        <target><x id="INTERPOLATION" equiv-text="{{ s.publishedCount | number }}"/> en ligne</target>
+      </trans-unit>
+      <trans-unit id="adminDashboard.pendingReview" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ s.pendingReview }}"/> pending review </source>
+        <target> <x id="INTERPOLATION" equiv-text="{{ s.pendingReview }}"/> en attente de révision </target>
+      </trans-unit>
+      <trans-unit id="adminDashboard.reviewNow" datatype="html">
+        <source> Review Now </source>
+        <target> Réviser maintenant </target>
+      </trans-unit>
+      <trans-unit id="adminDashboard.totalBookings" datatype="html">
+        <source>Total Bookings</source>
+        <target>Réservations totales</target>
+      </trans-unit>
+      <trans-unit id="adminDashboard.platformRevenue" datatype="html">
+        <source>Platform Revenue</source>
+        <target>Revenus de la plateforme</target>
+      </trans-unit>
+      <trans-unit id="adminDashboard.avgRating" datatype="html">
+        <source>Average Rating</source>
+        <target>Note moyenne</target>
+      </trans-unit>
+      <trans-unit id="adminDashboard.reviewsThisMonth" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ s.reviewsThisMonth | number }}"/> reviews this month </source>
+        <target> <x id="INTERPOLATION" equiv-text="{{ s.reviewsThisMonth | number }}"/> avis ce mois-ci </target>
+      </trans-unit>
+      <trans-unit id="adminDashboard.publishRateTitle" datatype="html">
+        <source>Experience Publish Rate</source>
+        <target>Taux de publication des expériences</target>
+      </trans-unit>
+      <trans-unit id="adminDashboard.publishRateDesc" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ s.publishedCount | number }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ s.totalExperiences | number }}"/> experiences live (<x id="INTERPOLATION_2" equiv-text="{{ s.publishedCount / s.totalExperiences | percent:'1.0-0' }}"/>) </source>
+        <target> <x id="INTERPOLATION" equiv-text="{{ s.publishedCount | number }}"/> sur <x id="INTERPOLATION_1" equiv-text="{{ s.totalExperiences | number }}"/> expériences en ligne (<x id="INTERPOLATION_2" equiv-text="{{ s.publishedCount / s.totalExperiences | percent:'1.0-0' }}"/>) </target>
+      </trans-unit>
+
+      <trans-unit id="adminShell.title" datatype="html">
+        <source>Admin Panel</source>
+        <target>Panneau d'administration</target>
+      </trans-unit>
+      <trans-unit id="adminShell.subtitle" datatype="html">
+        <source>RuralXperience Platform Management</source>
+        <target>Gestion de la plateforme RuralXperience</target>
+      </trans-unit>
+      <trans-unit id="adminShell.tabDashboard" datatype="html">
+        <source>Dashboard</source>
+        <target>Tableau de bord</target>
+      </trans-unit>
+      <trans-unit id="adminShell.tabModeration" datatype="html">
+        <source>Moderation</source>
+        <target>Modération</target>
+      </trans-unit>
+      <trans-unit id="adminShell.tabUsers" datatype="html">
+        <source>Users</source>
+        <target>Utilisateurs</target>
+      </trans-unit>
+      <trans-unit id="adminShell.tabAudit" datatype="html">
+        <source>Audit Log</source>
+        <target>Journal d'audit</target>
+      </trans-unit>
+      <trans-unit id="auditLog.title" datatype="html">
+        <source>Audit Log</source>
+        <target>Journal d'audit</target>
+      </trans-unit>
+      <trans-unit id="auditLog.filterLabel" datatype="html">
+        <source>Filter by action</source>
+        <target>Filtrer par action</target>
+      </trans-unit>
+      <trans-unit id="auditLog.filterAll" datatype="html">
+        <source>All actions</source>
+        <target>Toutes les actions</target>
+      </trans-unit>
+      <trans-unit id="auditLog.filterApproved" datatype="html">
+        <source>Approved</source>
+        <target>Approuvé</target>
+      </trans-unit>
+      <trans-unit id="auditLog.filterRejected" datatype="html">
+        <source>Rejected</source>
+        <target>Rejeté</target>
+      </trans-unit>
+      <trans-unit id="auditLog.filterUserSuspended" datatype="html">
+        <source>User Suspended</source>
+        <target>Utilisateur suspendu</target>
+      </trans-unit>
+      <trans-unit id="auditLog.filterRoleChanged" datatype="html">
+        <source>Role Changed</source>
+        <target>Rôle modifié</target>
+      </trans-unit>
+      <trans-unit id="auditLog.loadingMore" datatype="html">
+        <source>Loading more...</source>
+        <target>Chargement...</target>
+      </trans-unit>
+      <trans-unit id="auditLog.endOfLog" datatype="html">
+        <source> End of log — <x id="INTERPOLATION" equiv-text="{{ entries().length }}"/> entries total </source>
+        <target> Fin du journal — <x id="INTERPOLATION" equiv-text="{{ entries().length }}"/> entrées au total </target>
+      </trans-unit>
+
+      <trans-unit id="moderation.title" datatype="html">
+        <source>Moderation Queue</source>
+        <target>File d'attente de modération</target>
+      </trans-unit>
+      <trans-unit id="moderation.selectedCount" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ selectedIds().size }}"/> selected</source>
+        <target><x id="INTERPOLATION" equiv-text="{{ selectedIds().size }}"/> sélectionné(s)</target>
+      </trans-unit>
+      <trans-unit id="moderation.approveSelected" datatype="html">
+        <source>Approve Selected</source>
+        <target>Approuver la sélection</target>
+      </trans-unit>
+      <trans-unit id="moderation.selectAllAria" datatype="html">
+        <source>Select all</source>
+        <target>Tout sélectionner</target>
+      </trans-unit>
+      <trans-unit id="moderation.selectRowAria" datatype="html">
+        <source>Select <x id="INTERPOLATION" equiv-text="{{ exp.title }}"/></source>
+        <target>Sélectionner <x id="INTERPOLATION" equiv-text="{{ exp.title }}"/></target>
+      </trans-unit>
+      <trans-unit id="moderation.colExperience" datatype="html">
+        <source>Experience</source>
+        <target>Expérience</target>
+      </trans-unit>
+      <trans-unit id="moderation.colHost" datatype="html">
+        <source>Host</source>
+        <target>Hôte</target>
+      </trans-unit>
+      <trans-unit id="moderation.colCategory" datatype="html">
+        <source>Category</source>
+        <target>Catégorie</target>
+      </trans-unit>
+      <trans-unit id="moderation.colLocation" datatype="html">
+        <source>Location</source>
+        <target>Lieu</target>
+      </trans-unit>
+      <trans-unit id="moderation.colPrice" datatype="html">
+        <source>Price/day</source>
+        <target>Prix/jour</target>
+      </trans-unit>
+      <trans-unit id="moderation.colSubmitted" datatype="html">
+        <source>Submitted</source>
+        <target>Soumis le</target>
+      </trans-unit>
+      <trans-unit id="moderation.colActions" datatype="html">
+        <source>Actions</source>
+        <target>Actions</target>
+      </trans-unit>
+      <trans-unit id="moderation.tooltipPreview" datatype="html">
+        <source>Preview listing</source>
+        <target>Aperçu de l'annonce</target>
+      </trans-unit>
+      <trans-unit id="moderation.tooltipApprove" datatype="html">
+        <source>Approve</source>
+        <target>Approuver</target>
+      </trans-unit>
+      <trans-unit id="moderation.tooltipReject" datatype="html">
+        <source>Reject</source>
+        <target>Rejeter</target>
+      </trans-unit>
+      <trans-unit id="moderation.emptyTitle" datatype="html">
+        <source>Queue is clear!</source>
+        <target>La file d'attente est vide !</target>
+      </trans-unit>
+      <trans-unit id="moderation.emptyDesc" datatype="html">
+        <source>All experiences have been reviewed.</source>
+        <target>Toutes les expériences ont été révisées.</target>
+      </trans-unit>
+      <trans-unit id="moderation.paginatorAria" datatype="html">
+        <source>Moderation queue pages</source>
+        <target>Pages de la file d'attente de modération</target>
+      </trans-unit>
+
+      <trans-unit id="userManagement.title" datatype="html">
+        <source>User Management</source>
+        <target>Gestion des utilisateurs</target>
+      </trans-unit>
+      <trans-unit id="userManagement.searchLabel" datatype="html">
+        <source>Search users</source>
+        <target>Rechercher des utilisateurs</target>
+      </trans-unit>
+      <trans-unit id="userManagement.searchPlaceholder" datatype="html">
+        <source>Name or email</source>
+        <target>Nom ou e-mail</target>
+      </trans-unit>
+      <trans-unit id="userManagement.roleLabel" datatype="html">
+        <source>Role</source>
+        <target>Rôle</target>
+      </trans-unit>
+      <trans-unit id="userManagement.roleAll" datatype="html">
+        <source>All roles</source>
+        <target>Tous les rôles</target>
+      </trans-unit>
+      <trans-unit id="userManagement.roleExplorer" datatype="html">
+        <source>Explorer</source>
+        <target>Explorateur</target>
+      </trans-unit>
+      <trans-unit id="userManagement.roleHost" datatype="html">
+        <source>Host</source>
+        <target>Hôte</target>
+      </trans-unit>
+      <trans-unit id="userManagement.roleAdmin" datatype="html">
+        <source>Admin</source>
+        <target>Admin</target>
+      </trans-unit>
+      <trans-unit id="userManagement.statusLabel" datatype="html">
+        <source>Status</source>
+        <target>Statut</target>
+      </trans-unit>
+      <trans-unit id="userManagement.statusAll" datatype="html">
+        <source>All statuses</source>
+        <target>Tous les statuts</target>
+      </trans-unit>
+      <trans-unit id="userManagement.statusActive" datatype="html">
+        <source>Active</source>
+        <target>Actif</target>
+      </trans-unit>
+      <trans-unit id="userManagement.statusSuspended" datatype="html">
+        <source>Suspended</source>
+        <target>Suspendu</target>
+      </trans-unit>
+      <trans-unit id="userManagement.colName" datatype="html">
+        <source>Name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="userManagement.colEmail" datatype="html">
+        <source>Email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="userManagement.colRole" datatype="html">
+        <source>Role</source>
+        <target>Rôle</target>
+      </trans-unit>
+      <trans-unit id="userManagement.colStatus" datatype="html">
+        <source>Status</source>
+        <target>Statut</target>
+      </trans-unit>
+      <trans-unit id="userManagement.colBookings" datatype="html">
+        <source> Bookings </source>
+        <target> Réservations </target>
+      </trans-unit>
+      <trans-unit id="userManagement.colJoined" datatype="html">
+        <source>Joined</source>
+        <target>Inscrit le</target>
+      </trans-unit>
+      <trans-unit id="userManagement.optionsAria" datatype="html">
+        <source>Options for <x id="INTERPOLATION" equiv-text="{{ u.email }}"/></source>
+        <target>Options pour <x id="INTERPOLATION" equiv-text="{{ u.email }}"/></target>
+      </trans-unit>
+      <trans-unit id="userManagement.promoteHost" datatype="html">
+        <source>Promote to Host</source>
+        <target>Promouvoir comme Hôte</target>
+      </trans-unit>
+      <trans-unit id="userManagement.actionUnsuspend" datatype="html">
+        <source>Unsuspend</source>
+        <target>Rétablir</target>
+      </trans-unit>
+      <trans-unit id="userManagement.actionSuspend" datatype="html">
+        <source>Suspend</source>
+        <target>Suspendre</target>
+      </trans-unit>
+
+      <trans-unit id="auth.brandLogo" datatype="html">
+        <source> RuralXperience </source>
+        <target> RuralXperience </target>
+      </trans-unit>
+      <trans-unit id="login.title" datatype="html">
+        <source>Welcome back</source>
+        <target>Bon retour</target>
+      </trans-unit>
+      <trans-unit id="login.subtitle" datatype="html">
+        <source> Log in to explore rural experiences </source>
+        <target> Connectez-vous pour explorer des expériences rurales </target>
+      </trans-unit>
+      <trans-unit id="login.emailLabel" datatype="html">
+        <source>Email address</source>
+        <target>Adresse e-mail</target>
+      </trans-unit>
+      <trans-unit id="login.emailPlaceholder" datatype="html">
+        <source>you@example.com</source>
+        <target>vous@exemple.com</target>
+      </trans-unit>
+      <trans-unit id="login.emailRequiredError" datatype="html">
+        <source>Email is required</source>
+        <target>L'e-mail est requis</target>
+      </trans-unit>
+      <trans-unit id="login.emailInvalidError" datatype="html">
+        <source>Enter a valid email address</source>
+        <target>Entrez une adresse e-mail valide</target>
+      </trans-unit>
+      <trans-unit id="login.passwordLabel" datatype="html">
+        <source>Password</source>
+        <target>Mot de passe</target>
+      </trans-unit>
+      <trans-unit id="login.hidePasswordAria" datatype="html">
+        <source>Hide password</source>
+        <target>Masquer le mot de passe</target>
+      </trans-unit>
+      <trans-unit id="login.showPasswordAria" datatype="html">
+        <source>Show password</source>
+        <target>Afficher le mot de passe</target>
+      </trans-unit>
+      <trans-unit id="login.passwordRequiredError" datatype="html">
+        <source>Password is required</source>
+        <target>Le mot de passe est requis</target>
+      </trans-unit>
+      <trans-unit id="login.forgotPassword" datatype="html">
+        <source> Forgot your password? </source>
+        <target> Mot de passe oublié ? </target>
+      </trans-unit>
+      <trans-unit id="login.loggingIn" datatype="html">
+        <source>Logging in...</source>
+        <target>Connexion en cours...</target>
+      </trans-unit>
+      <trans-unit id="login.submitBtn" datatype="html">
+        <source>Log In</source>
+        <target>Se connecter</target>
+      </trans-unit>
+      <trans-unit id="login.noAccount" datatype="html">
+        <source>Don't have an account?</source>
+        <target>Vous n'avez pas de compte ?</target>
+      </trans-unit>
+      <trans-unit id="login.signUpFree" datatype="html">
+        <source>Sign up free</source>
+        <target>Inscrivez-vous gratuitement</target>
+      </trans-unit>
+      <trans-unit id="register.title" datatype="html">
+        <source>Create your account</source>
+        <target>Créez votre compte</target>
+      </trans-unit>
+      <trans-unit id="register.firstNameLabel" datatype="html">
+        <source>First name</source>
+        <target>Prénom</target>
+      </trans-unit>
+      <trans-unit id="register.firstNameRequiredError" datatype="html">
+        <source>First name is required</source>
+        <target>Le prénom est requis</target>
+      </trans-unit>
+      <trans-unit id="register.lastNameLabel" datatype="html">
+        <source>Last name</source>
+        <target>Nom de famille</target>
+      </trans-unit>
+      <trans-unit id="register.emailLabel" datatype="html">
+        <source>Email address</source>
+        <target>Adresse e-mail</target>
+      </trans-unit>
+      <trans-unit id="register.emailInvalidError" datatype="html">
+        <source>Enter a valid email address</source>
+        <target>Entrez une adresse e-mail valide</target>
+      </trans-unit>
+      <trans-unit id="register.roleLabel" datatype="html">
+        <source>I want to:</source>
+        <target>Je souhaite :</target>
+      </trans-unit>
+      <trans-unit id="register.roleExplorer" datatype="html">
+        <source> Explore rural experiences </source>
+        <target> Explorer des expériences rurales </target>
+      </trans-unit>
+      <trans-unit id="register.roleHost" datatype="html">
+        <source> Host experiences on my farm </source>
+        <target> Héberger des expériences dans ma ferme </target>
+      </trans-unit>
+      <trans-unit id="register.passwordLabel" datatype="html">
+        <source>Password</source>
+        <target>Mot de passe</target>
+      </trans-unit>
+      <trans-unit id="register.hidePasswordAria" datatype="html">
+        <source>Hide password</source>
+        <target>Masquer le mot de passe</target>
+      </trans-unit>
+      <trans-unit id="register.showPasswordAria" datatype="html">
+        <source>Show password</source>
+        <target>Afficher le mot de passe</target>
+      </trans-unit>
+      <trans-unit id="register.confirmPasswordLabel" datatype="html">
+        <source>Confirm password</source>
+        <target>Confirmer le mot de passe</target>
+      </trans-unit>
+      <trans-unit id="register.creatingAccount" datatype="html">
+        <source>Creating account...</source>
+        <target>Création du compte...</target>
+      </trans-unit>
+      <trans-unit id="register.submitBtn" datatype="html">
+        <source>Create Account</source>
+        <target>Créer un compte</target>
+      </trans-unit>
+      <trans-unit id="register.haveAccount" datatype="html">
+        <source>Already have an account?</source>
+        <target>Vous avez déjà un compte ?</target>
+      </trans-unit>
+      <trans-unit id="register.loginLink" datatype="html">
+        <source>Log in</source>
+        <target>Se connecter</target>
+      </trans-unit>
+
+      <trans-unit id="bookingForm.hostedBy" datatype="html">
+        <source> Hosted by <x id="INTERPOLATION" equiv-text="{{ experience().hostFirstName}}"/> <x id="INTERPOLATION_1" equiv-text="{{ experience().hostLastName}}"/> </source>
+        <target> Hébergé par <x id="INTERPOLATION" equiv-text="{{ experience().hostFirstName}}"/> <x id="INTERPOLATION_1" equiv-text="{{ experience().hostLastName}}"/> </target>
+      </trans-unit>
+      <trans-unit id="bookingForm.pricePerPerson" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ experience().pricePerPerson | currency:'EUR':'symbol':'1.0-0' }}"/> per person per day </source>
+        <target> <x id="INTERPOLATION" equiv-text="{{ experience().pricePerPerson | currency:'EUR':'symbol':'1.0-0' }}"/> par personne et par jour </target>
+      </trans-unit>
+      <trans-unit id="bookingForm.selectDatesTitle" datatype="html">
+        <source>Select dates</source>
+        <target>Sélectionner les dates</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.startDateLabel" datatype="html">
+        <source>Start date</source>
+        <target>Date de début</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.datePlaceholder" datatype="html">
+        <source>DD/MM/YYYY</source>
+        <target>JJ/MM/AAAA</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.startDateReqError" datatype="html">
+        <source>Please select a start date</source>
+        <target>Veuillez sélectionner une date de début</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.startDatePastError" datatype="html">
+        <source>Start date cannot be in the past</source>
+        <target>La date de début ne peut pas être dans le passé</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.endDateLabel" datatype="html">
+        <source>End date</source>
+        <target>Date de fin</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.endDateReqError" datatype="html">
+        <source>Please select an end date</source>
+        <target>Veuillez sélectionner une date de fin</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.endDatePastError" datatype="html">
+        <source>End date cannot be in the past</source>
+        <target>La date de fin ne peut pas être dans le passé</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.guestsTitle" datatype="html">
+        <source>Number of guests</source>
+        <target>Nombre de voyageurs</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.guestsLabel" datatype="html">
+        <source>Guests</source>
+        <target>Voyageurs</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.maxGuestsHint" datatype="html">
+        <source> Maximum <x id="INTERPOLATION" equiv-text="{{ experience().maxGuests }}"/> guests </source>
+        <target> Maximum <x id="INTERPOLATION" equiv-text="{{ experience().maxGuests }}"/> voyageurs </target>
+      </trans-unit>
+      <trans-unit id="bookingForm.guestsReqError" datatype="html">
+        <source>Please enter the number of guests</source>
+        <target>Veuillez entrer le nombre de voyageurs</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.guestsMinError" datatype="html">
+        <source>At least 1 guest required</source>
+        <target>Au moins 1 voyageur requis</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.guestsMaxError" datatype="html">
+        <source>Maximum <x id="INTERPOLATION" equiv-text="{{ experience().maxGuests }}"/> guests allowed</source>
+        <target>Maximum <x id="INTERPOLATION" equiv-text="{{ experience().maxGuests }}"/> voyageurs autorisés</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.specialRequestsTitle" datatype="html">
+        <source>Special requests</source>
+        <target>Demandes spéciales</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.optional" datatype="html">
+        <source>(optional)</source>
+        <target>(facultatif)</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.requestsLabel" datatype="html">
+        <source>Special requests or dietary requirements</source>
+        <target>Demandes spéciales ou restrictions alimentaires</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.requestsPlaceholder" datatype="html">
+        <source>Any allergies, mobility requirements...</source>
+        <target>Allergies, besoins de mobilité...</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.charCount" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ bookingForm.get('specialRequests')?.value?.length ?? 0 }}"/> / 500 </source>
+        <target> <x id="INTERPOLATION" equiv-text="{{ bookingForm.get('specialRequests')?.value?.length ?? 0 }}"/> / 500 </target>
+      </trans-unit>
+      <trans-unit id="bookingForm.calcDetailSingleDay" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ experience().pricePerPerson | currency:'EUR':'symbol':'1.0-0' }}"/> × <x id="INTERPOLATION_1" equiv-text="{{ guestsCtrl.value }}"/> guests × <x id="INTERPOLATION_2" equiv-text="{{ durationDays() }}"/> day </source>
+        <target> <x id="INTERPOLATION" equiv-text="{{ experience().pricePerPerson | currency:'EUR':'symbol':'1.0-0' }}"/> × <x id="INTERPOLATION_1" equiv-text="{{ guestsCtrl.value }}"/> voyageurs × <x id="INTERPOLATION_2" equiv-text="{{ durationDays() }}"/> jour </target>
+      </trans-unit>
+      <trans-unit id="bookingForm.calcDetailMultipleDays" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ experience().pricePerPerson | currency:'EUR':'symbol':'1.0-0' }}"/> × <x id="INTERPOLATION_1" equiv-text="{{ guestsCtrl.value }}"/> guests × <x id="INTERPOLATION_2" equiv-text="{{ durationDays() }}"/> days </source>
+        <target> <x id="INTERPOLATION" equiv-text="{{ experience().pricePerPerson | currency:'EUR':'symbol':'1.0-0' }}"/> × <x id="INTERPOLATION_1" equiv-text="{{ guestsCtrl.value }}"/> voyageurs × <x id="INTERPOLATION_2" equiv-text="{{ durationDays() }}"/> jours </target>
+      </trans-unit>
+      <trans-unit id="bookingForm.total" datatype="html">
+        <source>Total</source>
+        <target>Total</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.chargeNote" datatype="html">
+        <source> You will not be charged until the host confirms your booking. </source>
+        <target> Vous ne serez pas débité tant que l'hôte n'aura pas confirmé votre réservation. </target>
+      </trans-unit>
+      <trans-unit id="bookingForm.creatingRequestBtn" datatype="html">
+        <source>Creating request...</source>
+        <target>Création de la demande...</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.sendRequestBtn" datatype="html">
+        <source>Send Request</source>
+        <target>Envoyer la demande</target>
+      </trans-unit>
+      <trans-unit id="bookingForm.disclaimer" datatype="html">
+        <source> No payment taken now. Your card will be charged only after the host accepts your request. </source>
+        <target> Aucun paiement immédiat. Votre carte ne sera débitée qu'après l'acceptation de votre demande par l'hôte. </target>
+      </trans-unit>
+
+      <trans-unit id="experienceDetail.coverAlt" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ experience().title }}"/></source>
+        <target><x id="INTERPOLATION" equiv-text="{{ experience().title }}"/></target>
+      </trans-unit>
+      <trans-unit id="experienceDetail.reviewCount" datatype="html">
+        <source> (<x id="INTERPOLATION" equiv-text="{{ experience().reviewCount }}"/> reviews) </source>
+        <target> (<x id="INTERPOLATION" equiv-text="{{ experience().reviewCount }}"/> avis) </target>
+      </trans-unit>
+      <trans-unit id="experienceDetail.durationSingle" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ experience().durationDays }}"/> day</source>
+        <target><x id="INTERPOLATION" equiv-text="{{ experience().durationDays }}"/> jour</target>
+      </trans-unit>
+      <trans-unit id="experienceDetail.durationMultiple" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ experience().durationDays }}"/> days</source>
+        <target><x id="INTERPOLATION" equiv-text="{{ experience().durationDays }}"/> jours</target>
+      </trans-unit>
+      <trans-unit id="experienceDetail.maxGuests" datatype="html">
+        <source>Up to <x id="INTERPOLATION" equiv-text="{{ experience().maxGuests }}"/> guests</source>
+        <target>Jusqu'à <x id="INTERPOLATION" equiv-text="{{ experience().maxGuests }}"/> voyageurs</target>
+      </trans-unit>
+      <trans-unit id="experienceDetail.aboutTitle" datatype="html">
+        <source>About this experience</source>
+        <target>À propos de cette expérience</target>
+      </trans-unit>
+      <trans-unit id="experienceDetail.priceLabel" datatype="html">
+        <source>per person / day</source>
+        <target>par personne / jour</target>
+      </trans-unit>
+      <trans-unit id="experienceDetail.verifiedHost" datatype="html">
+        <source>Verified host</source>
+        <target>Hôte vérifié</target>
+      </trans-unit>
+      <trans-unit id="experienceDetail.bookBtn" datatype="html">
+        <source>Book this experience</source>
+        <target>Réserver cette expérience</target>
+      </trans-unit>
+      <trans-unit id="experienceDetail.noChargeNote" datatype="html">
+        <source> You won't be charged until the host confirms. </source>
+        <target> Vous ne serez pas débité tant que l'hôte n'aura pas confirmé. </target>
+      </trans-unit>
+
+      <trans-unit id="experienceList.title" datatype="html">
+        <source>Rural Experiences</source>
+        <target>Expériences Rurales</target>
+      </trans-unit>
+      <trans-unit id="experienceList.subtitle" datatype="html">
+        <source> Discover authentic farm stays, fishing retreats, and artisan workshops across France. </source>
+        <target> Découvrez des séjours authentiques à la ferme, des retraites de pêche et des ateliers d'artisans à travers la France. </target>
+      </trans-unit>
+      <trans-unit id="experienceList.filteredCount" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ filteredExperiences().length }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ experiences().length }}"/> experiences </source>
+        <target> <x id="INTERPOLATION" equiv-text="{{ filteredExperiences().length }}"/> sur <x id="INTERPOLATION_1" equiv-text="{{ experiences().length }}"/> expériences </target>
+      </trans-unit>
+      <trans-unit id="experienceList.totalCount" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ experiences().length }}"/> experiences available </source>
+        <target> <x id="INTERPOLATION" equiv-text="{{ experiences().length }}"/> expériences disponibles </target>
+      </trans-unit>
+      <trans-unit id="experienceList.searchPlaceholder" datatype="html">
+        <source>Search by name, location...</source>
+        <target>Rechercher par nom, lieu...</target>
+      </trans-unit>
+      <trans-unit id="experienceList.clearSearchAria" datatype="html">
+        <source>Clear search</source>
+        <target>Effacer la recherche</target>
+      </trans-unit>
+      <trans-unit id="experienceList.filterCategoryAria" datatype="html">
+        <source>Filter by category</source>
+        <target>Filtrer par catégorie</target>
+      </trans-unit>
+      <trans-unit id="experienceList.categoryAll" datatype="html">
+        <source>All</source>
+        <target>Tout</target>
+      </trans-unit>
+      <trans-unit id="experienceList.clearSingleFilter" datatype="html">
+        <source> Clear <x id="INTERPOLATION" equiv-text="{{ activeFilterCount() }}"/> filter </source>
+        <target> Effacer <x id="INTERPOLATION" equiv-text="{{ activeFilterCount() }}"/> filtre </target>
+      </trans-unit>
+      <trans-unit id="experienceList.clearMultipleFilters" datatype="html">
+        <source> Clear <x id="INTERPOLATION" equiv-text="{{ activeFilterCount() }}"/> filters </source>
+        <target> Effacer <x id="INTERPOLATION" equiv-text="{{ activeFilterCount() }}"/> filtres </target>
+      </trans-unit>
+      <trans-unit id="experienceList.loadingText" datatype="html">
+        <source>Finding experiences for you...</source>
+        <target>Recherche d'expériences pour vous...</target>
+      </trans-unit>
+      <trans-unit id="experienceList.errorTitle" datatype="html">
+        <source>Something went wrong</source>
+        <target>Un problème est survenu</target>
+      </trans-unit>
+      <trans-unit id="experienceList.tryAgainBtn" datatype="html">
+        <source>Try Again</source>
+        <target>Réessayer</target>
+      </trans-unit>
+      <trans-unit id="experienceList.emptyTitle" datatype="html">
+        <source>No experiences found</source>
+        <target>Aucune expérience trouvée</target>
+      </trans-unit>
+      <trans-unit id="experienceList.emptyWithFilters" datatype="html">
+        <source> No experiences match your current filters. Try broadening your search. </source>
+        <target> Aucune expérience ne correspond à vos filtres. Essayez d'élargir votre recherche. </target>
+      </trans-unit>
+      <trans-unit id="experienceList.clearAllFiltersBtn" datatype="html">
+        <source> Clear all filters </source>
+        <target> Effacer tous les filtres </target>
+      </trans-unit>
+      <trans-unit id="experienceList.emptyWithoutFilters" datatype="html">
+        <source> Check back soon — new experiences are added regularly. </source>
+        <target> Revenez bientôt — de nouvelles expériences sont régulièrement ajoutées. </target>
+      </trans-unit>
+      <trans-unit id="experienceList.paginatorAria" datatype="html">
+        <source>Select page</source>
+        <target>Sélectionner la page</target>
+      </trans-unit>
+
+      <trans-unit id="bookingDetail.successTitle" datatype="html">
+        <source>Booking request sent!</source>
+        <target>Demande de réservation envoyée !</target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.successDesc" datatype="html">
+        <source>The host will review your request and respond soon.</source>
+        <target>L'hôte examinera votre demande et vous répondra bientôt.</target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.dismissAria" datatype="html">
+        <source>Dismiss</source>
+        <target>Fermer</target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.backAria" datatype="html">
+        <source>Back to bookings</source>
+        <target>Retour aux réservations</target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.title" datatype="html">
+        <source>Booking #<x id="INTERPOLATION" equiv-text="{{ booking.id }}"/></source>
+        <target>Réservation #<x id="INTERPOLATION" equiv-text="{{ booking.id }}"/></target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.expPhotoAlt" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ booking.experienceTitle }}"/></source>
+        <target><x id="INTERPOLATION" equiv-text="{{ booking.experienceTitle }}"/></target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.viewExpBtn" datatype="html">
+        <source>View Experience</source>
+        <target>Voir l'expérience</target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.yourStay" datatype="html">
+        <source>Your Stay</source>
+        <target>Votre séjour</target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.datesLabel" datatype="html">
+        <source>Dates</source>
+        <target>Dates</target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.dateRange" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ booking.startDate | date:'d MMMM yyyy' }}"/> to <x id="INTERPOLATION_1" equiv-text="{{ booking.endDate | date:'d MMMM yyyy' }}"/> </source>
+        <target> Du <x id="INTERPOLATION" equiv-text="{{ booking.startDate | date:'d MMMM yyyy' }}"/> au <x id="INTERPOLATION_1" equiv-text="{{ booking.endDate | date:'d MMMM yyyy' }}"/> </target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.guestsLabel" datatype="html">
+        <source>Guests</source>
+        <target>Voyageurs</target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.guestsValue" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ booking.numberOfGuests }}"/> guests</source>
+        <target><x id="INTERPOLATION" equiv-text="{{ booking.numberOfGuests }}"/> voyageurs</target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.totalPriceLabel" datatype="html">
+        <source>Total price</source>
+        <target>Prix total</target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.specialRequestsLabel" datatype="html">
+        <source>Special requests</source>
+        <target>Demandes spéciales</target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.statusTitle" datatype="html">
+        <source>Status</source>
+        <target>Statut</target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.statusNotePending" datatype="html">
+        <source> Your request has been sent. The host typically responds within 24 hours. </source>
+        <target> Votre demande a été envoyée. L'hôte répond généralement dans les 24 heures. </target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.statusNoteConfirmed" datatype="html">
+        <source> Your booking is confirmed! Get ready for an amazing experience. </source>
+        <target> Votre réservation est confirmée ! Préparez-vous pour une expérience inoubliable. </target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.statusNoteCompleted" datatype="html">
+        <source> How was it? Share your experience with other explorers. </source>
+        <target> Comment c'était ? Partagez votre expérience avec d'autres explorateurs. </target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.writeReviewBtn" datatype="html">
+        <source>Write a Review</source>
+        <target>Rédiger un avis</target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.cancelBtn" datatype="html">
+        <source>Cancel Booking</source>
+        <target>Annuler la réservation</target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.yourHostTitle" datatype="html">
+        <source>Your Host</source>
+        <target>Votre Hôte</target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.hostAvatarAlt" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ host().firstName }}"/></source>
+        <target><x id="INTERPOLATION" equiv-text="{{ host().firstName }}"/></target>
+      </trans-unit>
+      <trans-unit id="bookingDetail.loadingText" datatype="html">
+        <source>Loading booking details...</source>
+        <target>Chargement des détails de la réservation...</target>
+      </trans-unit>
+
+      <trans-unit id="myBookings.title" datatype="html">
+        <source>My Bookings</source>
+        <target>Mes Réservations</target>
+      </trans-unit>
+      <trans-unit id="myBookings.statTotal" datatype="html">
+        <source>Total bookings</source>
+        <target>Réservations totales</target>
+      </trans-unit>
+      <trans-unit id="myBookings.statUpcoming" datatype="html">
+        <source>Upcoming</source>
+        <target>À venir</target>
+      </trans-unit>
+      <trans-unit id="myBookings.statAwaiting" datatype="html">
+        <source>Awaiting host</source>
+        <target>En attente de l'hôte</target>
+      </trans-unit>
+      <trans-unit id="myBookings.statCompleted" datatype="html">
+        <source>Experiences completed</source>
+        <target>Expériences terminées</target>
+      </trans-unit>
+      <trans-unit id="myBookings.tabUpcoming" datatype="html">
+        <source>Upcoming</source>
+        <target>À venir</target>
+      </trans-unit>
+      <trans-unit id="myBookings.emptyUpcoming" datatype="html">
+        <source>No upcoming bookings.</source>
+        <target>Aucune réservation à venir.</target>
+      </trans-unit>
+      <trans-unit id="myBookings.browseBtn" datatype="html">
+        <source>Browse Experiences</source>
+        <target>Parcourir les expériences</target>
+      </trans-unit>
+      <trans-unit id="myBookings.tabPending" datatype="html">
+        <source>Pending</source>
+        <target>En attente</target>
+      </trans-unit>
+      <trans-unit id="myBookings.emptyPending" datatype="html">
+        <source>No pending requests.</source>
+        <target>Aucune demande en attente.</target>
+      </trans-unit>
+      <trans-unit id="myBookings.tabCompleted" datatype="html">
+        <source>Completed</source>
+        <target>Terminé</target>
+      </trans-unit>
+      <trans-unit id="myBookings.emptyCompleted" datatype="html">
+        <source>No completed bookings yet.</source>
+        <target>Aucune réservation terminée pour le moment.</target>
+      </trans-unit>
+      <trans-unit id="myBookings.tabCancelled" datatype="html">
+        <source>Cancelled</source>
+        <target>Annulé</target>
+      </trans-unit>
+      <trans-unit id="myBookings.emptyCancelled" datatype="html">
+        <source>No cancelled bookings.</source>
+        <target>Aucune réservation annulée.</target>
+      </trans-unit>
+
+      <trans-unit id="writeReview.title" datatype="html">
+        <source>How was your experience?</source>
+        <target>Comment s'est passée votre expérience ?</target>
+      </trans-unit>
+      <trans-unit id="writeReview.subtitle" datatype="html">
+        <source> Your honest review helps other explorers choose the right experience. </source>
+        <target> Votre avis honnête aide d'autres explorateurs à choisir la bonne expérience. </target>
+      </trans-unit>
+      <trans-unit id="writeReview.ratingGroupAria" datatype="html">
+        <source>Rating out of 5</source>
+        <target>Note sur 5</target>
+      </trans-unit>
+      <trans-unit id="writeReview.starAria" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ star }}"/> stars</source>
+        <target><x id="INTERPOLATION" equiv-text="{{ star }}"/> étoiles</target>
+      </trans-unit>
+      <trans-unit id="writeReview.ratingError" datatype="html">
+        <source>Please select a rating</source>
+        <target>Veuillez sélectionner une note</target>
+      </trans-unit>
+      <trans-unit id="writeReview.titleLabel" datatype="html">
+        <source>Review title</source>
+        <target>Titre de l'avis</target>
+      </trans-unit>
+      <trans-unit id="writeReview.titlePlaceholder" datatype="html">
+        <source>e.g. An unforgettable experience</source>
+        <target>ex. Une expérience inoubliable</target>
+      </trans-unit>
+      <trans-unit id="writeReview.titleReqError" datatype="html">
+        <source>A title is required</source>
+        <target>Un titre est requis</target>
+      </trans-unit>
+      <trans-unit id="writeReview.commentLabel" datatype="html">
+        <source>Your review</source>
+        <target>Votre avis</target>
+      </trans-unit>
+      <trans-unit id="writeReview.commentPlaceholder" datatype="html">
+        <source>Tell others what you enjoyed...</source>
+        <target>Dites aux autres ce que vous avez apprécié...</target>
+      </trans-unit>
+      <trans-unit id="writeReview.commentReqError" datatype="html">
+        <source>Please write your review</source>
+        <target>Veuillez rédiger votre avis</target>
+      </trans-unit>
+      <trans-unit id="writeReview.commentMinLengthError" datatype="html">
+        <source>At least 20 characters please</source>
+        <target>Au moins 20 caractères s'il vous plaît</target>
+      </trans-unit>
+      <trans-unit id="writeReview.cancelBtn" datatype="html">
+        <source>Cancel</source>
+        <target>Annuler</target>
+      </trans-unit>
+      <trans-unit id="writeReview.submittingBtn" datatype="html">
+        <source>Submitting...</source>
+        <target>Soumission en cours...</target>
+      </trans-unit>
+      <trans-unit id="writeReview.submitBtn" datatype="html">
+        <source>Submit Review</source>
+        <target>Soumettre l'avis</target>
+      </trans-unit>
+
+      <trans-unit id="hero.tagline" datatype="html">
+        <source>Authentic Rural Experiences</source>
+        <target>Expériences Rurales Authentiques</target>
+      </trans-unit>
+      <trans-unit id="hero.title" datatype="html">
+        <source> Discover the countryside,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/>one farm at a time </source>
+        <target> Découvrez la campagne,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/>une ferme à la fois </target>
+      </trans-unit>
+      <trans-unit id="hero.description" datatype="html">
+        <source> Connect with rural hosts across France offering immersive farm stays, fishing trips, artisan workshops, and harvest experiences. </source>
+        <target> Connectez-vous avec des hôtes ruraux à travers la France offrant des séjours immersifs à la ferme, des sorties de pêche, des ateliers d'artisans et des expériences de récolte. </target>
+      </trans-unit>
+      <trans-unit id="hero.ctaBtn" datatype="html">
+        <source> Explore Experiences </source>
+        <target> Explorer les expériences </target>
+      </trans-unit>
+      <trans-unit id="hero.logoAlt" datatype="html">
+        <source>rxp</source>
+        <target>rxp</target>
+      </trans-unit>
+
+      <trans-unit id="declineDialog.title" datatype="html">
+        <source>Decline this booking?</source>
+        <target>Refuser cette réservation ?</target>
+      </trans-unit>
+      <trans-unit id="declineDialog.description" datatype="html">
+        <source> The explorer will be notified that their request was declined. Optionally, you can provide a reason. </source>
+        <target> L'explorateur sera informé que sa demande a été refusée. Facultativement, vous pouvez fournir un motif. </target>
+      </trans-unit>
+      <trans-unit id="declineDialog.reasonLabel" datatype="html">
+        <source>Reason (optional)</source>
+        <target>Motif (facultatif)</target>
+      </trans-unit>
+      <trans-unit id="declineDialog.reasonPlaceholder" datatype="html">
+        <source>e.g. Dates no longer available</source>
+        <target>ex. Dates non disponibles</target>
+      </trans-unit>
+      <trans-unit id="declineDialog.charCount" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ reasonCtrl.value.length }}"/>/300 </source>
+        <target> <x id="INTERPOLATION" equiv-text="{{ reasonCtrl.value.length }}"/>/300 </target>
+      </trans-unit>
+      <trans-unit id="declineDialog.keepPendingBtn" datatype="html">
+        <source>Keep Pending</source>
+        <target>Maintenir en attente</target>
+      </trans-unit>
+      <trans-unit id="declineDialog.declineBtn" datatype="html">
+        <source>Decline Booking</source>
+        <target>Refuser la réservation</target>
+      </trans-unit>
+
+      <trans-unit id="experienceForm.pageTitle" datatype="html">
+        <source>Create a New Experience</source>
+        <target>Créer une nouvelle expérience</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.step1Label" datatype="html">
+        <source>Basic Information</source>
+        <target>Informations générales</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.step1Error" datatype="html">
+        <source>Please fix the errors above</source>
+        <target>Veuillez corriger les erreurs ci-dessus</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.titleLabel" datatype="html">
+        <source>Experience title</source>
+        <target>Titre de l'expérience</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.titlePlaceholder" datatype="html">
+        <source>e.g. Three-Day Lavender Harvest</source>
+        <target>ex. Récolte de lavande sur trois jours</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.titleLengthHint" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ basicInfoForm.get('title')?.value?.length ?? 0 }}"/>/100 </source>
+        <target> <x id="INTERPOLATION" equiv-text="{{ basicInfoForm.get('title')?.value?.length ?? 0 }}"/>/100 </target>
+      </trans-unit>
+      <trans-unit id="experienceForm.titleReqError" datatype="html">
+        <source>Title is required</source>
+        <target>Le titre est requis</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.titleMinLengthError" datatype="html">
+        <source>Title must be at least 10 characters</source>
+        <target>Le titre doit comporter au moins 10 caractères</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.descLabel" datatype="html">
+        <source>Description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.descPlaceholder" datatype="html">
+        <source>Describe what guests will experience...</source>
+        <target>Décrivez ce que les voyageurs vont vivre...</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.descLengthHint" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ basicInfoForm.get('description')?.value?.length ?? 0 }}"/>/2000 </source>
+        <target> <x id="INTERPOLATION" equiv-text="{{ basicInfoForm.get('description')?.value?.length ?? 0 }}"/>/2000 </target>
+      </trans-unit>
+      <trans-unit id="experienceForm.categoryLabel" datatype="html">
+        <source>Category</source>
+        <target>Catégorie</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.categoryReqError" datatype="html">
+        <source>Please select a category</source>
+        <target>Veuillez sélectionner une catégorie</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.btnNextLogistics" datatype="html">
+        <source>Next: Logistics</source>
+        <target>Suivant : Logistique</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.step2Label" datatype="html">
+        <source>Pricing and Logistics</source>
+        <target>Tarification et logistique</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.priceLabel" datatype="html">
+        <source>Price per person per day (€)</source>
+        <target>Prix par personne et par jour (€)</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.priceReqError" datatype="html">
+        <source>Price is required</source>
+        <target>Le prix est requis</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.priceMinError" datatype="html">
+        <source>Minimum price is €10</source>
+        <target>Le prix minimum est de 10 €</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.durationLabel" datatype="html">
+        <source>Duration (days)</source>
+        <target>Durée (jours)</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.maxGuestsLabel" datatype="html">
+        <source>Maximum guests</source>
+        <target>Maximum de voyageurs</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.locationLabel" datatype="html">
+        <source>Location (town/region)</source>
+        <target>Lieu (ville/région)</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.locationPlaceholder" datatype="html">
+        <source>e.g. Valensole</source>
+        <target>ex. Valensole</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.countryLabel" datatype="html">
+        <source>Country</source>
+        <target>Pays</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.countryFrance" datatype="html">
+        <source>France</source>
+        <target>France</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.countryBelgium" datatype="html">
+        <source>Belgium</source>
+        <target>Belgique</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.countrySwitzerland" datatype="html">
+        <source>Switzerland</source>
+        <target>Suisse</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.btnBack" datatype="html">
+        <source>Back</source>
+        <target>Retour</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.btnNextAgenda" datatype="html">
+        <source> Next: Daily Agenda </source>
+        <target> Suivant : Programme journalier </target>
+      </trans-unit>
+      <trans-unit id="experienceForm.step3Label" datatype="html">
+        <source>Daily Agenda</source>
+        <target>Programme journalier</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.agendaIntro" datatype="html">
+        <source> Describe what guests will do each day. This helps explorers understand what to expect. </source>
+        <target> Décrivez ce que les voyageurs feront chaque jour. Cela aide les explorateurs à savoir à quoi s'attendre. </target>
+      </trans-unit>
+      <trans-unit id="experienceForm.timeLabel" datatype="html">
+        <source>Time of day</source>
+        <target>Moment de la journée</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.timeMorning" datatype="html">
+        <source>Morning</source>
+        <target>Matin</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.timeAfternoon" datatype="html">
+        <source>Afternoon</source>
+        <target>Après-midi</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.timeEvening" datatype="html">
+        <source>Evening</source>
+        <target>Soirée</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.activityLabel" datatype="html">
+        <source>Activity</source>
+        <target>Activité</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.activityPlaceholder" datatype="html">
+        <source>e.g. Lavender harvest</source>
+        <target>ex. Récolte de lavande</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.removeAgendaItemAria" datatype="html">
+        <source>Remove this agenda item</source>
+        <target>Supprimer cet élément du programme</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.btnAddAgendaItem" datatype="html">
+        <source>Add agenda item</source>
+        <target>Ajouter un élément au programme</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.btnCreating" datatype="html">
+        <source>Creating experience...</source>
+        <target>Création de l'expérience...</target>
+      </trans-unit>
+      <trans-unit id="experienceForm.btnCreate" datatype="html">
+        <source>Create Experience</source>
+        <target>Créer l'expérience</target>
+      </trans-unit>
+
+      <trans-unit id="hostBookings.title" datatype="html">
+        <source>Incoming Booking Requests</source>
+        <target>Demandes de réservation entrantes</target>
+      </trans-unit>
+      <trans-unit id="hostBookings.tabPending" datatype="html">
+        <source>Pending</source>
+        <target>En attente</target>
+      </trans-unit>
+      <trans-unit id="hostBookings.explorerAvatarAlt" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ booking.explorerFirstName }}"/></source>
+        <target><x id="INTERPOLATION" equiv-text="{{ booking.explorerFirstName }}"/></target>
+      </trans-unit>
+      <trans-unit id="hostBookings.requestedDate" datatype="html">
+        <source> Requested <x id="INTERPOLATION" equiv-text="{{ booking.createdAt | date:'d MMM yyyy' }}"/> </source>
+        <target> Demandé le <x id="INTERPOLATION" equiv-text="{{ booking.createdAt | date:'d MMM yyyy' }}"/> </target>
+      </trans-unit>
+      <trans-unit id="hostBookings.dateRange" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ booking.startDate | date:'d MMM' }}"/> → <x id="INTERPOLATION_1" equiv-text="{{ booking.endDate | date:'d MMM yyyy' }}"/> </source>
+        <target> <x id="INTERPOLATION" equiv-text="{{ booking.startDate | date:'d MMM' }}"/> → <x id="INTERPOLATION_1" equiv-text="{{ booking.endDate | date:'d MMM yyyy' }}"/> </target>
+      </trans-unit>
+      <trans-unit id="hostBookings.singleGuest" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ booking.numberOfGuests }}"/> guest </source>
+        <target> <x id="INTERPOLATION" equiv-text="{{ booking.numberOfGuests }}"/> voyageur </target>
+      </trans-unit>
+      <trans-unit id="hostBookings.multipleGuests" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ booking.numberOfGuests }}"/> guests </source>
+        <target> <x id="INTERPOLATION" equiv-text="{{ booking.numberOfGuests }}"/> voyageurs </target>
+      </trans-unit>
+      <trans-unit id="hostBookings.totalPrice" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ booking.totalPrice | currency:'EUR':'symbol':'1.0-0' }}"/> total </source>
+        <target> <x id="INTERPOLATION" equiv-text="{{ booking.totalPrice | currency:'EUR':'symbol':'1.0-0' }}"/> au total </target>
+      </trans-unit>
+      <trans-unit id="hostBookings.declineBtn" datatype="html">
+        <source>Decline</source>
+        <target>Refuser</target>
+      </trans-unit>
+      <trans-unit id="hostBookings.acceptBtn" datatype="html">
+        <source>Accept</source>
+        <target>Accepter</target>
+      </trans-unit>
+      <trans-unit id="hostBookings.emptyTitle" datatype="html">
+        <source>All caught up!</source>
+        <target>Tout est à jour !</target>
+      </trans-unit>
+      <trans-unit id="hostBookings.emptyDesc" datatype="html">
+        <source>No pending booking requests at the moment.</source>
+        <target>Aucune demande de réservation en attente pour le moment.</target>
+      </trans-unit>
+      <trans-unit id="hostBookings.tabAllBookings" datatype="html">
+        <source>All Bookings</source>
+        <target>Toutes les réservations</target>
+      </trans-unit>
+      <trans-unit id="hostBookings.emptyAllBookings" datatype="html">
+        <source>No bookings yet.</source>
+        <target>Aucune réservation pour le moment.</target>
+      </trans-unit>
+
+      <trans-unit id="hostDashboard.title" datatype="html">
+        <source>Dashboard</source>
+        <target>Tableau de bord</target>
+      </trans-unit>
+      <trans-unit id="hostDashboard.awaitingResponse" datatype="html">
+        <source>Awaiting Response</source>
+        <target>En attente de réponse</target>
+      </trans-unit>
+      <trans-unit id="hostDashboard.reviewRequests" datatype="html">
+        <source> Review Requests </source>
+        <target> Examiner les demandes </target>
+      </trans-unit>
+      <trans-unit id="hostDashboard.confirmedUpcoming" datatype="html">
+        <source>Confirmed Upcoming</source>
+        <target>Confirmées à venir</target>
+      </trans-unit>
+      <trans-unit id="hostDashboard.totalBookings" datatype="html">
+        <source>Total Bookings</source>
+        <target>Réservations totales</target>
+      </trans-unit>
+      <trans-unit id="hostDashboard.totalRevenue" datatype="html">
+        <source>Total Revenue</source>
+        <target>Revenus totaux</target>
+      </trans-unit>
+      <trans-unit id="hostDashboard.quickActions" datatype="html">
+        <source>Quick Actions</source>
+        <target>Actions rapides</target>
+      </trans-unit>
+      <trans-unit id="hostDashboard.createExperience" datatype="html">
+        <source>Create Experience</source>
+        <target>Créer une expérience</target>
+      </trans-unit>
+      <trans-unit id="hostDashboard.manageListings" datatype="html">
+        <source>Manage Listings</source>
+        <target>Gérer les annonces</target>
+      </trans-unit>
+      <trans-unit id="hostDashboard.viewAllBookings" datatype="html">
+        <source>View All Bookings</source>
+        <target>Voir toutes les réservations</target>
+      </trans-unit>
+
+      <trans-unit id="hostExperiences.title" datatype="html">
+        <source>My Experiences</source>
+        <target>Mes expériences</target>
+      </trans-unit>
+      <trans-unit id="hostExperiences.btnNew" datatype="html">
+        <source>New Experience</source>
+        <target>Nouvelle expérience</target>
+      </trans-unit>
+      <trans-unit id="hostExperiences.perPersonDay" datatype="html">
+        <source>/person/day</source>
+        <target>/personne/jour</target>
+      </trans-unit>
+      <trans-unit id="hostExperiences.maxGuests" datatype="html">
+        <source>Max</source>
+        <target>Max</target>
+      </trans-unit>
+      <trans-unit id="hostExperiences.guests" datatype="html">
+        <source>guests</source>
+        <target>voyageurs</target>
+      </trans-unit>
+      <trans-unit id="hostExperiences.review" datatype="html">
+        <source>review</source>
+        <target>avis</target>
+      </trans-unit>
+      <trans-unit id="hostExperiences.reviews" datatype="html">
+        <source>reviews</source>
+        <target>avis</target>
+      </trans-unit>
+      <trans-unit id="hostExperiences.toggleLive" datatype="html">
+        <source>Live</source>
+        <target>En ligne</target>
+      </trans-unit>
+      <trans-unit id="hostExperiences.toggleDraft" datatype="html">
+        <source>Draft</source>
+        <target>Brouillon</target>
+      </trans-unit>
+      <trans-unit id="hostExperiences.menuPreview" datatype="html">
+        <source>Preview listing</source>
+        <target>Aperçu de l'annonce</target>
+      </trans-unit>
+      <trans-unit id="hostExperiences.menuEdit" datatype="html">
+        <source>Edit</source>
+        <target>Modifier</target>
+      </trans-unit>
+      <trans-unit id="hostExperiences.menuPhotos" datatype="html">
+        <source>Manage photos</source>
+        <target>Gérer les photos</target>
+      </trans-unit>
+      <trans-unit id="hostExperiences.menuDelete" datatype="html">
+        <source>Delete</source>
+        <target>Supprimer</target>
+      </trans-unit>
+      <trans-unit id="hostExperiences.emptyTitle" datatype="html">
+        <source>No experiences yet</source>
+        <target>Aucune expérience pour le moment</target>
+      </trans-unit>
+      <trans-unit id="hostExperiences.emptyMessage" datatype="html">
+        <source> Create your first experience to start receiving bookings. </source>
+        <target> Créez votre première expérience pour commencer à recevoir des réservations. </target>
+      </trans-unit>
+      <trans-unit id="hostExperiences.emptyBtn" datatype="html">
+        <source> Create Experience </source>
+        <target> Créer une expérience </target>
+      </trans-unit>
+      <trans-unit id="hostExperiences.tooltipAwaiting" datatype="html">
+        <source>Awaiting moderation approval</source>
+        <target>En attente d'approbation par la modération</target>
+      </trans-unit>
+      <trans-unit id="hostExperiences.tooltipPublish" datatype="html">
+        <source>Publish</source>
+        <target>Publier</target>
+      </trans-unit>
+      <trans-unit id="hostExperiences.tooltipUnpublish" datatype="html">
+        <source>Unpublish</source>
+        <target>Dépublier</target>
+      </trans-unit>
+
+      <trans-unit id="hostShell.tabDashboard" datatype="html">
+        <source>Dashboard</source>
+        <target>Tableau de bord</target>
+      </trans-unit>
+      <trans-unit id="hostShell.tabExperiences" datatype="html">
+        <source>My Experiences</source>
+        <target>Mes expériences</target>
+      </trans-unit>
+      <trans-unit id="hostShell.tabBookings" datatype="html">
+        <source>Bookings</source>
+        <target>Réservations</target>
+      </trans-unit>
+      <trans-unit id="hostShell.tabProfile" datatype="html">
+        <source>Profile</source>
+        <target>Profil</target>
+      </trans-unit>
+
+      <trans-unit id="notifCentre.bellAria" datatype="html">
+        <source>Notifications</source>
+        <target>Notifications</target>
+      </trans-unit>
+      <trans-unit id="notifCentre.title" datatype="html">
+        <source>Notifications</source>
+        <target>Notifications</target>
+      </trans-unit>
+      <trans-unit id="notifCentre.clearAll" datatype="html">
+        <source>Clear all</source>
+        <target>Tout effacer</target>
+      </trans-unit>
+      <trans-unit id="notifCentre.viewDetailsTooltip" datatype="html">
+        <source>View details</source>
+        <target>Voir les détails</target>
+      </trans-unit>
+      <trans-unit id="notifCentre.empty" datatype="html">
+        <source>No notifications yet</source>
+        <target>Aucune notification pour le moment</target>
+      </trans-unit>
+
+      <trans-unit id="bookingCard.guest" datatype="html">
+        <source>guest</source>
+        <target>voyageur</target>
+      </trans-unit>
+      <trans-unit id="bookingCard.guests" datatype="html">
+        <source>guests</source>
+        <target>voyageurs</target>
+      </trans-unit>
+      <trans-unit id="bookingCard.total" datatype="html">
+        <source>total</source>
+        <target>au total</target>
+      </trans-unit>
+      <trans-unit id="bookingCard.notYetCharged" datatype="html">
+        <source> — not yet charged </source>
+        <target> — pas encore débité </target>
+      </trans-unit>
+      <trans-unit id="bookingCard.hostedBy" datatype="html">
+        <source>Hosted by</source>
+        <target>Hébergé par</target>
+      </trans-unit>
+      <trans-unit id="bookingCard.viewDetails" datatype="html">
+        <source> View Details </source>
+        <target> Voir les détails </target>
+      </trans-unit>
+      <trans-unit id="bookingCard.writeReview" datatype="html">
+        <source>Write Review</source>
+        <target>Rédiger un avis</target>
+      </trans-unit>
+      <trans-unit id="bookingCard.cancelling" datatype="html">
+        <source>Cancelling...</source>
+        <target>Annulation...</target>
+      </trans-unit>
+      <trans-unit id="bookingCard.cancel" datatype="html">
+        <source>Cancel</source>
+        <target>Annuler</target>
+      </trans-unit>
+      <trans-unit id="confirmDialog.warningAria" datatype="html">
+        <source>Warning</source>
+        <target>Avertissement</target>
+      </trans-unit>
+      <trans-unit id="experienceCard.priceUnit" datatype="html">
+        <source>/person/day</source>
+        <target>/personne/jour</target>
+      </trans-unit>
+      <trans-unit id="experienceCard.bookNowBtn" datatype="html">
+        <source>Book Now</source>
+        <target>Réserver maintenant</target>
+      </trans-unit>
+      <trans-unit id="experienceCard.addWishlist" datatype="html">
+        <source>Add to wishlist</source>
+        <target>Ajouter à la liste de souhaits</target>
+      </trans-unit>
+      <trans-unit id="experienceCard.removeWishlist" datatype="html">
+        <source>Remove from wishlist</source>
+        <target>Retirer de la liste de souhaits</target>
+      </trans-unit>
+      <trans-unit id="experienceCard.verifiedHost" datatype="html">
+        <source>Verified host</source>
+        <target>Hôte vérifié</target>
+      </trans-unit>
+      <trans-unit id="experienceCard.ratingAria" datatype="html">
+        <source><x id="PH" equiv-text="this.experience().averageRating"/> out of 5 stars, <x id="PH_1" equiv-text="this.experience().reviewCount"/> reviews</source>
+        <target><x id="PH" equiv-text="this.experience().averageRating"/> sur 5 étoiles, <x id="PH_1" equiv-text="this.experience().reviewCount"/> avis</target>
+      </trans-unit>
+      <trans-unit id="experienceCard.bookNowAria" datatype="html">
+        <source>Book <x id="PH" equiv-text="this.experience().title"/></source>
+        <target>Réserver <x id="PH" equiv-text="this.experience().title"/></target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

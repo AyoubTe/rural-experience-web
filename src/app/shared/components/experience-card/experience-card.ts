@@ -50,6 +50,19 @@ export class ExperienceCard {
   booked      = output<number>();
   wishlisted  = output<number>();
 
+  // i18n
+  readonly addToWishlistLabel    = $localize`:@@experienceCard.addWishlist:Add to wishlist`;
+  readonly removeFromWishlistLabel = $localize`:@@experienceCard.removeWishlist:Remove from wishlist`;
+  readonly verifiedHostLabel     = $localize`:@@experienceCard.verifiedHost:Verified host`;
+
+  ratingAriaLabel = computed(() =>
+    $localize`:@@experienceCard.ratingAria:${this.experience().averageRating} out of 5 stars, ${this.experience().reviewCount} reviews`
+  );
+
+  bookNowAriaLabel = computed(() =>
+    $localize`:@@experienceCard.bookNowAria:Book ${this.experience().title}`
+  );
+
   // ── Internal state ───────────────────────────────────────────────
   isWishlisted = signal(false);
 

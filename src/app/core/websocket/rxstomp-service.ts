@@ -5,7 +5,6 @@ import { filter, map } from 'rxjs/operators';
 
 import { AppNotification } from '../models/notification.model';
 import {environment} from '../../../environments/environment.development';
-import SockJS from 'sockjs-client';
 
 @Injectable({ providedIn: 'root' })
 export class RxStompService implements OnDestroy {

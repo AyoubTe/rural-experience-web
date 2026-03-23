@@ -27,13 +27,24 @@ export function handleApiError(
 }
 
 function defaultMessageFor(status: number): string {
-  switch (true) {
-    case status === 400: return 'Invalid request. Check your input.';
-    case status === 401: return 'Please log in to continue.';
-    case status === 403: return 'You do not have permission.';
-    case status === 404: return 'The requested resource was not found.';
-    case status === 409: return 'A conflict occurred.';
-    case status >= 500:  return 'Server error. Please try again.';
-    default:             return 'An unexpected error occurred.';
+  switch (status) {
+    case 400: return $localize`:@@error.400:
+      The request was invalid. Please check your input.`;
+    case 401: return $localize`:@@error.401:
+      Please log in to continue.`;
+    case 403: return $localize`:@@error.403:
+      You do not have permission to perform this action.`;
+    case 404: return $localize`:@@error.404:
+      The requested resource was not found.`;
+    case 409: return $localize`:@@error.409:
+      This action conflicts with an existing record.`;
+    case 422: return $localize`:@@error.422:
+      Validation failed. Please check your input.`;
+    case 429: return $localize`:@@error.429:
+      Too many requests. Please wait a moment.`;
+    case 503: return $localize`:@@error.503:
+      The service is temporarily unavailable. Please try again.`;
+    default:  return $localize`:@@error.default:
+      Something went wrong. Please try again.`;
   }
 }

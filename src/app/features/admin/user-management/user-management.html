@@ -1,33 +1,33 @@
 <div class="user-management">
-  <h2>User Management</h2>
+  <h2 i18n="@@userManagement.title">User Management</h2>
 
-  <!-- Filters -->
   <div class="filters">
     <mat-form-field appearance="outline">
-      <mat-label>Search users</mat-label>
+      <mat-label i18n="@@userManagement.searchLabel">Search users</mat-label>
       <input matInput [formControl]="searchCtrl"
-             placeholder="Name or email">
+             placeholder="Name or email"
+             i18n-placeholder="@@userManagement.searchPlaceholder">
       <mat-icon matPrefix>search</mat-icon>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Role</mat-label>
+      <mat-label i18n="@@userManagement.roleLabel">Role</mat-label>
       <mat-select [(ngModel)]="roleFilter"
                   (ngModelChange)="onFilterChange()">
-        <mat-option value="">All roles</mat-option>
-        <mat-option value="EXPLORER">Explorer</mat-option>
-        <mat-option value="HOST">Host</mat-option>
-        <mat-option value="ADMIN">Admin</mat-option>
+        <mat-option value="" i18n="@@userManagement.roleAll">All roles</mat-option>
+        <mat-option value="EXPLORER" i18n="@@userManagement.roleExplorer">Explorer</mat-option>
+        <mat-option value="HOST" i18n="@@userManagement.roleHost">Host</mat-option>
+        <mat-option value="ADMIN" i18n="@@userManagement.roleAdmin">Admin</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Status</mat-label>
+      <mat-label i18n="@@userManagement.statusLabel">Status</mat-label>
       <mat-select [(ngModel)]="statusFilter"
                   (ngModelChange)="onFilterChange()">
-        <mat-option value="">All statuses</mat-option>
-        <mat-option value="ACTIVE">Active</mat-option>
-        <mat-option value="SUSPENDED">Suspended</mat-option>
+        <mat-option value="" i18n="@@userManagement.statusAll">All statuses</mat-option>
+        <mat-option value="ACTIVE" i18n="@@userManagement.statusActive">Active</mat-option>
+        <mat-option value="SUSPENDED" i18n="@@userManagement.statusSuspended">Suspended</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
@@ -38,19 +38,19 @@
          matSort (matSortChange)="onSortChange($event)">
 
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <th mat-header-cell *matHeaderCellDef i18n="@@userManagement.colName">Name</th>
       <td mat-cell *matCellDef="let u">
         {{ u.firstName }} {{ u.lastName }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@userManagement.colEmail">Email</th>
       <td mat-cell *matCellDef="let u">{{ u.email }}</td>
     </ng-container>
 
     <ng-container matColumnDef="role">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@userManagement.colRole">Role</th>
       <td mat-cell *matCellDef="let u">
         <mat-chip
           [class]="'role-chip--' + u.role.toLowerCase()"
@@ -61,7 +61,7 @@
     </ng-container>
 
     <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <th mat-header-cell *matHeaderCellDef i18n="@@userManagement.colStatus">Status</th>
       <td mat-cell *matCellDef="let u">
         <mat-chip
           [class]="u.status === 'ACTIVE'
@@ -73,14 +73,14 @@
     </ng-container>
 
     <ng-container matColumnDef="bookingCount">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@userManagement.colBookings">
         Bookings
       </th>
       <td mat-cell *matCellDef="let u">{{ u.bookingCount }}</td>
     </ng-container>
 
     <ng-container matColumnDef="createdAt">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Joined</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@userManagement.colJoined">Joined</th>
       <td mat-cell *matCellDef="let u">
         {{ u.createdAt | date:'d MMM yyyy' }}
       </td>
@@ -90,24 +90,28 @@
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let u">
         <button mat-icon-button [matMenuTriggerFor]="userMenu"
-                [attr.aria-label]="'Options for ' + u.email">
+                aria-label="Options for {{ u.email }}"
+                i18n-aria-label="@@userManagement.optionsAria">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #userMenu="matMenu">
           @if (u.role === 'EXPLORER') {
             <button mat-menu-item (click)="onPromoteToHost(u)">
               <mat-icon>upgrade</mat-icon>
-              Promote to Host
+              <span i18n="@@userManagement.promoteHost">Promote to Host</span>
             </button>
           }
           <button mat-menu-item (click)="onSuspend(u)">
-            <mat-icon [color]="u.status === 'SUSPENDED'
-              ? 'primary' : 'warn'">
-              {{ u.status === 'SUSPENDED'
-              ? 'lock_open' : 'block' }}
+            <mat-icon [color]="u.status === 'SUSPENDED' ? 'primary' : 'warn'">
+              {{ u.status === 'SUSPENDED' ? 'lock_open' : 'block' }}
             </mat-icon>
-            {{ u.status === 'SUSPENDED'
-            ? 'Unsuspend' : 'Suspend' }}
+
+            @if (u.status === 'SUSPENDED') {
+              <span i18n="@@userManagement.actionUnsuspend">Unsuspend</span>
+            } @else {
+              <span i18n="@@userManagement.actionSuspend">Suspend</span>
+            }
+
           </button>
         </mat-menu>
       </td>

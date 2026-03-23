@@ -1,5 +1,5 @@
 <div class="host-bookings">
-  <h2>Incoming Booking Requests</h2>
+  <h2 i18n="@@hostBookings.title">Incoming Booking Requests</h2>
 
   @if (loading()) {
     <mat-progress-bar mode="indeterminate" />
@@ -7,10 +7,9 @@
 
   <mat-tab-group>
 
-    <!-- Pending — needs action -->
     <mat-tab>
       <ng-template mat-tab-label>
-        Pending
+        <span i18n="@@hostBookings.tabPending">Pending</span>
         @if (pending().length > 0) {
           <span class="tab-badge">{{ pending().length }}</span>
         }
@@ -22,11 +21,11 @@
 
             <mat-card-content class="host-booking-card__content">
 
-              <!-- Explorer photo + name -->
               <div class="host-booking-card__explorer">
                 @if (booking.explorerFirstName) {
                   <img [src]="booking.explorerFirstName"
-                       [alt]="booking.explorerFirstName"
+                       alt="{{ booking.explorerFirstName }}"
+                       i18n-alt="@@hostBookings.explorerAvatarAlt"
                        class="explorer-avatar">
                 } @else {
                   <div class="explorer-avatar explorer-avatar--initials">
@@ -39,13 +38,14 @@
                     {{ booking.explorerLastName }}
                   </strong>
                   <p class="muted">
-                    Requested
-                    {{ booking.createdAt | date:'d MMM yyyy' }}
+                    <span i18n="@@hostBookings.requestedDate">
+                      Requested
+                      {{ booking.createdAt | date:'d MMM yyyy' }}
+                    </span>
                   </p>
                 </div>
               </div>
 
-              <!-- Stay details -->
               <div class="host-booking-card__details">
                 <div class="detail-row">
                   <mat-icon>landscape</mat-icon>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="detail-row">
                   <mat-icon>calendar_today</mat-icon>
-                  <span>
+                  <span i18n="@@hostBookings.dateRange">
                     {{ booking.startDate | date:'d MMM' }}
                     →
                     {{ booking.endDate | date:'d MMM yyyy' }}
@@ -61,18 +61,22 @@
                 </div>
                 <div class="detail-row">
                   <mat-icon>group</mat-icon>
-                  <span>
-                    {{ booking.numberOfGuests }}
-                    {{ booking.numberOfGuests === 1
-                    ? 'guest' : 'guests' }}
-                  </span>
+
+                  @if (booking.numberOfGuests === 1) {
+                    <span i18n="@@hostBookings.singleGuest">
+                      {{ booking.numberOfGuests }} guest
+                    </span>
+                  } @else {
+                    <span i18n="@@hostBookings.multipleGuests">
+                      {{ booking.numberOfGuests }} guests
+                    </span>
+                  }
+
                 </div>
                 <div class="detail-row">
                   <mat-icon>euro</mat-icon>
-                  <span>
-                    {{ booking.totalPrice
-                    | currency:'EUR':'symbol':'1.0-0' }}
-                    total
+                  <span i18n="@@hostBookings.totalPrice">
+                    {{ booking.totalPrice | currency:'EUR':'symbol':'1.0-0' }} total
                   </span>
                 </div>
 
@@ -86,17 +90,16 @@
 
             </mat-card-content>
 
-            <!-- Accept / Decline actions -->
             <mat-card-actions align="end">
               <button mat-stroked-button color="warn"
                       (click)="onDecline(booking.id)">
                 <mat-icon>close</mat-icon>
-                Decline
+                <span i18n="@@hostBookings.declineBtn">Decline</span>
               </button>
               <button mat-flat-button color="primary"
                       (click)="onConfirm(booking.id)">
                 <mat-icon>check</mat-icon>
-                Accept
+                <span i18n="@@hostBookings.acceptBtn">Accept</span>
               </button>
             </mat-card-actions>
 
@@ -104,15 +107,14 @@
         } @empty {
           <div class="empty-queue">
             <mat-icon class="empty-queue__icon">inbox</mat-icon>
-            <h3>All caught up!</h3>
-            <p>No pending booking requests at the moment.</p>
+            <h3 i18n="@@hostBookings.emptyTitle">All caught up!</h3>
+            <p i18n="@@hostBookings.emptyDesc">No pending booking requests at the moment.</p>
           </div>
         }
       </div>
     </mat-tab>
 
-    <!-- All bookings tab -->
-    <mat-tab label="All Bookings">
+    <mat-tab label="All Bookings" i18n-label="@@hostBookings.tabAllBookings">
       <div class="booking-list">
         @for (booking of allHostBks(); track booking.id) {
           <div class="all-booking-row">
@@ -124,12 +126,11 @@
             </span>
             <span>{{ booking.startDate | date:'d MMM yyyy' }}</span>
             <span>
-              {{ booking.totalPrice
-              | currency:'EUR':'symbol':'1.0-0' }}
+              {{ booking.totalPrice | currency:'EUR':'symbol':'1.0-0' }}
             </span>
           </div>
         } @empty {
-          <p class="empty-state">No bookings yet.</p>
+          <p class="empty-state" i18n="@@hostBookings.emptyAllBookings">No bookings yet.</p>
         }
       </div>
     </mat-tab>

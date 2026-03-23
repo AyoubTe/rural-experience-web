@@ -1,60 +1,63 @@
 <div class="experience-form-page">
-  <h1>Create a New Experience</h1>
+  <h1 i18n="@@experienceForm.pageTitle">Create a New Experience</h1>
 
   <mat-stepper
     [linear]="true"
     orientation="vertical"
     class="experience-stepper">
 
-    <!-- ── Step 1: Basic Info ──────────────────────────────── -->
     <mat-step
       [stepControl]="basicInfoForm"
       label="Basic Information"
-      errorMessage="Please fix the errors above">
+      i18n-label="@@experienceForm.step1Label"
+      errorMessage="Please fix the errors above"
+      i18n-errorMessage="@@experienceForm.step1Error">
 
       <form [formGroup]="basicInfoForm">
 
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Experience title</mat-label>
+          <mat-label i18n="@@experienceForm.titleLabel">Experience title</mat-label>
           <input matInput formControlName="title"
-                 placeholder="e.g. Three-Day Lavender Harvest">
-          <mat-hint align="end">
+                 placeholder="e.g. Three-Day Lavender Harvest"
+                 i18n-placeholder="@@experienceForm.titlePlaceholder">
+          <mat-hint align="end" i18n="@@experienceForm.titleLengthHint">
             {{ basicInfoForm.get('title')?.value?.length ?? 0 }}/100
           </mat-hint>
           <mat-error>
             @if (basicInfoForm.get('title')?.hasError('required')) {
-              Title is required
+              <span i18n="@@experienceForm.titleReqError">Title is required</span>
             } @else if (basicInfoForm.get('title')?.hasError('minlength')) {
-              Title must be at least 10 characters
+              <span i18n="@@experienceForm.titleMinLengthError">Title must be at least 10 characters</span>
             }
           </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Description</mat-label>
+          <mat-label i18n="@@experienceForm.descLabel">Description</mat-label>
           <textarea matInput formControlName="description"
                     rows="6"
-                    placeholder="Describe what guests will experience...">
+                    placeholder="Describe what guests will experience..."
+                    i18n-placeholder="@@experienceForm.descPlaceholder">
           </textarea>
-          <mat-hint align="end">
+          <mat-hint align="end" i18n="@@experienceForm.descLengthHint">
             {{ basicInfoForm.get('description')?.value?.length ?? 0 }}/2000
           </mat-hint>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Category</mat-label>
+          <mat-label i18n="@@experienceForm.categoryLabel">Category</mat-label>
           <mat-select formControlName="categoryId">
             @for (cat of categories$ | async; track cat.id){
               <mat-option [value]="cat.id"> {{ cat.name }} </mat-option>
             }
           </mat-select>
-          <mat-error>Please select a category</mat-error>
+          <mat-error i18n="@@experienceForm.categoryReqError">Please select a category</mat-error>
         </mat-form-field>
 
         <div class="step-actions">
           <button mat-flat-button color="primary" matStepperNext
                   [disabled]="basicInfoForm.invalid">
-            Next: Logistics
+            <span i18n="@@experienceForm.btnNextLogistics">Next: Logistics</span>
             <mat-icon iconSuffix>arrow_forward</mat-icon>
           </button>
         </div>
@@ -62,38 +65,38 @@
       </form>
     </mat-step>
 
-    <!-- ── Step 2: Logistics ───────────────────────────────── -->
     <mat-step
       [stepControl]="logisticsForm"
-      label="Pricing and Logistics">
+      label="Pricing and Logistics"
+      i18n-label="@@experienceForm.step2Label">
 
       <form [formGroup]="logisticsForm">
 
         <div class="form-row">
           <mat-form-field appearance="outline">
-            <mat-label>Price per person per day (€)</mat-label>
+            <mat-label i18n="@@experienceForm.priceLabel">Price per person per day (€)</mat-label>
             <input matInput type="number"
                    formControlName="pricePerPerson"
                    min="10">
             <mat-icon matPrefix>euro</mat-icon>
             <mat-error>
               @if (logisticsForm.get('pricePerPerson')?.hasError('required')) {
-                Price is required
+                <span i18n="@@experienceForm.priceReqError">Price is required</span>
               } @else if (logisticsForm.get('pricePerPerson')?.hasError('min')) {
-                Minimum price is €10
+                <span i18n="@@experienceForm.priceMinError">Minimum price is €10</span>
               }
             </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Duration (days)</mat-label>
+            <mat-label i18n="@@experienceForm.durationLabel">Duration (days)</mat-label>
             <input matInput type="number"
                    formControlName="durationDays"
                    min="1" max="30">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Maximum guests</mat-label>
+            <mat-label i18n="@@experienceForm.maxGuestsLabel">Maximum guests</mat-label>
             <input matInput type="number"
                    formControlName="maxGuests"
                    min="1" max="50">
@@ -102,37 +105,38 @@
 
         <div class="form-row">
           <mat-form-field appearance="outline">
-            <mat-label>Location (town/region)</mat-label>
+            <mat-label i18n="@@experienceForm.locationLabel">Location (town/region)</mat-label>
             <input matInput formControlName="location"
-                   placeholder="e.g. Valensole">
+                   placeholder="e.g. Valensole"
+                   i18n-placeholder="@@experienceForm.locationPlaceholder">
             <mat-icon matPrefix>place</mat-icon>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Country</mat-label>
+            <mat-label i18n="@@experienceForm.countryLabel">Country</mat-label>
             <mat-select formControlName="country">
-              <mat-option value="France">France</mat-option>
-              <mat-option value="Belgium">Belgium</mat-option>
-              <mat-option value="Switzerland">Switzerland</mat-option>
+              <mat-option value="France" i18n="@@experienceForm.countryFrance">France</mat-option>
+              <mat-option value="Belgium" i18n="@@experienceForm.countryBelgium">Belgium</mat-option>
+              <mat-option value="Switzerland" i18n="@@experienceForm.countrySwitzerland">Switzerland</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
 
         <div class="step-actions">
-          <button mat-stroked-button matStepperPrevious>Back</button>
+          <button mat-stroked-button matStepperPrevious i18n="@@experienceForm.btnBack">Back</button>
           <button mat-flat-button color="primary" matStepperNext
-                  [disabled]="logisticsForm.invalid">
+                  [disabled]="logisticsForm.invalid"
+                  i18n="@@experienceForm.btnNextAgenda">
             Next: Daily Agenda
           </button>
         </div>
       </form>
     </mat-step>
 
-    <!-- ── Step 3: Agenda ──────────────────────────────────── -->
-    <mat-step label="Daily Agenda" [stepControl]="agendaForm">
+    <mat-step label="Daily Agenda" i18n-label="@@experienceForm.step3Label" [stepControl]="agendaForm">
       <form [formGroup]="agendaForm">
 
-        <p class="step-intro">
+        <p class="step-intro" i18n="@@experienceForm.agendaIntro">
           Describe what guests will do each day. This helps explorers
           understand what to expect.
         </p>
@@ -143,25 +147,27 @@
             <div [formGroupName]="i" class="agenda-item">
 
               <mat-form-field appearance="outline" class="time-field">
-                <mat-label>Time of day</mat-label>
+                <mat-label i18n="@@experienceForm.timeLabel">Time of day</mat-label>
                 <mat-select formControlName="time">
-                  <mat-option value="Morning">Morning</mat-option>
-                  <mat-option value="Afternoon">Afternoon</mat-option>
-                  <mat-option value="Evening">Evening</mat-option>
+                  <mat-option value="Morning" i18n="@@experienceForm.timeMorning">Morning</mat-option>
+                  <mat-option value="Afternoon" i18n="@@experienceForm.timeAfternoon">Afternoon</mat-option>
+                  <mat-option value="Evening" i18n="@@experienceForm.timeEvening">Evening</mat-option>
                 </mat-select>
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="activity-field">
-                <mat-label>Activity</mat-label>
+                <mat-label i18n="@@experienceForm.activityLabel">Activity</mat-label>
                 <input matInput formControlName="activity"
-                       placeholder="e.g. Lavender harvest">
+                       placeholder="e.g. Lavender harvest"
+                       i18n-placeholder="@@experienceForm.activityPlaceholder">
               </mat-form-field>
 
               <button mat-icon-button
                       type="button"
                       (click)="removeAgendaItem(i)"
                       [disabled]="agendaItems.length === 1"
-                      aria-label="Remove this agenda item">
+                      aria-label="Remove this agenda item"
+                      i18n-aria-label="@@experienceForm.removeAgendaItemAria">
                 <mat-icon>remove_circle_outline</mat-icon>
               </button>
 
@@ -172,11 +178,11 @@
         <button mat-stroked-button type="button"
                 (click)="addAgendaItem()">
           <mat-icon>add</mat-icon>
-          Add agenda item
+          <span i18n="@@experienceForm.btnAddAgendaItem">Add agenda item</span>
         </button>
 
         <div class="step-actions">
-          <button mat-stroked-button matStepperPrevious>Back</button>
+          <button mat-stroked-button matStepperPrevious i18n="@@experienceForm.btnBack">Back</button>
           <button
             mat-flat-button color="primary"
             type="button"
@@ -184,19 +190,24 @@
             [disabled]="!allFormsValid() || isSubmitting()">
 
             @if (isSubmitting()) {
-              <mat-icon>hourglass_empty</mat-icon>
+              <ng-container>
+                <mat-icon>hourglass_empty</mat-icon>
+                <span i18n="@@experienceForm.btnCreating">Creating experience...</span>
+              </ng-container>
             } @else {
-              <mat-icon>check</mat-icon>
+              <ng-container>
+                <mat-icon>check</mat-icon>
+                <span i18n="@@experienceForm.btnCreate">Create Experience</span>
+              </ng-container>
             }
 
-            {{ isSubmitting() ? 'Creating experience...' : 'Create Experience' }}
           </button>
         </div>
 
         @if (submitError()) {
           <div class="submit-error" role="alert">
             <mat-icon>error_outline</mat-icon>
-            {{ submitError() }}
+            <span>{{ submitError() }}</span>
           </div>
         }
 

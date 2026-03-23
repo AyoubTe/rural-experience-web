@@ -1,0 +1,22 @@
+<button mat-button [matMenuTriggerFor]="langMenu"
+        class="lang-switcher">
+  <span class="lang-switcher__flag">
+    {{ currentOption().flag }}
+  </span>
+  {{ currentOption().label }}
+  <mat-icon iconSuffix>arrow_drop_down</mat-icon>
+</button>
+
+<mat-menu #langMenu="matMenu">
+  @for (option of localeOptions; track option.code) {
+    <button mat-menu-item
+            (click)="locale.setLocale(option.code)"
+            [class.active-locale]="locale.locale() === option.code">
+      <span>{{ option.flag }}</span>
+      {{ option.label }}
+      @if (locale.locale() === option.code) {
+        <mat-icon>check</mat-icon>
+      }
+    </button>
+  }
+</mat-menu>

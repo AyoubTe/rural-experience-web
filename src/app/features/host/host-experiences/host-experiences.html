@@ -1,11 +1,11 @@
 <div class="host-experiences">
 
   <div class="host-experiences__toolbar">
-    <h2>My Experiences</h2>
+    <h2 i18n="@@hostExperiences.title">My Experiences</h2>
     <a mat-flat-button color="primary"
        routerLink="/host/experiences/new">
       <mat-icon>add</mat-icon>
-      New Experience
+      <span i18n="@@hostExperiences.btnNew">New Experience</span>
     </a>
   </div>
 
@@ -21,14 +21,13 @@
              class="exp-row__photo"
              [src]="exp.coverPhotoUrl
                     ?? 'assets/images/placeholder-experience.jpg'"
-             [alt]="exp.title">
+             [alt]="exp.title"
+             i18n-alt="@@hostExperiences.photoAlt">
 
         <mat-card-content class="exp-row__content">
 
           <div class="exp-row__header">
             <h3 class="exp-row__title">{{ exp.title }}</h3>
-
-            <!-- Status chip -->
             <mat-chip
               [class]="'exp-status--' + exp.status.toLowerCase()"
               disableRipple>
@@ -39,11 +38,14 @@
           <div class="exp-row__meta">
             <span>
               {{ exp.pricePerPerson
-              | currency:'EUR':'symbol':'1.0-0' }} /person/day
+              | currency:'EUR':'symbol':'1.0-0' }}
+              <ng-container i18n="@@hostExperiences.perPersonDay">/person/day</ng-container>
             </span>
             <span>{{ exp.durationDays | duration }}</span>
             <span>
-              Max {{ exp.maxGuests }} guests
+              <ng-container i18n="@@hostExperiences.maxGuests">Max</ng-container>
+              {{ exp.maxGuests }}
+              <ng-container i18n="@@hostExperiences.guests">guests</ng-container>
             </span>
             <span>
               <mat-icon inline>place</mat-icon>
@@ -51,26 +53,25 @@
             </span>
           </div>
 
-          <!-- Rating -->
           @if (exp.reviewCount > 0) {
             <div class="exp-row__rating">
               <mat-icon class="star-icon">star</mat-icon>
-              <span>
-                {{ exp.averageRating | number:'1.1-1' }}
-              </span>
+              <span>{{ exp.averageRating | number:'1.1-1' }}</span>
               <span class="muted">
                 ({{ exp.reviewCount }}
-                {{ exp.reviewCount === 1 ? 'review' : 'reviews' }})
+                @if (exp.reviewCount === 1) {
+                  <ng-container i18n="@@hostExperiences.review">review</ng-container>
+                } @else {
+                  <ng-container i18n="@@hostExperiences.reviews">reviews</ng-container>
+                })
               </span>
             </div>
           }
 
         </mat-card-content>
 
-        <!-- Actions -->
         <mat-card-actions class="exp-row__actions" align="end">
 
-          <!-- Publish toggle -->
           <mat-slide-toggle
             [checked]="exp.status === 'PUBLISHED'"
             [disabled]="togglingId() === exp.id ||
@@ -79,50 +80,54 @@
             (change)="onTogglePublish(exp, $event)"
             color="primary"
             [matTooltip]="exp.status === 'PENDING_REVIEW'
-              ? 'Awaiting moderation approval'
-              : (exp.status === 'PUBLISHED' ? 'Unpublish' : 'Publish')">
-            {{ exp.status === 'PUBLISHED' ? 'Live' : 'Draft' }}
+              ? awaitingModerationTooltip
+              : (exp.status === 'PUBLISHED' ? unpublishTooltip : publishTooltip)">
+            @if (exp.status === 'PUBLISHED') {
+              <ng-container i18n="@@hostExperiences.toggleLive">Live</ng-container>
+            } @else {
+              <ng-container i18n="@@hostExperiences.toggleDraft">Draft</ng-container>
+            }
           </mat-slide-toggle>
 
-          <!-- More menu -->
           <button mat-icon-button [matMenuTriggerFor]="expMenu"
-                  [attr.aria-label]="'Options for ' + exp.title">
+                  [attr.aria-label]="exp.title"
+                  i18n-aria-label="@@hostExperiences.menuAria">
             <mat-icon>more_vert</mat-icon>
           </button>
+
           <mat-menu #expMenu="matMenu">
-            <a mat-menu-item
-               [routerLink]="['/experiences', exp.id]">
+            <a mat-menu-item [routerLink]="['/experiences', exp.id]">
               <mat-icon>visibility</mat-icon>
-              Preview listing
+              <span i18n="@@hostExperiences.menuPreview">Preview listing</span>
             </a>
-            <a mat-menu-item
-               [routerLink]="['/host/experiences', exp.id, 'edit']">
+            <a mat-menu-item [routerLink]="['/host/experiences', exp.id, 'edit']">
               <mat-icon>edit</mat-icon>
-              Edit
+              <span i18n="@@hostExperiences.menuEdit">Edit</span>
             </a>
-            <a mat-menu-item
-               [routerLink]="['/host/experiences', exp.id, 'photos']">
+            <a mat-menu-item [routerLink]="['/host/experiences', exp.id, 'photos']">
               <mat-icon>photo_library</mat-icon>
-              Manage photos
+              <span i18n="@@hostExperiences.menuPhotos">Manage photos</span>
             </a>
             <mat-divider />
-            <button mat-menu-item
-                    (click)="onDelete(exp)"
-                    class="delete-item">
+            <button mat-menu-item (click)="onDelete(exp)" class="delete-item">
               <mat-icon color="warn">delete</mat-icon>
-              Delete
+              <span i18n="@@hostExperiences.menuDelete">Delete</span>
             </button>
           </mat-menu>
 
         </mat-card-actions>
       </mat-card>
+
     } @empty {
       <div class="empty-experiences">
         <mat-icon>landscape</mat-icon>
-        <h3>No experiences yet</h3>
-        <p>Create your first experience to start receiving bookings.</p>
+        <h3 i18n="@@hostExperiences.emptyTitle">No experiences yet</h3>
+        <p i18n="@@hostExperiences.emptyMessage">
+          Create your first experience to start receiving bookings.
+        </p>
         <a mat-flat-button color="primary"
-           routerLink="/host/experiences/new">
+           routerLink="/host/experiences/new"
+           i18n="@@hostExperiences.emptyBtn">
           Create Experience
         </a>
       </div>

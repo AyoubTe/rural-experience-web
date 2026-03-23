@@ -1,6 +1,6 @@
 import {
   ApplicationConfig,
-  isDevMode,
+  isDevMode, LOCALE_ID,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection
 } from '@angular/core';
@@ -19,9 +19,23 @@ import {BookingEffects} from '@rxp/features/booking/store/booking.effects';
 import {provideEffects} from '@ngrx/effects';
 import {NotificationEffects} from '@rxp/features/notification/store/notification.effects';
 import {notificationReducer} from '@rxp/features/notification/store/notification.reducer';
+import {registerLocaleData} from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import localeFrExtra from '@angular/common/locales/extra/fr';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
+registerLocaleData(localeFr, 'fr', localeFrExtra);
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'fr',
+    },
+    provideAnimationsAsync(),
+    provideNativeDateAdapter(),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes, withViewTransitions(), withInMemoryScrolling({
