@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { AuthShell } from './auth-shell';
 
@@ -8,16 +9,22 @@ describe('AuthShell', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AuthShell]
+      imports: [AuthShell],
+      providers: [
+        // Provide an empty routing array so RouterLink and RouterOutlet don't crash
+        provideRouter([])
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AuthShell);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+
+    // Trigger initial data binding
+    fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the auth shell', () => {
     expect(component).toBeTruthy();
   });
 });

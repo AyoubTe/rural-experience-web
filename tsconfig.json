@@ -20,7 +20,10 @@
     "useDefineForClassFields": false,
     "paths": {
       "@rxp/*": ["src/app/*"]
-    }
+    },
+    "types": [
+      "node"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

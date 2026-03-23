@@ -101,10 +101,6 @@
           "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "tsconfig.spec.json",
-            "browser": "src/main.ts",
-            "allowedCommonJsDependencies": [
-              "@stomp/stompjs"
-            ],
             "inlineStyleLanguage": "scss",
             "assets": [
               {
