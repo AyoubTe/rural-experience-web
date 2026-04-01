@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test --watch=false --browsers=ChromeHeadless"
+    "test": "ng test --watch=false --browsers=ChromeHeadless",
+    "build:prod": "ng build --configuration production --localize",
+    "build:en": "ng build --configuration production",
+    "build:fr": "ng build --configuration production,fr"
   },
   "prettier": {
     "printWidth": 100,
