@@ -9,3 +9,6 @@ e2e/
 .env
 .env.*
 docker-compose*.yml
+.vscode
+.idea
+.angular

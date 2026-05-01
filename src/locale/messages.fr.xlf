@@ -1449,6 +1449,57 @@
         <source>Book <x id="PH" equiv-text="this.experience().title"/></source>
         <target>Réserver <x id="PH" equiv-text="this.experience().title"/></target>
       </trans-unit>
+      <!-- Experience Form -->
+      <trans-unit id="experienceForm.step4Label" datatype="html">
+        <source>Photos</source>
+        <target>Photos</target>
+      </trans-unit>
+
+      <!-- Error messages -->
+      <trans-unit id="error.400" datatype="html">
+        <source>The request was invalid. Please check your input.</source>
+        <target>La requête est invalide. Veuillez vérifier vos données.</target>
+      </trans-unit>
+
+      <trans-unit id="error.401" datatype="html">
+        <source>Please log in to continue.</source>
+        <target>Veuillez vous connecter pour continuer.</target>
+      </trans-unit>
+
+      <trans-unit id="error.403" datatype="html">
+        <source>You do not have permission to perform this action.</source>
+        <target>Vous n'avez pas la permission d'effectuer cette action.</target>
+      </trans-unit>
+
+      <trans-unit id="error.404" datatype="html">
+        <source>The requested resource was not found.</source>
+        <target>La ressource demandée est introuvable.</target>
+      </trans-unit>
+
+      <trans-unit id="error.409" datatype="html">
+        <source>This action conflicts with an existing record.</source>
+        <target>Cette action est en conflit avec un enregistrement existant.</target>
+      </trans-unit>
+
+      <trans-unit id="error.422" datatype="html">
+        <source>Validation failed. Please check your input.</source>
+        <target>La validation a échoué. Veuillez vérifier vos données.</target>
+      </trans-unit>
+
+      <trans-unit id="error.429" datatype="html">
+        <source>Too many requests. Please wait a moment.</source>
+        <target>Trop de requêtes. Veuillez patienter un moment.</target>
+      </trans-unit>
+
+      <trans-unit id="error.503" datatype="html">
+        <source>The service is temporarily unavailable. Please try again.</source>
+        <target>Le service est temporairement indisponible. Veuillez réessayer.</target>
+      </trans-unit>
+
+      <trans-unit id="error.default" datatype="html">
+        <source>Something went wrong. Please try again.</source>
+        <target>Une erreur s'est produite. Veuillez réessayer.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

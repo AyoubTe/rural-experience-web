@@ -1,11 +1,13 @@
 import {ChangeDetectionStrategy, Component, inject, input, signal} from '@angular/core';
 import {NotificationService} from '@rxp/features/notification/notification-service';
-import {ExperiencePhoto} from '@rxp/core/models/experience.model';
 
 import {
-  CdkDragDrop, CdkDropList,
-  CdkDrag, CdkDragHandle,
-  moveItemInArray, CdkDragPreview, CdkDragPlaceholder
+  CdkDrag,
+  CdkDragDrop,
+  CdkDragPlaceholder,
+  CdkDragPreview,
+  CdkDropList,
+  moveItemInArray
 } from '@angular/cdk/drag-drop';
 import {MatIcon} from '@angular/material/icon';
 import {MatProgressBar} from '@angular/material/progress-bar';
@@ -32,10 +34,10 @@ export class PhotoManager {
 
   // ── Services ────────────────────────────────────────────────────
   private photoSvc = inject(PhotoService);
-  private notify   = inject(NotificationService);
+  private notify = inject(NotificationService);
 
   // ── State ────────────────────────────────────────────────────────
-  photos      = signal<PhotoResponse[]>([]);
+  photos = signal<PhotoResponse[]>([]);
   isUploading = signal(false);
 
   ngOnInit(): void {
@@ -43,20 +45,20 @@ export class PhotoManager {
     this.photoSvc.getPhotos(this.experienceId())
       .subscribe(serverPhotos => {
         this.photos.set(serverPhotos.map(p => ({
-          id:             p.id,
-          url:            p.url,
-          filename:       p.altText,
-          sortOrder:      p.sortOrder,
-          uploadedAt:     p.uploadedAt,
+          id: p.id,
+          url: p.url,
+          filename: p.altText,
+          sortOrder: p.sortOrder,
+          uploadedAt: p.uploadedAt,
         })));
       });
   }
 
   // ── File selection ────────────────────────────────────────────
   onFileSelected(event: Event): void {
-    const input   = event.target as HTMLInputElement;
-    const files   = Array.from(input.files ?? []);
-    input.value   = ''; // Reset so same file can be re-selected
+    const input = event.target as HTMLInputElement;
+    const files = Array.from(input.files ?? []);
+    input.value = ''; // Reset so same file can be re-selected
 
     const validFiles = files.filter(f => {
       if (!f.type.startsWith('image/')) {
@@ -79,10 +81,10 @@ export class PhotoManager {
 
     // Add a pending entry immediately for instant visual feedback
     const pending: PhotoResponse = {
-      id:             0,
-      url:            previewUrl,
-      altText:       file.name,
-      uploadedAt:       'now',
+      id: 0,
+      url: previewUrl,
+      altText: file.name,
+      uploadedAt: 'now',
       sortOrder: 0,
     };
 
@@ -98,7 +100,7 @@ export class PhotoManager {
             this.photos.update(list =>
               list.map(p =>
                 p.url === previewUrl
-                  ? { ...p, uploadProgress: event.progress }
+                  ? {...p, uploadProgress: event.progress}
                   : p
               )
             );
@@ -109,10 +111,10 @@ export class PhotoManager {
               list.map(p =>
                 p.url === previewUrl
                   ? {
-                    id:             event.photo.id,
-                    url:            event.photo.url,
-                    altText:       event.photo.altText,
-                    uploadedAt:       'true',
+                    id: event.photo.id,
+                    url: event.photo.url,
+                    altText: event.photo.altText,
+                    uploadedAt: 'true',
                     sortOrder: 1,
                   }
                   : p
@@ -170,5 +172,7 @@ export class PhotoManager {
   }
 
   // Cover photo = first photo in the list
-  get coverPhotoIndex(): number { return 0; }
+  get coverPhotoIndex(): number {
+    return 0;
+  }
 }

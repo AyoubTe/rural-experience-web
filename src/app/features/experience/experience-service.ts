@@ -60,9 +60,9 @@ export class ExperienceService {
 
     return this.http
       .get<PageResponse<Experience>>(this.baseUrl + API_ENDPOINTS.EXPERIENCES.BASE,
-        { params: httpParams })
+        {params: httpParams})
       .pipe(
-        retry({ count: 1, delay: 1000 }),  // Retry once on failure
+        retry({count: 1, delay: 1000}),  // Retry once on failure
         catchError(this.handleError),
       );
   }
@@ -114,12 +114,12 @@ export class ExperienceService {
     return throwError(() => new Error(message));
   }
 
-  createExperience(exp: CreateExperienceRequest) {
+  createExperience(exp: FormData) {
     return this.http.post<ExperienceResponse>(`${this.baseUrl}` + API_ENDPOINTS.EXPERIENCES.BASE, exp)
       .pipe(catchError(handleApiError));
   }
 
-  getHostExperiences() : Observable<PageResponse<ExperienceSummaryResponse>> {
+  getHostExperiences(): Observable<PageResponse<ExperienceSummaryResponse>> {
     return this.http.get<PageResponse<ExperienceSummaryResponse>>(`${this.baseUrl}` + API_ENDPOINTS.EXPERIENCES.GET_HOST_EXPERIENCES)
       .pipe(catchError(handleApiError));
   }
@@ -127,11 +127,11 @@ export class ExperienceService {
   updateStatus(id: number, status: string): Observable<ExperienceSummaryResponse> {
     return this.http.patch<ExperienceSummaryResponse>(
       `${this.baseUrl}${API_ENDPOINTS.EXPERIENCES.UPDATE_STATUS(id)}`,
-      { status }
+      {status}
     ).pipe(catchError(handleApiError));
   }
 
-  deleteExperience(id: number) : Observable<void>{
+  deleteExperience(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}` + API_ENDPOINTS.EXPERIENCES.DELETE(id))
       .pipe(catchError(handleApiError));
   }
@@ -148,8 +148,8 @@ export class ExperienceService {
     ).pipe(catchError(handleApiError));
   }
 
-  getHostByExpId(id: number | undefined) : Observable<HostProfileResponse> {
-    return  this.http.get<HostProfileResponse>(
+  getHostByExpId(id: number | undefined): Observable<HostProfileResponse> {
+    return this.http.get<HostProfileResponse>(
       `${this.baseUrl}${API_ENDPOINTS.EXPERIENCES.GET_HOST_BY_EXP_ID(id)}`
     ).pipe(catchError(this.handleError));
   }

@@ -1,0 +1,39 @@
+<div class="uploader-wrapper">
+  <div class="drop-zone"
+       [class.disabled]="isFull()"
+       (click)="!isFull() && fileInput.click()"
+       (drop)="onFileDropped($event)"
+       (dragover)="onDragOver($event)">
+
+    <mat-icon>cloud_upload</mat-icon>
+    <p>Glissez vos photos ici ou <b>parcourez</b></p>
+    <p class="hint">Maximum {{ maxFiles() }} photos</p>
+    <input #fileInput type="file" multiple (change)="onFileSelected($event)" hidden accept="image/*">
+  </div>
+
+  <div class="preview-grid"
+       cdkDropList
+       cdkDropListOrientation="mixed"
+       (cdkDropListDropped)="reorderFiles($event)">
+
+    @for (preview of previews(); track preview.url; let i = $index) {
+      <div class="preview-card" cdkDrag>
+        <div class="drag-handle" cdkDragHandle>
+          <mat-icon>drag_indicator</mat-icon>
+        </div>
+
+        <img [src]="preview.url" alt="Prévisualisation">
+
+        <button mat-icon-button class="delete-btn" color="warn" (click)="removeFile(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+        @if (i === 0) {
+          <div class="cover-badge">Photo de couverture</div>
+        }
+      </div>
+    } @empty {
+      <p class="empty-msg">Aucune photo sélectionnée.</p>
+    }
+  </div>
+</div>

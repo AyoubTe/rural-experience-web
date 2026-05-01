@@ -47,8 +47,8 @@
         <mat-form-field appearance="outline">
           <mat-label i18n="@@experienceForm.categoryLabel">Category</mat-label>
           <mat-select formControlName="categoryId">
-            @for (cat of categories$ | async; track cat.id){
-              <mat-option [value]="cat.id"> {{ cat.name }} </mat-option>
+            @for (cat of categories$ | async; track cat.id) {
+              <mat-option [value]="cat.id"> {{ cat.name }}</mat-option>
             }
           </mat-select>
           <mat-error i18n="@@experienceForm.categoryReqError">Please select a category</mat-error>
@@ -131,6 +131,35 @@
           </button>
         </div>
       </form>
+    </mat-step>
+
+    <mat-step label="Photos" i18n-label="@@experienceForm.step4Label">
+      <div class="upload-container"
+           (click)="fileInput.click()"
+           (keydown.enter)="fileInput.click()"
+           (drop)="onFileDropped($event)"
+           (dragover)="onDragOver($event)">
+
+        <mat-icon>cloud_upload</mat-icon>
+        <p>Drag and drop photos here or <b>browse</b></p>
+        <input #fileInput type="file" multiple (change)="onFileSelected($event)" hidden accept="image/*">
+      </div>
+
+      <div class="preview-grid" cdkDropList (cdkDropListDropped)="reorderFiles($event)">
+        @for (preview of imagePreviews; track preview; let i = $index) {
+          <div class="preview-card" cdkDrag>
+            <img [src]="preview.url" alt="Preview">
+            <button mat-icon-button color="warn" (click)="removeFile(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        }
+      </div>
+
+      <div class="step-actions">
+        <button mat-stroked-button matStepperPrevious>Back</button>
+        <button mat-flat-button color="primary" matStepperNext>Next: Agenda</button>
+      </div>
     </mat-step>
 
     <mat-step label="Daily Agenda" i18n-label="@@experienceForm.step3Label" [stepControl]="agendaForm">
